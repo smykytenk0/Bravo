@@ -1,0 +1,137 @@
+  <div class="ordersSearch" matInput (keyup)="applyFilter($event)" #input>
+    <img src="../../assets/search.png" class="ordersSearchImg" alt="search"/>
+    <input class="ordersSearchInput" placeholder="Order, Customer, Notes...">
+  </div>
+  <table mat-table
+         [dataSource]="dataSource" multiTemplateDataRows
+         class="mat-elevation-z8">
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> Button </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderNo">
+      <th mat-header-cell *matHeaderCellDef> Order No </th>
+      <td mat-cell *matCellDef="let element"> {{ element.orderNo }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef class="sortSizeTh">
+        <div class="columnName"> Customer </div>
+        <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
+          <div class="sortSizeWrapper">
+            <img src="../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{ element.customer }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="customerNo">
+      <th mat-header-cell *matHeaderCellDef> Customer No </th>
+      <td mat-cell *matCellDef="let element"> {{ element.customerNo }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="items">
+      <th mat-header-cell *matHeaderCellDef> Items </th>
+      <td mat-cell *matCellDef="let element"> {{ element.items.length }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="notes" class="notesTd">
+      <th mat-header-cell *matHeaderCellDef> Notes </th>
+      <td mat-cell *matCellDef="let element" class="notes"> {{ element.notes }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ordered">
+      <th mat-header-cell *matHeaderCellDef class="sortSizeTh">
+        <div class="columnName"> Ordered </div>
+        <div *ngIf="!dataPickerOpened; else activeDatepicker">
+          <div class="sortSizeWrapper">
+          <img src="../../assets/sort-size.png" (click)="openDataPicker()"/>
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.ordered}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reqDelivery">
+      <th mat-header-cell *matHeaderCellDef> Req. Delivery </th>
+      <td mat-cell *matCellDef="let element"> {{element.reqDelivery}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="sortSizeTh">
+        <div class="columnName"> Status </div>
+        <div>
+          <img src="../../assets/sort-size.png" class="sort-size"/>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="tableDetails">
+            <div class="notes">
+              <div class="infoTitle">Notes:</div>
+              <div class="info">{{ element.notes }}</div>
+            </div>
+            <div class="address">
+              <div class="infoTitle">Delivery Address:</div>
+              <div class="info">{{ element.address }}</div>
+            </div>
+            <div class="print">
+              <img src="../../assets/print.png" height="20" width="20"/>
+              <div>Print order</div>
+            </div>
+          </div>
+          <table class="tableInsideTable">
+            <tr>
+              <td>ProductCode</td>
+              <td>Product</td>
+              <td>Unit</td>
+              <td>Quantity</td>
+            </tr>
+            <tr *ngFor="let item of element.items">
+              <td>{{ item.productCode }}</td>
+              <td>{{ item.product }}</td>
+              <td>{{ item.unit }}</td>
+              <td>{{ item.quantity }}</td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+<ng-template #activeDatepicker>
+  <div class="sortSizeActiveWrapper">
+    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="openDataPicker()"/>
+  </div>
+</ng-template>
+
+<ng-template #activeCustomerSelect>
+  <div class="sortSizeActiveWrapper">
+    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="customerSelectOpen()"/>
+  </div>
+</ng-template>
+
+<div *ngIf="dataPickerOpened">
+  <app-datepicker></app-datepicker>
+</div>
+
+
+<div *ngIf="isCustomersOpened">
+  <app-customerpicker [customers]="uniqueCustomers"></app-customerpicker>
+</div>

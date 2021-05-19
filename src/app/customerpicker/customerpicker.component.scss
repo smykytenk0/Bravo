@@ -1,0 +1,31 @@
+.customerSelect{
+  position: absolute;
+  top:26%;
+  left: 31%;
+  width: 382px;
+  height: 72px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 2px 4px rgba(97, 97, 97, 0.18), 0 4px 8px rgba(97, 97, 97, 0.18);
+}
+:host ::ng-deep{
+  .mat-form-field-flex{
+    outline: none;
+    width: 350px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    margin: 16px;
+    background-color: white;
+  }
+  .mat-form-field-underline{
+    width: 0px;
+  }
+  .mat-option{
+    width: 350px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+
+  }
+}

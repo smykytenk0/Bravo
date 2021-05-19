@@ -1,0 +1,11 @@
+<div class="customerSelect">
+  <mat-form-field appearance="fill">
+    <mat-label>Customer</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="customer">
+      <mat-option *ngFor="let customer of customers" [value]="customer">
+        {{customer}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
