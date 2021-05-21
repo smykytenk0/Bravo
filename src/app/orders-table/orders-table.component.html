@@ -4,7 +4,7 @@
   </div>
   <table mat-table
          [dataSource]="dataSource" multiTemplateDataRows
-         class="mat-elevation-z8">
+         class="<mat-elevation-z8>">
     <ng-container matColumnDef="button">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element"> Button </td>
@@ -66,7 +66,7 @@
           <img src="../../assets/sort-size.png" class="sort-size"/>
         </div>
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      <td mat-cell *matCellDef="let element"> <app-status [status]="element.status"></app-status> </td>
     </ng-container>
 
     <ng-container matColumnDef="expandedDetail">
@@ -133,5 +133,5 @@
 
 
 <div *ngIf="isCustomersOpened">
-  <app-customerpicker [customers]="uniqueCustomers"></app-customerpicker>
+  <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
 </div>

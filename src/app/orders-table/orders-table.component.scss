@@ -52,9 +52,101 @@ mat-paginator{
 }
 
 :host ::ng-deep{
+
+  .mat-paginator-range-actions button .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
+    background-repeat: no-repeat;
+    margin: 11px;
+  }
+
+  .mat-paginator-range-actions button:nth-child(2) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
+    background-image: url("../../assets/push-chevron-left.png");
+  }
+
+  .mat-paginator-range-actions button:nth-child(3) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
+    background-image: url("../../assets/chevron-left.png");
+  }
+
+  .mat-paginator-range-actions button:nth-child(4) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
+    background-image: url("../../assets/chevron-right.png");
+  }
+  .mat-paginator-range-actions button:nth-child(5) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
+    background-image: url("../../assets/push-chevron-right.png");
+  }
+
+  .mat-form-field-underline{
+    display: none;
+  }
+
+  .mat-form-field-flex{
+    width: 80px;
+    border: 1px solid silver;
+    border-radius: 8px;
+  }
+
+  .mat-form-field-infix{
+    border: none;
+    padding: 8px 12px;
+    margin-right: 6px;
+  }
+
+  .mat-form-field-wrapper{
+    padding:0;
+  }
+
+  .mat-paginator-page-size-select{
+    margin: 0;
+    width: 80px;
+    padding: 0;
+  }
+
+  .mat-select-min-line{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.0168em;
+    text-align: left;
+
+  }
+
+  .mat-paginator-page-size-label{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.0168em;
+    text-align: left;
+    margin:0 12px;
+
+  }
+
+  .mat-button-ripple.mat-ripple{
+    border-radius: 0;
+  }
+
+  .mat-paginator-container{
+    padding: 0;
+  }
+
+  .mat-icon-button .mat-button-wrapper>*{
+    margin-top: 5px;
+    vertical-align: top;
+  }
+
+  .mat-button-wrapper{
+    display: none;
+  }
+
+  .mat-paginator-icon{
+    width: 23px;
+  }
+
   .mat-icon-button{
     margin-right: 12px;
+    width: 32px;
+    height: 32px;
     background-color: #E0E0E0;
+    vertical-align: top;
   }
 
   .example-expanded-row{
@@ -251,5 +343,3 @@ th{
   letter-spacing: 0.005em;
   text-align: left;
 }
-
-

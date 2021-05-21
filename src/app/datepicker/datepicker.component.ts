@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-datepicker',
@@ -7,9 +6,4 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent {
-
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
 }
