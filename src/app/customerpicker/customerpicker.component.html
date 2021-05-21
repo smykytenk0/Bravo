@@ -7,7 +7,8 @@
         [removable]="removable"
         (removed)="remove(customer)">
         {{customer}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        <img class="closeImg" matChipRemove src="../../assets/close.png" alt="close">
+        <!--<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>-->
       </mat-chip>
       <input
         #customerInput

@@ -3,16 +3,20 @@
   top:26%;
   left: 31%;
   width: 382px;
-  height: 72px;
+  min-height: 72px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0px 2px 4px rgba(97, 97, 97, 0.18), 0 4px 8px rgba(97, 97, 97, 0.18);
 }
 :host ::ng-deep{
+
+  .mat-chip-list-wrapper input{
+    max-width: 80px;
+  }
   .mat-form-field-flex{
     outline: none;
     width: 350px;
-    height: 40px;
+    min-height: 40px;
     border-radius: 8px;
     border: 1px solid #E0E0E0;
     margin: 16px;
@@ -20,8 +24,47 @@
   }
   .mat-option{
     width: 350px;
-    height: 40px;
+    min-height: 40px;
     border-radius: 8px;
     border: 1px solid #E0E0E0;
   }
+
+  .mat-chip-list-wrapper .mat-standard-chip {
+    margin-right: 10px;
+    height: 32px;
+    background: #C5DCFA80;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mat-standard-chip:hover::after {
+    opacity: 0.04;
+  }
+  .mat-chip-list-wrapper input.mat-input-element{
+    margin: 8px;
+  }
+
+  .mat-standard-chip .mat-chip-remove, .mat-standard-chip .mat-chip-trailing-icon{
+    margin-left: 16px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .mat-form-field-infix{
+    padding: 7px;
+  }
+}
+
+img{
+  width: 6px;
+  height: 10px;
+}
+
+mat-chip{
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.005em;
+  text-align: left;
 }
