@@ -19,22 +19,20 @@ export class CustomerpickerComponent  {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   customerCtrl = new FormControl();
   filteredCustomers: Observable<string[]>;
-  customers: string[];
+  customers: string[] = [];
 
-  //TODO: `do the data filter for selectCustomers and styles for this select`
-  @ViewChild('customerInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor() {
     this.filteredCustomers = this.customerCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCustomers.slice()));
+      map((customers: string | null) => customers ? this._filter(customers) : this.allCustomers.slice()));
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
       this.customers.push(value);
     }
@@ -45,8 +43,8 @@ export class CustomerpickerComponent  {
     this.customerCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.customers.indexOf(fruit);
+  remove(customer: string): void {
+    const index = this.customers.indexOf(customer);
 
     if (index >= 0) {
       this.customers.splice(index, 1);
@@ -55,14 +53,14 @@ export class CustomerpickerComponent  {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.customers.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
+    this.customerInput.nativeElement.value = '';
     this.customerCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allCustomers.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    return this.allCustomers.filter(customers => customers.toLowerCase().indexOf(filterValue) === 0);
   }
 }
 
