@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {FormControl, FormGroup} from "@angular/forms";
 
 export interface OdrerElement {
   orderNo: number,
@@ -93,9 +94,15 @@ export class OrdersTableComponent implements AfterViewInit{
   dataSource = new MatTableDataSource<OdrerElement>(ELEMENT_DATA);
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
+  isStatusOpened: boolean = false;
   uniqueCustomers: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement:  OdrerElement | null;
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
 
   constructor() {
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc,elem)=>acc.add(elem.customer), new Set()));
@@ -118,6 +125,9 @@ export class OrdersTableComponent implements AfterViewInit{
     this.isCustomersOpened = !this.isCustomersOpened;
   }
 
+  openStatusSelect() {
+    this.isStatusOpened = !this.isStatusOpened
+  }
 }
 
 

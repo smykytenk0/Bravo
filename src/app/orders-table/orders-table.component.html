@@ -1,8 +1,8 @@
-  <div class="ordersSearch" matInput (keyup)="applyFilter($event)" #input>
+<div class="ordersSearch" matInput (keyup)="applyFilter($event)" #input>
     <img src="../../assets/search.png" class="ordersSearchImg" alt="search"/>
     <input class="ordersSearchInput" placeholder="Order, Customer, Notes...">
   </div>
-  <table mat-table
+<table mat-table
          [dataSource]="dataSource" multiTemplateDataRows
          class="<mat-elevation-z8>">
     <ng-container matColumnDef="button">
@@ -45,9 +45,21 @@
     <ng-container matColumnDef="ordered">
       <th mat-header-cell *matHeaderCellDef class="sortSizeTh">
         <div class="columnName"> Ordered </div>
-        <div *ngIf="!dataPickerOpened; else activeDatepicker">
-          <div class="sortSizeWrapper">
-          <img src="../../assets/sort-size.png" (click)="openDataPicker()"/>
+        <div>
+          <div class="datepicker">
+            <mat-form-field style="display: none">
+              <mat-date-range-input  [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start">
+                <input matEndDate formControlName="end" >
+              </mat-date-range-input>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+
+              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+            </mat-form-field>
+            <div class="sortSizeWrapper" *ngIf="!dataPickerOpened; else activeDatepicker">
+              <img src="../../assets/sort-size.png" (click)=" picker.open(); openDataPicker()"/>
+            </div>
           </div>
         </div>
       </th>
@@ -62,8 +74,8 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef class="sortSizeTh">
         <div class="columnName"> Status </div>
-        <div>
-          <img src="../../assets/sort-size.png" class="sort-size"/>
+        <div class="sortSizeWrapper" *ngIf="!isStatusOpened; else statusOpen">
+          <img src="../../assets/sort-size.png" class="sort-size" (click)="openStatusSelect()"/>
         </div>
       </th>
       <td mat-cell *matCellDef="let element"> <app-status [status]="element.status"></app-status> </td>
@@ -113,7 +125,7 @@
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #activeDatepicker>
   <div class="sortSizeActiveWrapper">
@@ -127,11 +139,14 @@
   </div>
 </ng-template>
 
-<div *ngIf="dataPickerOpened">
-  <app-datepicker></app-datepicker>
-</div>
-
+<ng-template #statusOpen>
+  <div class="sortSizeActiveWrapper">
+    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="openStatusSelect()"/>
+  </div>
+</ng-template>
 
 <div *ngIf="isCustomersOpened">
   <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
 </div>
+
+

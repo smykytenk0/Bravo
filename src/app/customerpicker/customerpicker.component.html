@@ -8,7 +8,6 @@
         (removed)="remove(customer)">
         {{customer}}
         <img class="closeImg" matChipRemove src="../../assets/close.png" alt="close">
-        <!--<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>-->
       </mat-chip>
       <input
         #customerInput
@@ -19,7 +18,7 @@
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let customer of filteredCustomers | async" [value]="customer">
+      <mat-option *ngFor="let customer of filteredCustomers$ | async" [value]="customer">
         {{customer}}
       </mat-option>
     </mat-autocomplete>
