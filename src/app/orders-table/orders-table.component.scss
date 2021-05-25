@@ -5,7 +5,6 @@
     line-height: 24px;
     letter-spacing: 0.0168em;
     text-align: left;
-
   }
 
   table {
@@ -62,6 +61,30 @@
   }
 
   :host ::ng-deep{
+
+    mat-datepicker-content{
+      transform-origin: left top;
+      position: fixed;
+      left: 50%;
+    }
+
+    .mat-row td:first-child{
+      background-image: url("../../assets/chevron-down.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      width:62px;
+    }
+
+    .example-expanded-row td:first-child{
+      width:62px;
+      background-image: url("../../assets/chevron-up.png");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    mat-form-field{
+      display: none;
+    }
     .mat-paginator-range-actions button .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
       background-repeat: no-repeat;
       margin: 11px;
