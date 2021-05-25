@@ -19,10 +19,11 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { StatusComponent } from './status/status.component';
-import {NgSelectModule} from "@ng-select/ng-select";
-import {MatChipsModule} from "@angular/material/chips";
-import {MatIconModule} from "@angular/material/icon";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatIconModule } from "@angular/material/icon";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatMenuModule } from "@angular/material/menu";
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     NgSelectModule,
     MatChipsModule,
     MatIconModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

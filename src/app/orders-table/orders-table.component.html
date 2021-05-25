@@ -4,15 +4,15 @@
 </div>
 <table mat-table
          [dataSource]="dataSource" multiTemplateDataRows
-         class="<mat-elevation-z8>">
+         class="mat-elevation-z8">
     <ng-container matColumnDef="button">
-      <th mat-header-cell *matHeaderCellDef></th>
+      <th class="mainTableTh" mat-header-cell *matHeaderCellDef ></th>
       <td mat-cell *matCellDef="let element"> </td>
     </ng-container>
 
     <ng-container matColumnDef="orderNo">
-      <th mat-header-cell *matHeaderCellDef> Order No </th>
-      <td mat-cell *matCellDef="let element"> {{ element.orderNo }} </td>
+      <th class="mainTableTh" mat-header-cell *matHeaderCellDef  > Order No </th>
+      <td mat-cell *matCellDef="let element" > {{ element.orderNo }} </td>
     </ng-container>
 
     <ng-container matColumnDef="customer">
@@ -28,18 +28,18 @@
     </ng-container>
 
     <ng-container matColumnDef="customerNo">
-      <th mat-header-cell *matHeaderCellDef> Customer No </th>
+      <th class="mainTableTh" mat-header-cell *matHeaderCellDef> Customer No </th>
       <td mat-cell *matCellDef="let element"> {{ element.customerNo }} </td>
     </ng-container>
 
     <ng-container matColumnDef="items">
-      <th mat-header-cell *matHeaderCellDef> Items </th>
+      <th class="mainTableTh" mat-header-cell *matHeaderCellDef> Items </th>
       <td mat-cell *matCellDef="let element"> {{ element.items.length }} </td>
     </ng-container>
 
     <ng-container matColumnDef="notes" class="notesTd">
-      <th mat-header-cell *matHeaderCellDef> Notes </th>
-      <td mat-cell *matCellDef="let element" class="notes"> {{ element.notes }} </td>
+      <th class="mainTableTh" mat-header-cell *matHeaderCellDef> Notes </th>
+      <td mat-cell *matCellDef="let element" class="tableNotes"> {{ element.notes }} </td>
     </ng-container>
 
     <ng-container matColumnDef="ordered">
@@ -67,7 +67,7 @@
     </ng-container>
 
     <ng-container matColumnDef="reqDelivery">
-      <th mat-header-cell *matHeaderCellDef> Req. Delivery </th>
+      <th class="mainTableTh" mat-header-cell *matHeaderCellDef> Req. Delivery </th>
       <td mat-cell *matCellDef="let element"> {{element.reqDelivery}} </td>
     </ng-container>
 
