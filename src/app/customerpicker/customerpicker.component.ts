@@ -18,14 +18,14 @@ export class CustomerpickerComponent  {
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   customerCtrl = new FormControl();
-  filteredCustomers$: Observable<string[]>;
+  filteredCustomers: Observable<string[]>;
   customers: string[] = [];
 
   @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor() {
-    this.filteredCustomers$ = this.customerCtrl.valueChanges.pipe(
+    this.filteredCustomers = this.customerCtrl.valueChanges.pipe(
       startWith(null),
       map((customers: string | null) => customers ? this._filter(customers) : this.allCustomers.slice()));
   }

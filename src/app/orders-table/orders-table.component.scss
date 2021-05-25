@@ -68,23 +68,15 @@
       left: 50%;
     }
 
-    .mat-row td:first-child{
-      background-image: url("../../assets/chevron-down.png");
-      background-repeat: no-repeat;
-      background-position: center;
-      width:62px;
+    .example-element-row td:first-child{
+      background: url("../../assets/chevron-down.png") center no-repeat;
     }
 
     .example-expanded-row td:first-child{
-      width:62px;
-      background-image: url("../../assets/chevron-up.png");
-      background-repeat: no-repeat;
-      background-position: center;
+      background: url("../../assets/chevron-up.png") center no-repeat;
     }
 
-    mat-form-field{
-      display: none;
-    }
+
     .mat-paginator-range-actions button .mat-button-ripple.mat-ripple, .mat-button-focus-overlay{
       background-repeat: no-repeat;
       margin: 11px;
