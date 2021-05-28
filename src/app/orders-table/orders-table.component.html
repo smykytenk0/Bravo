@@ -1,4 +1,4 @@
-<div class="ordersSearch" matInput (keyup)="applyFilter($event)" #input>
+<div class="ordersSearch" matInput (keyup)="applyInputFilter($event)" #input>
     <img src="../../assets/search.png" class="ordersSearchImg" alt="search"/>
     <input class="ordersSearchInput" placeholder="Order, Customer, Notes...">
 </div>
@@ -148,3 +148,4 @@
 <div *ngIf="isCustomersOpened">
   <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
 </div>
+

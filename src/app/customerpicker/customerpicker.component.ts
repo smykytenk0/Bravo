@@ -5,6 +5,9 @@ import {Observable} from "rxjs";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, startWith} from "rxjs/operators";
+import {select, Store} from "@ngrx/store";
+import {OrdersActions} from "../store/orders.actions";
+import {filteredCustomersSelector, ordersDataSelector} from "../store/orders.reducer";
 
 @Component({
   selector: 'app-customerpicker',
@@ -20,11 +23,13 @@ export class CustomerpickerComponent  {
   customerCtrl = new FormControl();
   filteredCustomers: Observable<string[]>;
   customers: string[] = [];
+  customers$: Observable<string[]>;
 
   @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor() {
+  constructor(private store: Store) {
+    this. customers$ = this.store.pipe(select(filteredCustomersSelector));
     this.filteredCustomers = this.customerCtrl.valueChanges.pipe(
       startWith(null),
       map((customers: string | null) => customers ? this._filter(customers) : this.allCustomers.slice()));
@@ -35,9 +40,8 @@ export class CustomerpickerComponent  {
 
     if (value) {
       this.customers.push(value);
+      this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: value}));
     }
-
-    // Clear the input value
     event.chipInput!.clear();
 
     this.customerCtrl.setValue(null);
@@ -45,14 +49,15 @@ export class CustomerpickerComponent  {
 
   remove(customer: string): void {
     const index = this.customers.indexOf(customer);
-
     if (index >= 0) {
+      this.store.dispatch(OrdersActions.removeCustomerFromSelect({index: index}));
       this.customers.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.customers.push(event.option.viewValue);
+    this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: event.option.viewValue}));
     this.customerInput.nativeElement.value = '';
     this.customerCtrl.setValue(null);
   }

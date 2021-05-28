@@ -3,6 +3,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormControl, FormGroup} from "@angular/forms";
+import {select, Store} from "@ngrx/store";
+import {ordersDataSelector} from "../store/orders.reducer";
 
 export interface OdrerElement {
   orderNo: number,
@@ -73,8 +75,8 @@ const ELEMENT_DATA: OdrerElement[] = [
       {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
       {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
     notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-
 ];
+
 
 @Component({
   selector: 'app-orders-table',
@@ -91,11 +93,12 @@ const ELEMENT_DATA: OdrerElement[] = [
 
 export class OrdersTableComponent implements AfterViewInit{
   displayedColumns: string[] = ['button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status'];
-  dataSource = new MatTableDataSource<OdrerElement>(ELEMENT_DATA);
+  dataSource: any;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any;
+  ordersData$: object[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement:  OdrerElement | null;
   range = new FormGroup({
@@ -104,7 +107,9 @@ export class OrdersTableComponent implements AfterViewInit{
   });
 
 
-  constructor() {
+  constructor(private store: Store) {
+    this.store.pipe(select(ordersDataSelector)).subscribe(data=>this.ordersData$ = data);
+    this.dataSource = new MatTableDataSource<any>(this.ordersData$);
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc,elem)=>acc.add(elem.customer), new Set()));
   }
 
@@ -112,12 +117,14 @@ export class OrdersTableComponent implements AfterViewInit{
     this.dataSource.paginator = this.paginator;
   }
 
-  applyFilter(event: Event) {
+  applyInputFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
   }
 
   openDataPicker() {
+    console.log(this.dataSource);
     this.dataPickerOpened = !this.dataPickerOpened;
   }
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import {MatTableModule} from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,9 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatIconModule } from "@angular/material/icon";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatMenuModule } from "@angular/material/menu";
+import {StoreModule} from "@ngrx/store";
+import {OrdersReducer} from "./store/orders.reducer";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -35,6 +39,9 @@ import { MatMenuModule } from "@angular/material/menu";
     StatusComponent,
   ],
   imports: [
+    StoreModule.forRoot({ordersReducer: OrdersReducer}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

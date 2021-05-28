@@ -209,6 +209,14 @@
 
     .example-expanded-row{
       background: #C5DCFA80;
+      & td:first-child{
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      & td:last-child{
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
     }
 
     td.mat-cell:last-of-type{
@@ -344,7 +352,7 @@
     border-bottom: 1px solid #E0E0E0;
   }
 
-  tr:last-child td{
+  tr tr:last-child td{
     border-bottom: none;
   }
 

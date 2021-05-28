@@ -1,0 +1,16 @@
+export interface OrdersData {
+  orderNo: number,
+  customer: string,
+  customerNo: number,
+  items: object[],
+  notes: string,
+  ordered: string,
+  reqDelivery: string,
+  status: string,
+  address: string
+}
+
+export interface IOrders {
+  ordersData: OrdersData[]
+  filteredCustomers: string[];
+}
