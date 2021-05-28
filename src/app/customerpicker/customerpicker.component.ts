@@ -7,7 +7,7 @@ import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/a
 import {map, startWith} from "rxjs/operators";
 import {select, Store} from "@ngrx/store";
 import {OrdersActions} from "../store/orders.actions";
-import {filteredCustomersSelector, ordersDataSelector} from "../store/orders.reducer";
+import {filteredCustomersSelector } from "../store/orders.reducer";
 
 @Component({
   selector: 'app-customerpicker',
@@ -22,7 +22,6 @@ export class CustomerpickerComponent  {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   customerCtrl = new FormControl();
   filteredCustomers: Observable<string[]>;
-  customers: string[] = [];
   customers$: Observable<string[]>;
 
   @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
@@ -39,7 +38,6 @@ export class CustomerpickerComponent  {
     const value = (event.value || '').trim();
 
     if (value) {
-      this.customers.push(value);
       this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: value}));
     }
     event.chipInput!.clear();
@@ -48,15 +46,10 @@ export class CustomerpickerComponent  {
   }
 
   remove(customer: string): void {
-    const index = this.customers.indexOf(customer);
-    if (index >= 0) {
-      this.store.dispatch(OrdersActions.removeCustomerFromSelect({index: index}));
-      this.customers.splice(index, 1);
-    }
+    this.store.dispatch(OrdersActions.removeCustomerFromSelect({customer: customer}));
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.customers.push(event.option.viewValue);
     this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: event.option.viewValue}));
     this.customerInput.nativeElement.value = '';
     this.customerCtrl.setValue(null);

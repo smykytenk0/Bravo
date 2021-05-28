@@ -69,7 +69,8 @@ export const OrdersReducer = createReducer(
   on(OrdersActions.addCustomersSelectFilteredData, (state, {customer})=>{
     return {...state, filteredCustomers: [...state.filteredCustomers, customer]}
   }),
-  on(OrdersActions.removeCustomerFromSelect, (state, {index})=>{
+  on(OrdersActions.removeCustomerFromSelect, (state, {customer})=>{
+    const index = state.filteredCustomers.indexOf(customer);
     return {...state, filteredCustomers: [...state.filteredCustomers.slice(0, index), ...state.filteredCustomers.slice(index+1)]}
   })
 );

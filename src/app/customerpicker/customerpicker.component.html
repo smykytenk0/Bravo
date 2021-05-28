@@ -2,7 +2,7 @@
   <mat-form-field class="example-chip-list">
     <mat-chip-list #chipList aria-label="Customer selection">
       <mat-chip
-        *ngFor="let customer of customers"
+        *ngFor="let customer of customers$ | async"
         [selectable]="selectable"
         [removable]="removable"
         (removed)="remove(customer)">
@@ -24,3 +24,4 @@
     </mat-autocomplete>
   </mat-form-field>
 </div>
+
