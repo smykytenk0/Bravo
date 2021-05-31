@@ -4,7 +4,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormControl, FormGroup} from "@angular/forms";
 import {select, Store} from "@ngrx/store";
-import {filterOrdersDataSelector, ordersDataSelector} from "../store/orders.reducer";
+import {filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector} from "../store/orders.reducer";
 import {OrdersService} from "../shared/services/orders.service";
 import {OrdersData} from "../store/interfaces/interfaces";
 import {Observable} from "rxjs";
@@ -105,6 +105,7 @@ export class OrdersTableComponent implements AfterViewInit {
   filteredOrdersData$: Observable<OrdersData[]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement:  OdrerElement | null;
+  startDate$: Observable<Date>;
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
@@ -117,14 +118,13 @@ export class OrdersTableComponent implements AfterViewInit {
     this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
     this.dataSource = new MatTableDataSource(this.ordersData);
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc,elem)=>acc.add(elem.customer), new Set()));
+    this.startDate$ = this.store.pipe(select(rangeStartDateSelector))
   }
 
   //TODO: pagination for my main table
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource.paginator);
-
   }
 
   applyInputFilter(event: Event) {

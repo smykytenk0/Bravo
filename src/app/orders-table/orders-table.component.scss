@@ -15,12 +15,21 @@
 
   .sortSizeTh{
     display: flex;
+    flex-wrap: wrap;
     height: 56px;
     align-items: center;
   }
 
+  app-customerpicker{
+    z-index: 2;
+  }
+
   .columnName{
     margin-right: 16px;
+  }
+
+  .sortSizeThContainer{
+    position: absolute;
   }
 
   .sortSize{
@@ -67,22 +76,22 @@
         padding: 0 0.7vw;
         border-bottom: 1px solid #E0E0E0;
         &:first-child{
-          width: 6.2vw;
+          width: 5vw;
         }
         &:nth-child(2){
-          width: 12.2vw;
+          width: 5.6vw;
         }
         &:nth-child(3){
-          width: 8.4vw;
+          width: 9.7vw;
         }
         &:nth-child(4){
-           width: 7.6vw;
+           width: 7.7vw;
          }
         &:nth-child(5){
           width: 4.2vw;
         }
         &:nth-child(6){
-          width: 9.7vw;
+          width: 7.7vw;
         }
         &:nth-child(7){
           width: 14.6vw;
@@ -90,7 +99,7 @@
         &:nth-child(8){
           width: 14.6vw;
         }
-        &:nth-child(8){
+        &:nth-child(9){
           width: 9vw;
         }
       }
@@ -247,6 +256,7 @@
   }
 
   .sortSizeWrapper{
+
     height: 24px;
     width: 24px;
     border-radius: 50%;

@@ -18,4 +18,5 @@ export class OrdersService{
     }
     return this.store.dispatch(OrdersActions.filterCustomerSelect({customers: this.ordersData}))
   }
+
 }

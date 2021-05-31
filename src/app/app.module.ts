@@ -25,10 +25,11 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatIconModule } from "@angular/material/icon";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatMenuModule } from "@angular/material/menu";
-import {StoreModule} from "@ngrx/store";
 import {OrdersReducer} from "./store/orders.reducer";
 import {environment} from "../environments/environment";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {dateFormatPipe} from "./shared/pipes/date.pipe";
+import {StoreModule} from "@ngrx/store";
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     DatepickerComponent,
     CustomerpickerComponent,
     StatusComponent,
+    dateFormatPipe
   ],
     imports: [
         StoreModule.forRoot({ordersReducer: OrdersReducer}),
