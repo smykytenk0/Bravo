@@ -48,8 +48,8 @@ export const initialState: IOrders = {
       ],
   filteredCustomers: [],
   filteredOrdersData: [],
-  rangeStartDate: new Date(new Date('1970-1-1')),
-  rangeEndDate: new Date()
+  rangeStartDate: new Date(1970, 1, 1),
+  rangeEndDate: new Date(2050, 12, 31)
 };
 
 export const OrdersReducer = createReducer(
@@ -63,8 +63,13 @@ export const OrdersReducer = createReducer(
   }),
   on(OrdersActions.filterCustomerSelect, (state, {customers})=>{
     return {...state, filteredOrdersData: customers}
+  }),
+  on(OrdersActions.getRangeStartDate, (state, {startDate})=>{
+    return{...state, rangeStartDate: startDate}
+  }),
+  on(OrdersActions.getRangeEndDate, (state, {endDate})=>{
+    return{...state, rangeEndDate: endDate}
   })
-
 );
 
 export const defaultOrdersSelector = createFeatureSelector<IOrders>('ordersReducer');

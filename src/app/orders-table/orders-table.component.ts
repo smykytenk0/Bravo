@@ -8,6 +8,7 @@ import {filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector} fr
 import {OrdersService} from "../shared/services/orders.service";
 import {OrdersData} from "../store/interfaces/interfaces";
 import {Observable} from "rxjs";
+import {OrdersActions} from "../store/orders.actions";
 
 export interface OdrerElement {
   orderNo: number,
@@ -113,9 +114,9 @@ export class OrdersTableComponent implements AfterViewInit {
 
 
   constructor(private store: Store, private orders: OrdersService) {
-    this.orders.selectCustomersFilter();
-    this.filteredOrdersData$ = this.store.pipe(select(filterOrdersDataSelector));
     this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
+    this.store.dispatch(OrdersActions.filterCustomerSelect({customers: this.ordersData}));
+    this.filteredOrdersData$ = this.store.pipe(select(filterOrdersDataSelector));
     this.dataSource = new MatTableDataSource(this.ordersData);
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc,elem)=>acc.add(elem.customer), new Set()));
     this.startDate$ = this.store.pipe(select(rangeStartDateSelector))
@@ -132,8 +133,7 @@ export class OrdersTableComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDataPicker() {
-    console.log(this.dataSource.paginator);
+  toggleDataPicker() {
     this.dataPickerOpened = !this.dataPickerOpened;
   }
 
@@ -143,6 +143,12 @@ export class OrdersTableComponent implements AfterViewInit {
 
   openStatusSelect() {
     this.isStatusOpened = !this.isStatusOpened
+  }
+
+  enterDatepickerData() {
+    this.store.dispatch(OrdersActions.getRangeStartDate({startDate: this.range.value.start}));
+    this.store.dispatch(OrdersActions.getRangeEndDate({endDate: this.range.value.end}));
+    this.orders.ordersFilter();
   }
 }
 

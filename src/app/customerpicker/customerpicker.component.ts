@@ -44,19 +44,19 @@ export class CustomerpickerComponent  {
     event.chipInput!.clear();
 
     this.customerCtrl.setValue(null);
-    this.orders.selectCustomersFilter();
+    this.orders.ordersFilter();
   }
 
   remove(customer: string): void {
     this.store.dispatch(OrdersActions.removeCustomerFromSelect({customer: customer}));
-    this.orders.selectCustomersFilter()
+    this.orders.ordersFilter()
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: event.option.viewValue}));
     this.customerInput.nativeElement.value = '';
     this.customerCtrl.setValue(null);
-    this.orders.selectCustomersFilter()
+    this.orders.ordersFilter()
   }
 
   private _filter(value: string): string[] {

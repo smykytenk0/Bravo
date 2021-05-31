@@ -47,18 +47,19 @@
         <div class="columnName"> Ordered </div>
         <div>
           <div class="datepicker">
-            <mat-form-field style="display: none">
-              <mat-date-range-input  [formGroup]="range" [rangePicker]="picker">
-                <input matStartDate formControlName="start">
-                <input matEndDate formControlName="end" >
-              </mat-date-range-input>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-
-              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-            </mat-form-field>
+            <mat-date-range-input [rangePicker]="picker" [formGroup]="range" style="width: 0; height: 0; visibility: hidden">
+              <input matStartDate placeholder="Start date" style="display: none" formControlName="start">
+              <input matEndDate placeholder="End date" style="display: none" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"  style="display: none"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel (click)="toggleDataPicker()">Cancel</button>
+                <button type="submit" mat-raised-button color="primary" matDateRangePickerApply (click)="enterDatepickerData(); toggleDataPicker()">Apply</button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
             <div class="sortSizeWrapper" *ngIf="!dataPickerOpened; else activeDatepicker">
-              <img src="../../assets/sort-size.png" (click)=" picker.open(); openDataPicker()"/>
+              <img src="../../assets/sort-size.png" (click)=" picker.open(); toggleDataPicker()"/>
             </div>
           </div>
         </div>
@@ -131,7 +132,7 @@
 
 <ng-template #activeDatepicker>
   <div class="sortSizeActiveWrapper">
-    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="openDataPicker()"/>
+    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="toggleDataPicker()"/>
   </div>
 </ng-template>
 
