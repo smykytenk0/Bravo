@@ -4,7 +4,10 @@ import {MatPaginator} from "@angular/material/paginator";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormControl, FormGroup} from "@angular/forms";
 import {select, Store} from "@ngrx/store";
-import {ordersDataSelector} from "../store/orders.reducer";
+import {filterOrdersDataSelector, ordersDataSelector} from "../store/orders.reducer";
+import {OrdersService} from "../shared/services/orders.service";
+import {OrdersData} from "../store/interfaces/interfaces";
+import {Observable} from "rxjs";
 
 export interface OdrerElement {
   orderNo: number,
@@ -91,14 +94,15 @@ const ELEMENT_DATA: OdrerElement[] = [
   ],
 })
 
-export class OrdersTableComponent implements AfterViewInit{
+export class OrdersTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status'];
   dataSource: any;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any;
-  ordersData$: object[];
+  ordersData: OrdersData[];
+  filteredOrdersData$: Observable<OrdersData[]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement:  OdrerElement | null;
   range = new FormGroup({
@@ -107,24 +111,29 @@ export class OrdersTableComponent implements AfterViewInit{
   });
 
 
-  constructor(private store: Store) {
-    this.store.pipe(select(ordersDataSelector)).subscribe(data=>this.ordersData$ = data);
-    this.dataSource = new MatTableDataSource<any>(this.ordersData$);
+  constructor(private store: Store, private orders: OrdersService) {
+    this.orders.selectCustomersFilter();
+    this.filteredOrdersData$ = this.store.pipe(select(filterOrdersDataSelector));
+    this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
+    this.dataSource = new MatTableDataSource(this.ordersData);
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc,elem)=>acc.add(elem.customer), new Set()));
   }
 
+  //TODO: pagination for my main table
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource.paginator);
+
   }
 
   applyInputFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
   }
 
   openDataPicker() {
-    console.log(this.dataSource);
+    console.log(this.dataSource.paginator);
     this.dataPickerOpened = !this.dataPickerOpened;
   }
 

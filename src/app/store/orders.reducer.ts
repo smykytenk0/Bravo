@@ -61,7 +61,8 @@ export const initialState: IOrders = {
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
       notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
   ],
-  filteredCustomers: []
+  filteredCustomers: [],
+  filteredOrdersData: []
 };
 
 export const OrdersReducer = createReducer(
@@ -72,9 +73,13 @@ export const OrdersReducer = createReducer(
   on(OrdersActions.removeCustomerFromSelect, (state, {customer})=>{
     const index = state.filteredCustomers.indexOf(customer);
     return {...state, filteredCustomers: [...state.filteredCustomers.slice(0, index), ...state.filteredCustomers.slice(index+1)]}
+  }),
+  on(OrdersActions.filterCustomerSelect, (state, {customers})=>{
+    return {...state, filteredOrdersData: customers}
   })
 );
 
 export const defaultOrdersSelector = createFeatureSelector<IOrders>('ordersReducer');
 export const ordersDataSelector = createSelector(defaultOrdersSelector, state=>state.ordersData);
 export const filteredCustomersSelector = createSelector(defaultOrdersSelector, state=>state.filteredCustomers);
+export const filterOrdersDataSelector = createSelector(defaultOrdersSelector, state=>state.filteredOrdersData);

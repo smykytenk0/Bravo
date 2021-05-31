@@ -8,6 +8,7 @@ import {map, startWith} from "rxjs/operators";
 import {select, Store} from "@ngrx/store";
 import {OrdersActions} from "../store/orders.actions";
 import {filteredCustomersSelector } from "../store/orders.reducer";
+import {OrdersService} from "../shared/services/orders.service";
 
 @Component({
   selector: 'app-customerpicker',
@@ -27,7 +28,7 @@ export class CustomerpickerComponent  {
   @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private orders: OrdersService) {
     this. customers$ = this.store.pipe(select(filteredCustomersSelector));
     this.filteredCustomers = this.customerCtrl.valueChanges.pipe(
       startWith(null),
@@ -43,16 +44,19 @@ export class CustomerpickerComponent  {
     event.chipInput!.clear();
 
     this.customerCtrl.setValue(null);
+    this.orders.selectCustomersFilter();
   }
 
   remove(customer: string): void {
     this.store.dispatch(OrdersActions.removeCustomerFromSelect({customer: customer}));
+    this.orders.selectCustomersFilter()
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: event.option.viewValue}));
     this.customerInput.nativeElement.value = '';
     this.customerCtrl.setValue(null);
+    this.orders.selectCustomersFilter()
   }
 
   private _filter(value: string): string[] {

@@ -28,6 +28,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import {StoreModule} from "@ngrx/store";
 import {OrdersReducer} from "./store/orders.reducer";
 import {environment} from "../environments/environment";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -38,32 +39,33 @@ import {environment} from "../environments/environment";
     CustomerpickerComponent,
     StatusComponent,
   ],
-  imports: [
-    StoreModule.forRoot({ordersReducer: OrdersReducer}),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    imports: [
+        StoreModule.forRoot({ordersReducer: OrdersReducer}),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
 
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    FormsModule,
-    NoopAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    NgSelectModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatMenuModule
-  ],
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        NgSelectModule,
+        MatChipsModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        MatMenuModule,
+        MatTooltipModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

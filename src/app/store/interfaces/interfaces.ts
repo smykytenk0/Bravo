@@ -13,4 +13,5 @@ export interface OrdersData {
 export interface IOrders {
   ordersData: OrdersData[]
   filteredCustomers: string[];
+  filteredOrdersData: OrdersData[];
 }
