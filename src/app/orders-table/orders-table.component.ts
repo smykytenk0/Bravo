@@ -6,7 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders.reducer';
 import { OrdersService } from '../shared/services/orders.service';
-import { OrdersData } from '../store/interfaces/interfaces';
+import { OrdersData } from '../store/interfaces/orders.interfaces';
 import { Observable, ReplaySubject } from 'rxjs';
 import { OrdersActions } from '../store/orders.actions';
 
@@ -222,6 +222,8 @@ const ELEMENT_DATA: OdrerElement[] = [
 })
 
 export class OrdersTableComponent implements AfterViewInit {
+  title: string = 'Orders';
+  placeholder: string = "Order, Customer, Notes...";
   displayedColumns: string[] = ['button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status'];
   dataSource: any;
   dataPickerOpened: boolean = false;
@@ -252,11 +254,6 @@ export class OrdersTableComponent implements AfterViewInit {
   //TODO: check ReplaySubject for dataSource$
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-  }
-
-  applyInputFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   toggleDataPicker() {

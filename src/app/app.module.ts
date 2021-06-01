@@ -36,6 +36,9 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomersComponent } from './customers/customers.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { PageTitleComponent } from './shared/components/page-title/page-title.component';
+import { SearchFieldComponent } from './shared/components/search-field/search-field.component';
+import { AddComponent } from './shared/components/add/add.component';
 
 const appRoutes: Routes = [
   { path: '', component: OrdersTableComponent },
@@ -55,7 +58,10 @@ const appRoutes: Routes = [
     dateFormatPipe,
     NavigationComponent,
     CustomersComponent,
-    CatalogComponent
+    CatalogComponent,
+    PageTitleComponent,
+    SearchFieldComponent,
+    AddComponent
   ],
   imports: [
     StoreModule.forRoot({ ordersReducer: OrdersReducer }),

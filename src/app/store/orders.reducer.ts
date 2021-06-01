@@ -1,5 +1,5 @@
 import {createFeatureSelector, createReducer, createSelector, on} from "@ngrx/store";
-import {IOrders} from "./interfaces/interfaces";
+import {IOrders} from "./interfaces/orders.interfaces";
 import {OrdersActions} from "./orders.actions";
 
 export const initialState: IOrders = {

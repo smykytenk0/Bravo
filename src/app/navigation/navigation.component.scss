@@ -5,6 +5,7 @@
 
 a{
   text-decoration: none;
+  outline: none;
   &:first-child .imgWrapper{
     background: url("../../assets/shopping-cart.png") center no-repeat;
   }

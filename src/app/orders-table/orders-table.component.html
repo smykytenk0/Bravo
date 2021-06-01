@@ -1,12 +1,7 @@
-<div class="pageTitle">
-  <img src="../../assets/menu.png" class="burgerImg"/>
-  <div class="title">Orders</div>
-</div>
+<app-page-title [title]="title"></app-page-title>
 
-<div class="ordersSearch" matInput (keyup)="applyInputFilter($event)" #input>
-    <img src="../../assets/search.png" class="ordersSearchImg" alt="search"/>
-    <input class="ordersSearchInput" placeholder="Order, Customer, Notes...">
-</div>
+<app-search-field [placeholder]="placeholder"></app-search-field>
+
 <table mat-table
          [dataSource]="filteredOrdersData$" multiTemplateDataRows
          class="mat-elevation-z8">

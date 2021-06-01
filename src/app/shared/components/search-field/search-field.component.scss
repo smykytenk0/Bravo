@@ -1,0 +1,28 @@
+.ordersSearch{
+  display: flex;
+  height: 40px;
+  width: 350px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  outline: none;
+  margin-bottom: 24px;
+
+  &Img{
+    padding: 10.55px 14.55px;
+    height: 18.9px;
+    width: 18.9px;
+  }
+  &Input{
+    width: 288px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.0168em;
+    text-align: left;
+  }
+}
+

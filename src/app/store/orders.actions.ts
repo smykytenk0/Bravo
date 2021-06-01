@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { OrdersData } from './interfaces/interfaces';
+import { OrdersData } from './interfaces/orders.interfaces';
 
 const addCustomersSelectFilteredData = createAction('[Orders] addCustomersSelectFilteredData', props<{ customer: string }>());
 const removeCustomerFromSelect = createAction('[Orders] removeCustomerFromSelect', props<{ customer: string }>());

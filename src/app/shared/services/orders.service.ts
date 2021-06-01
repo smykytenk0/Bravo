@@ -6,7 +6,7 @@ import {
   rangeEndDateSelector,
   rangeStartDateSelector
 } from "../../store/orders.reducer";
-import {OrdersData} from "../../store/interfaces/interfaces";
+import {OrdersData} from "../../store/interfaces/orders.interfaces";
 import {OrdersActions} from "../../store/orders.actions";
 
 @Injectable({providedIn:'root'})

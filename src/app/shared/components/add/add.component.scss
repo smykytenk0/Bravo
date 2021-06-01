@@ -1,0 +1,28 @@
+.addButton{
+  padding: 8px;
+  width: 152px;
+  display: flex;
+  align-items: center;
+  &:hover{
+    background: rgba(224, 224, 224, 0.5);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+}
+
+.plusIcon{
+  width: 16px;
+  height: 16px;
+  margin: 0 12px 0 4px;
+  background-image: url('../../../../assets/math-plus.png');
+}
+
+.addBtnText{
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  color: #1672EC;
+}
