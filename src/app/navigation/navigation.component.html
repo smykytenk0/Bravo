@@ -1,0 +1,25 @@
+<div class="navigationWrapper">
+  <div class="logo">
+    <img src="../../assets/BravoLogo.png" alt="logo">
+  </div>
+  <div class="navigation">
+    <a routerLink="/orders" [routerLinkActive]="['orders-active', 'active-link']" >
+      <div class="item">
+        <div class="imgWrapper"></div>
+        <div class="itemTitle">Orders</div>
+      </div>
+    </a>
+    <a routerLink="/catalog" [routerLinkActive]="['catalog-active', 'active-link']" >
+      <div class="item">
+        <div class="imgWrapper"></div>
+        <div class="itemTitle">Catalog</div>
+      </div>
+    </a>
+    <a routerLink="/customers" [routerLinkActive]="['customers-active', 'active-link']">
+      <div class="item">
+        <div class="imgWrapper"></div>
+        <div class="itemTitle">Customers</div>
+      </div>
+    </a>
+  </div>
+</div>

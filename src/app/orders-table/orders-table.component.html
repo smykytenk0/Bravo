@@ -1,3 +1,8 @@
+<div class="pageTitle">
+  <img src="../../assets/menu.png" class="burgerImg"/>
+  <div class="title">Orders</div>
+</div>
+
 <div class="ordersSearch" matInput (keyup)="applyInputFilter($event)" #input>
     <img src="../../assets/search.png" class="ordersSearchImg" alt="search"/>
     <input class="ordersSearchInput" placeholder="Order, Customer, Notes...">
@@ -154,6 +159,3 @@
 <ng-container *ngIf="isCustomersOpened">
   <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
 </ng-container>
-
-<div>{{startDate$ | async}}</div>
-
