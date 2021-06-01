@@ -1,14 +1,14 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {FormControl, FormGroup} from "@angular/forms";
-import {select, Store} from "@ngrx/store";
-import {filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector} from "../store/orders.reducer";
-import {OrdersService} from "../shared/services/orders.service";
-import {OrdersData} from "../store/interfaces/interfaces";
-import {Observable} from "rxjs";
-import {OrdersActions} from "../store/orders.actions";
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormControl, FormGroup } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders.reducer';
+import { OrdersService } from '../shared/services/orders.service';
+import { OrdersData } from '../store/interfaces/interfaces';
+import { Observable, ReplaySubject } from 'rxjs';
+import { OrdersActions } from '../store/orders.actions';
 
 export interface OdrerElement {
   orderNo: number,
@@ -23,62 +23,188 @@ export interface OdrerElement {
 }
 
 const ELEMENT_DATA: OdrerElement[] = [
-  {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-    {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-    {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Alex", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4},
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},] ,
-    notes: "Notes", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Dasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "Notes", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Masha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "Notes", ordered: "Ordered", reqDelivery: "Delivery", status: "Confirm", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Pasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Igor", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Valera", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Andrey", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"}, {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-  {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
-      {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
-      {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-    notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: "Ordered", reqDelivery: "Delivery", status: "confirmed", address: "Main Street 23, 1453 Zurich"},
+  {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Alex',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 },
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },],
+    notes: 'Notes',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Dasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: 'Notes',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Masha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: 'Notes',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'Confirm',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Pasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Igor',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Valera',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Andrey',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  }, {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
+  {
+    orderNo: 1,
+    customer: 'Sasha',
+    customerNo: 1,
+    items: [
+      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
+      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
+    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
+    ordered: 'Ordered',
+    reqDelivery: 'Delivery',
+    status: 'confirmed',
+    address: 'Main Street 23, 1453 Zurich'
+  },
 ];
 
 
@@ -88,8 +214,8 @@ const ELEMENT_DATA: OdrerElement[] = [
   styleUrls: ['./orders-table.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -105,7 +231,7 @@ export class OrdersTableComponent implements AfterViewInit {
   ordersData: OrdersData[];
   filteredOrdersData$: Observable<OrdersData[]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  expandedElement:  OdrerElement | null;
+  expandedElement: OdrerElement | null;
   startDate$: Observable<Date>;
   range = new FormGroup({
     start: new FormControl(),
@@ -115,15 +241,15 @@ export class OrdersTableComponent implements AfterViewInit {
 
   constructor(private store: Store, private orders: OrdersService) {
     this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
-    this.store.dispatch(OrdersActions.filterCustomerSelect({customers: this.ordersData}));
+    this.store.dispatch(OrdersActions.filterCustomerSelect({ customers: this.ordersData }));
     this.filteredOrdersData$ = this.store.pipe(select(filterOrdersDataSelector));
     this.dataSource = new MatTableDataSource(this.ordersData);
-    this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc,elem)=>acc.add(elem.customer), new Set()));
+    this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc, elem) => acc.add(elem.customer), new Set()));
     this.startDate$ = this.store.pipe(select(rangeStartDateSelector))
   }
 
   //TODO: pagination for my main table
-
+  //TODO: check ReplaySubject for dataSource$
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
@@ -146,10 +272,11 @@ export class OrdersTableComponent implements AfterViewInit {
   }
 
   enterDatepickerData() {
-    this.store.dispatch(OrdersActions.getRangeStartDate({startDate: this.range.value.start}));
-    this.store.dispatch(OrdersActions.getRangeEndDate({endDate: this.range.value.end}));
+    this.store.dispatch(OrdersActions.getRangeStartDate({ startDate: this.range.value.start }));
+    this.store.dispatch(OrdersActions.getRangeEndDate({ endDate: this.range.value.end }));
     this.orders.ordersFilter();
   }
+
+  cancelDatepickerData() {
+  }
 }
-
-

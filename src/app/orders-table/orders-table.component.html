@@ -54,8 +54,11 @@
             <mat-datepicker-toggle matSuffix [for]="picker"  style="display: none"></mat-datepicker-toggle>
             <mat-date-range-picker #picker>
               <mat-date-range-picker-actions>
-                <button mat-button matDateRangePickerCancel (click)="toggleDataPicker()">Cancel</button>
-                <button type="submit" mat-raised-button color="primary" matDateRangePickerApply (click)="enterDatepickerData(); toggleDataPicker()">Apply</button>
+                <button mat-button matDateRangePickerCancel (click)="toggleDataPicker(); cancelDatepickerData()">Cancel</button>
+                <button type="submit" mat-raised-button color="primary" matDateRangePickerApply (click)="enterDatepickerData(); toggleDataPicker()">
+                  <img src="../../assets/check.png">
+                  Done
+                </button>
               </mat-date-range-picker-actions>
             </mat-date-range-picker>
             <div class="sortSizeWrapper" *ngIf="!dataPickerOpened; else activeDatepicker">

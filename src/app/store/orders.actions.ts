@@ -1,16 +1,20 @@
-import {createAction, props} from "@ngrx/store";
-import {OrdersData} from "./interfaces/interfaces";
+import { createAction, props } from '@ngrx/store';
+import { OrdersData } from './interfaces/interfaces';
 
-const addCustomersSelectFilteredData = createAction('[Orders] addCustomersSelectFilteredData', props<{ customer: string}>());
-const removeCustomerFromSelect = createAction('[Orders] removeCustomerFromSelect', props<{customer: string}>());
-const filterCustomerSelect = createAction( '[Orders] filterCustomerSelect', props<{customers: OrdersData[]}>());
-const getRangeStartDate = createAction( '[Orders] getRangeStartDate', props<{startDate: Date}>());
-const getRangeEndDate = createAction( '[Orders] getRangeEndDate', props<{endDate: Date}>());
+const addCustomersSelectFilteredData = createAction('[Orders] addCustomersSelectFilteredData', props<{ customer: string }>());
+const removeCustomerFromSelect = createAction('[Orders] removeCustomerFromSelect', props<{ customer: string }>());
+const filterCustomerSelect = createAction('[Orders] filterCustomerSelect', props<{ customers: OrdersData[] }>());
+const applyCustomerFilter = createAction('[Orders] apply Customer Filter');
+const toggleDatepicker = createAction('[Orders] toggle Datepicker');
+const getRangeStartDate = createAction('[Orders] getRangeStartDate', props<{ startDate: Date }>());
+const getRangeEndDate = createAction('[Orders] getRangeEndDate', props<{ endDate: Date }>());
 
-export const OrdersActions ={
+export const OrdersActions = {
+  applyCustomerFilter,
   addCustomersSelectFilteredData,
   removeCustomerFromSelect,
   filterCustomerSelect,
   getRangeStartDate,
-  getRangeEndDate
+  getRangeEndDate,
+  toggleDatepicker
 };

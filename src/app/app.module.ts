@@ -30,6 +30,8 @@ import {environment} from "../environments/environment";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {dateFormatPipe} from "./shared/pipes/date.pipe";
 import {StoreModule} from "@ngrx/store";
+import { OrdersEffect } from './store/orders.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import {StoreModule} from "@ngrx/store";
     imports: [
         StoreModule.forRoot({ordersReducer: OrdersReducer}),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
-
+        EffectsModule.forRoot([ OrdersEffect ]),
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,

@@ -49,7 +49,7 @@ export const initialState: IOrders = {
   filteredCustomers: [],
   filteredOrdersData: [],
   rangeStartDate: new Date(1970, 1, 1),
-  rangeEndDate: new Date(2050, 12, 31)
+  rangeEndDate: new Date(2050, 12, 31),
 };
 
 export const OrdersReducer = createReducer(
