@@ -6,8 +6,8 @@ import {MatChipInputEvent} from "@angular/material/chips";
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, startWith} from "rxjs/operators";
 import {select, Store} from "@ngrx/store";
-import {OrdersActions} from "../store/orders.actions";
-import {filteredCustomersSelector } from "../store/orders.reducer";
+import {OrdersActions} from "../store/orders/orders.actions";
+import {filteredCustomersSelector } from "../store/orders/orders.reducer";
 import {OrdersService} from "../shared/services/orders.service";
 
 @Component({

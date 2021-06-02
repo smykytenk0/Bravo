@@ -5,9 +5,9 @@ import {
   ordersDataSelector,
   rangeEndDateSelector,
   rangeStartDateSelector
-} from "../../store/orders.reducer";
+} from "../../store/orders/orders.reducer";
 import {OrdersData} from "../../store/interfaces/orders.interfaces";
-import {OrdersActions} from "../../store/orders.actions";
+import {OrdersActions} from "../../store/orders/orders.actions";
 
 @Injectable({providedIn:'root'})
 export class OrdersService{

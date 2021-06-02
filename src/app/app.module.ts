@@ -25,12 +25,12 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
-import { OrdersReducer } from './store/orders.reducer';
+import { OrdersReducer } from './store/orders/orders.reducer';
 import { environment } from '../environments/environment';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { dateFormatPipe } from './shared/pipes/date.pipe';
 import { StoreModule } from '@ngrx/store';
-import { OrdersEffect } from './store/orders.effects';
+import { OrdersEffect } from './store/orders/orders.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -39,6 +39,11 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { PageTitleComponent } from './shared/components/page-title/page-title.component';
 import { SearchFieldComponent } from './shared/components/search-field/search-field.component';
 import { AddComponent } from './shared/components/add/add.component';
+import { CustomersReducer } from './store/customers/customers.reducer';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { AddCustomerModalWindowComponent } from './add-customer-modal-window/add-customer-modal-window.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 const appRoutes: Routes = [
   { path: '', component: OrdersTableComponent },
@@ -61,10 +66,12 @@ const appRoutes: Routes = [
     CatalogComponent,
     PageTitleComponent,
     SearchFieldComponent,
-    AddComponent
+    AddComponent,
+    PaginatorComponent,
+    AddCustomerModalWindowComponent
   ],
   imports: [
-    StoreModule.forRoot({ ordersReducer: OrdersReducer }),
+    StoreModule.forRoot({ ordersReducer: OrdersReducer, customersReducer: CustomersReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([OrdersEffect]),
     BrowserModule,
@@ -89,7 +96,8 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatMenuModule,
     MatTooltipModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

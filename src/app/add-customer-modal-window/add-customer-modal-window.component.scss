@@ -1,0 +1,150 @@
+.customerModalWindow{
+  width: 26.3vw;
+  padding: 22px 24px;
+  background-color: white;
+  position: relative;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.addAndCloseWrapper{
+  display: flex;
+}
+
+h2{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  margin-bottom: 8px
+}
+
+.closeBtn{
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  outline: none;
+
+  &:hover{
+    border-radius: 18px;
+    background: rgba(224, 224, 224, 0.5);
+  }
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  & label{
+    margin:16px 0 2px 12px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.03em;
+    text-align: left;
+    color: #616161;
+  }
+
+  & input{
+    border: 1px solid #A1A1A1;
+    border-radius: 8px;
+    height: 48px;
+    padding-left: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.0168em;
+    text-align: left;
+    outline: none;
+  }
+
+  & textarea{
+    min-height: 120px;
+    border: 1px solid #A1A1A1;
+    border-radius: 8px;
+    resize: none;
+    outline: none;
+    padding: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.0168em;
+    text-align: left;
+
+  }
+}
+
+:host ::ng-deep{
+  .mat-checkbox-checked{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.005em;
+    text-align: left;
+  }
+
+  .mat-checkbox-inner-container {
+    margin: auto 13px auto 9px;
+  }
+}
+
+mat-checkbox{
+  width: 94px;
+  position: center;
+  padding: 12px 0;
+}
+
+.mat-checkbox-label{
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+}
+
+.customerDaysCheckbox{
+  margin-bottom: 8px;
+}
+
+.customerModalWindowButtons{
+  padding: 20px 24px;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalWindowButton{
+  padding: 12px 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.cancelCustomerButton{
+  color: #616161;
+  border: 1px solid #C0C0C0;
+}
+
+.addCustomerButton{
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #1672EC;
+  color: #C5DCFA;
+  & img{
+    margin: 0 16px 0 4px;
+  }
+}

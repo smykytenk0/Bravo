@@ -1,0 +1,30 @@
+<div class="customerModalWindow">
+  <button class="closeBtn" mat-dialog-close><img src="../../assets/close.png"></button>
+  <h2>Add Customer</h2>
+  <div class="input">
+    <label for="customerNo">Customer No</label>
+    <input id="customerNo">
+  </div>
+  <div class="input">
+    <label for="name">Name </label>
+    <input id="name">
+  </div>
+  <div class="customerDaysCheckbox input">
+    <label for="customersCheckbox">Delivery Days</label>
+    <section id="customersCheckbox" class="daysSection" >
+      <mat-checkbox *ngFor="let day of shortDays">{{ day }}</mat-checkbox>
+    </section>
+  </div>
+  <div class="input">
+    <label for="shortlistedProducts">Shortlisted Products</label>
+    <textarea id="shortlistedProducts"></textarea>
+  </div>
+</div>
+
+<div class="customerModalWindowButtons">
+  <div class="cancelCustomerButton modalWindowButton" mat-dialog-close>Cancel</div>
+  <div class="addCustomerButton modalWindowButton">
+    <img src="../../assets/math-plus-white.png" alt="white-plus">
+    Add Customer
+  </div>
+</div>

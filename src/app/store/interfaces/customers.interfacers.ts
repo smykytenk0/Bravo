@@ -1,7 +1,10 @@
 export interface ICustomerData {
-  customerNo: number,
+  customerNo: string,
   name: string,
   address: string,
   deliveryDays: string[];
-  shortlistedProducts: string;
+}
+
+export interface ICustomers {
+  customers: ICustomerData[];
 }

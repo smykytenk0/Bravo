@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class CatalogComponent {
   title: string = 'Catalog';
-  placeholder: string = "Product code, Name..."
+  placeholder: string = 'Product code, Name...'
+  addBtnText: string = 'Add Product';
 
 }

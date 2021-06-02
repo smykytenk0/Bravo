@@ -4,11 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders.reducer';
+import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders/orders.reducer';
 import { OrdersService } from '../shared/services/orders.service';
 import { OrdersData } from '../store/interfaces/orders.interfaces';
 import { Observable, ReplaySubject } from 'rxjs';
-import { OrdersActions } from '../store/orders.actions';
+import { OrdersActions } from '../store/orders/orders.actions';
 
 export interface OdrerElement {
   orderNo: number,

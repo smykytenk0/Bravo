@@ -7,11 +7,11 @@ td{
     text-align: left;
   }
 
-  table {
-    width: 100%;
-    box-shadow: none;
-    border: 1px solid #E0E0E0;
-  }
+table {
+  box-shadow: none;
+}
+
+
 
   .sortSizeTh{
     display: flex;
@@ -43,6 +43,10 @@ td{
   }
 
   :host ::ng-deep{
+
+    .mat-elevation-z8 th.mat-header-cell:hover {
+      border-bottom: 1px solid #1672EC;
+    }
 
     .mat-elevation-z8{
       & th.mat-header-cell{
@@ -357,16 +361,6 @@ td{
     white-space: nowrap;
   }
 
-  th{
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 20px;
-    letter-spacing: 0.005em;
-    text-align: left;
-    color: black;
-  }
-
   .tableInsideTable tr td{
     font-size: 16px;
     font-style: normal;
@@ -374,7 +368,6 @@ td{
     line-height: 24px;
     letter-spacing: 0.0168em;
     text-align: left;
-
   }
 
   .tableInsideTable tr:first-child td{
