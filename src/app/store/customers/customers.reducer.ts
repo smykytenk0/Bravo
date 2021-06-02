@@ -1,5 +1,6 @@
 import { ICustomers } from '../interfaces/customers.interfacers';
-import { createFeatureSelector, createReducer, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { CustomersActions } from './customers.actions';
 
 export const initialState: ICustomers = {
   customers: [
@@ -20,6 +21,9 @@ export const initialState: ICustomers = {
 
 export const CustomersReducer = createReducer(
   initialState,
+  on(CustomersActions.addNewCustomer, (state, {customer}) =>{
+    return { ...state, customers: [...state.customers, customer]}
+  })
 );
 
 export const defaultCustomersSelector = createFeatureSelector<ICustomers>('customersReducer');

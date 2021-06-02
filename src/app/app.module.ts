@@ -43,6 +43,7 @@ import { CustomersReducer } from './store/customers/customers.reducer';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { AddCustomerModalWindowComponent } from './add-customer-modal-window/add-customer-modal-window.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AddProductModalWindowComponent } from './add-product-modal-window/add-product-modal-window.component';
 
 
 const appRoutes: Routes = [
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     SearchFieldComponent,
     AddComponent,
     PaginatorComponent,
-    AddCustomerModalWindowComponent
+    AddCustomerModalWindowComponent,
+    AddProductModalWindowComponent
   ],
   imports: [
     StoreModule.forRoot({ ordersReducer: OrdersReducer, customersReducer: CustomersReducer }),
