@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { ICustomerData, ICustomers } from '../store/interfaces/customers.interfacers';
 import { select, Store } from '@ngrx/store';
 import { customersSelector } from '../store/customers/customers.reducer';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCustomerModalWindowComponent } from '../add-customer-modal-window/add-customer-modal-window.component';
 
 
 @Component({
@@ -17,7 +19,14 @@ export class CustomersComponent {
   customers$: Observable<ICustomerData[]>;
   displayedColumns: string[] = ['customerNo', 'name', 'address', 'deliveryDays'];
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private dialog: MatDialog) {
     this.customers$ = this.store.pipe(select(customersSelector))
   }
+
+  OpenCustomersTableTr(row) {
+    this.dialog.open(AddCustomerModalWindowComponent, {
+      data: row
+    })
+  }
 }
+

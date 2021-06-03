@@ -23,6 +23,9 @@ export const CustomersReducer = createReducer(
   initialState,
   on(CustomersActions.addNewCustomer, (state, {customer}) =>{
     return { ...state, customers: [...state.customers, customer]}
+  }),
+  on(CustomersActions.editCustomer, (state, {customer}) => {
+    return { ...state, customers: [...state.customers.filter(customerObj => customerObj.name != customer.name), customer] }
   })
 );
 

@@ -1,6 +1,6 @@
 <form class="customerModalWindow" [formGroup]="customerForm">
   <button class="closeBtn" mat-dialog-close><img src="../../assets/close.png"></button>
-  <h2>Add Customer</h2>
+  <h2> {{ modalTitle }}</h2>
   <div class="input">
     <label for="customerNo">Customer No</label>
     <input id="customerNo" formControlName="customerNo">
@@ -8,6 +8,10 @@
   <div class="input">
     <label for="name">Name </label>
     <input id="name" formControlName="name">
+  </div>
+  <div class="input">
+    <label for="address">Delivery Address </label>
+    <input id="address" formControlName="deliveryAddress">
   </div>
   <div class="customerDaysCheckbox input">
     <label for="customersCheckbox">Delivery Days</label>
@@ -18,6 +22,15 @@
     </section>
   </div>
   <div class="input">
+    <label for="contactName">Contact Name </label>
+    <input id="contactName" formControlName="contactName">
+  </div>
+  <div class="input">
+    <label for="mobilePhone"></label>
+    <input id="mobilePhone" formControlName="mobilePhone" placeholder="Mobile Phone">
+  </div>
+  <mat-checkbox formControlName="notify">Notify customer via text message</mat-checkbox>
+  <div class="input">
     <label for="shortlistedProducts">Shortlisted Products</label>
     <textarea id="shortlistedProducts"></textarea>
   </div>
@@ -25,7 +38,7 @@
 
 <div class="customerModalWindowButtons">
   <button class="cancelCustomerButton modalWindowButton" mat-dialog-close>Cancel</button>
-  <button class="addCustomerButton modalWindowButton" type="submit" (click)="addNewCustomer()">
+  <button class="addCustomerButton modalWindowButton" type="submit" (click)="addNewCustomer()" mat-dialog-close>
     <img src="../../assets/math-plus-white.png" alt="white-plus">
     Add Customer
   </button>

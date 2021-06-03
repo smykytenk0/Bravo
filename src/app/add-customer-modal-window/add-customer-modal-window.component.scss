@@ -16,7 +16,7 @@ h2{
   font-weight: 600;
   line-height: 32px;
   text-align: left;
-  margin-bottom: 8px
+  margin-bottom: 6px
 }
 
 .closeBtn{
@@ -53,7 +53,7 @@ h2{
     border: 1px solid #A1A1A1;
     border-radius: 8px;
     height: 48px;
-    padding-left: 12px;
+    padding: 0 0 0 12px;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -76,7 +76,15 @@ h2{
     line-height: 24px;
     letter-spacing: 0.0168em;
     text-align: left;
+  }
+}
 
+.input:nth-child(8){
+  & input{
+    margin-top: 34px;
+  }
+  & label{
+    margin: 0;
   }
 }
 
@@ -99,6 +107,9 @@ mat-checkbox{
   width: 94px;
   position: center;
   padding: 12px 0;
+  &:last-child{
+    padding: 22px 0 12px 0;
+  }
 }
 
 .mat-checkbox-label{
