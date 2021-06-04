@@ -25,7 +25,10 @@ export const CustomersReducer = createReducer(
     return { ...state, customers: [...state.customers, customer]}
   }),
   on(CustomersActions.editCustomer, (state, {customer}) => {
-    return { ...state, customers: [...state.customers.filter(customerObj => customerObj.name != customer.name), customer] }
+    const index = state.customers.indexOf(state.customers.find(data => data.name == customer.name));
+    const newCustomersArray = [...state.customers];
+    newCustomersArray[index] = customer;
+    return { ...state, customers: newCustomersArray }
   })
 );
 

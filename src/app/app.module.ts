@@ -41,9 +41,16 @@ import { SearchFieldComponent } from './shared/components/search-field/search-fi
 import { AddComponent } from './shared/components/add/add.component';
 import { CustomersReducer } from './store/customers/customers.reducer';
 import { PaginatorComponent } from './paginator/paginator.component';
-import { AddCustomerModalWindowComponent } from './add-customer-modal-window/add-customer-modal-window.component';
+import { AddCustomerModalWindowComponent } from './shared/components/add-customer-modal-window/add-customer-modal-window.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AddProductModalWindowComponent } from './add-product-modal-window/add-product-modal-window.component';
+import { AddProductModalWindowComponent } from './shared/components/add-product-modal-window/add-product-modal-window.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ReplaceCatalogComponent } from './shared/components/replace-catalog/replace-catalog.component';
+import { ReplaceCatalogModalComponent } from './shared/components/replace-catalog-modal/replace-catalog-modal.component';
+import { CatalogReducer } from './store/catalog/catalog.reducer';
+import { ProductDeleteModalWindowComponent } from './shared/components/product-delete-modal-window/product-delete-modal-window.component';
 
 
 const appRoutes: Routes = [
@@ -70,10 +77,14 @@ const appRoutes: Routes = [
     AddComponent,
     PaginatorComponent,
     AddCustomerModalWindowComponent,
-    AddProductModalWindowComponent
+    AddProductModalWindowComponent,
+    SidenavComponent,
+    ReplaceCatalogComponent,
+    ReplaceCatalogModalComponent,
+    ProductDeleteModalWindowComponent
   ],
   imports: [
-    StoreModule.forRoot({ ordersReducer: OrdersReducer, customersReducer: CustomersReducer }),
+    StoreModule.forRoot({ ordersReducer: OrdersReducer, customersReducer: CustomersReducer, catalogReducer: CatalogReducer}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([OrdersEffect]),
     BrowserModule,
@@ -99,7 +110,9 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatTooltipModule,
     RouterModule.forRoot(appRoutes),
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

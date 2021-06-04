@@ -1,6 +1,6 @@
-<form class="customerModalWindow" [formGroup]="customerForm">
-  <button class="closeBtn" mat-dialog-close><img src="../../assets/close.png"></button>
-  <h2> {{ modalTitle }}</h2>
+<form class="modalWindow" [formGroup]="customerForm">
+  <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close.png"></button>
+  <h2 class="modalTitle"> {{ modalTitle }}</h2>
   <div class="input">
     <label for="customerNo">Customer No</label>
     <input id="customerNo" formControlName="customerNo">
@@ -36,10 +36,10 @@
   </div>
 </form>
 
-<div class="customerModalWindowButtons">
-  <button class="cancelCustomerButton modalWindowButton" mat-dialog-close>Cancel</button>
+<div class="ModalWindowButtons">
+  <button class="cancelModalButton modalWindowButton" mat-dialog-close>Cancel</button>
   <button class="addCustomerButton modalWindowButton" type="submit" (click)="addNewCustomer()" mat-dialog-close>
-    <img src="../../assets/math-plus-white.png" alt="white-plus">
-    Add Customer
+    <img src="../../../../assets/math-plus-white.png" alt="white-plus">
+    {{ modalAcceptButton }}
   </button>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DAYS_SHORT } from '../shared/constants';
+import { DAYS_SHORT } from '../../constants';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 

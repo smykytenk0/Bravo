@@ -1,10 +1,10 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { DAYS_SHORT } from '../shared/constants';
+import { DAYS_SHORT } from '../../constants';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { CustomersActions } from '../store/customers/customers.actions';
+import { CustomersActions } from '../../../store/customers/customers.actions';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ICustomerData } from '../store/interfaces/customers.interfacers';
+import { ICustomerData } from '../../../store/interfaces/customers.interfacers';
 
 @Component({
   selector: 'app-add-customer-modal-window',
@@ -17,18 +17,22 @@ export class AddCustomerModalWindowComponent implements OnInit {
   deliveryDaysForm: FormGroup;
   deliveryDays: string[] = [];
   modalTitle: string = this.data ? 'Edit customer' : 'Add customer';
+  modalAcceptButton: string = this.data? 'Save' : 'Add Customer' ;
 
   constructor(private store: Store, @Inject(MAT_DIALOG_DATA) private data: ICustomerData) {
   }
 
-  ngOnInit(): void {
+  private initDeliveryForm(){
     const daysControl = this.shortDays.reduce((previous, current) => {
       return {
         ...previous,
         [current]: new FormControl(this.data ? this.data.deliveryDays.indexOf(current) != -1 : null)
       }
     }, {});
+    this.deliveryDaysForm = new FormGroup(daysControl);
+  }
 
+  private initCustomerForm(){
     this.customerForm = new FormGroup({
       customerNo: new FormControl(this.data ? this.data.customerNo : ''),
       name: new FormControl(this.data ? this.data.name : ''),
@@ -37,7 +41,11 @@ export class AddCustomerModalWindowComponent implements OnInit {
       mobilePhone: new FormControl(),
       notify: new FormControl(),
     });
-    this.deliveryDaysForm = new FormGroup(daysControl);
+  }
+
+  ngOnInit(): void {
+    this.initDeliveryForm();
+    this.initCustomerForm();
   }
 
 
@@ -48,25 +56,14 @@ export class AddCustomerModalWindowComponent implements OnInit {
       }
     }
 
-    this.data ?
-      this.store.dispatch(CustomersActions.editCustomer({
-        customer:
-          {
-            customerNo: this.customerForm.value.customerNo,
-            name: this.customerForm.value.name,
-            address: this.customerForm.value.deliveryAddress,
-            deliveryDays: this.deliveryDays
-          }
-      }))
-      :
-      this.store.dispatch(CustomersActions.addNewCustomer({
-        customer:
-          {
-            customerNo: this.customerForm.value.customerNo,
-            name: this.customerForm.value.name,
-            address: this.customerForm.value.deliveryAddress,
-            deliveryDays: this.deliveryDays
-          }
-      }))
+    const customer = {
+      customerNo: this.customerForm.value.customerNo,
+      name: this.customerForm.value.name,
+      address: this.customerForm.value.deliveryAddress,
+      deliveryDays: this.deliveryDays
+    };
+
+    this.store.dispatch(this.data ? CustomersActions.editCustomer({
+      customer}) : CustomersActions.addNewCustomer({customer}));
   }
 }

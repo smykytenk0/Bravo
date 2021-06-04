@@ -1,12 +1,20 @@
-.titleAddWrapper{
-  display: flex;
-  align-items:center;
-}
-
 app-page-title{
   margin-right: 56.2vw;
 }
 
+app-add{
+  position: absolute;
+  top: 24px;
+  right: 24px
+}
+
 table {
   box-shadow: none;
+  & tr{
+    cursor: pointer;
+  }
+}
+
+mat-sidenav {
+  width: 200px;
 }

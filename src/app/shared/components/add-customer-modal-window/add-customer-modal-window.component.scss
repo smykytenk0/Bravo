@@ -1,39 +1,4 @@
-.customerModalWindow{
-  width: 26.3vw;
-  padding: 22px 24px;
-  background-color: white;
-  position: relative;
-  border-bottom: 1px solid #E0E0E0;
-}
 
-.addAndCloseWrapper{
-  display: flex;
-}
-
-h2{
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 32px;
-  text-align: left;
-  margin-bottom: 6px
-}
-
-.closeBtn{
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border: none;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  outline: none;
-
-  &:hover{
-    border-radius: 18px;
-    background: rgba(224, 224, 224, 0.5);
-  }
-}
 
 .input{
   display: flex;
@@ -123,31 +88,6 @@ mat-checkbox{
 
 .customerDaysCheckbox{
   margin-bottom: 8px;
-}
-
-.customerModalWindowButtons{
-  padding: 20px 24px;
-  background-color: white;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.modalWindowButton{
-  outline: none;
-  padding: 12px 16px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: 0.05em;
-  text-align: left;
-  border-radius: 8px;
-}
-
-.cancelCustomerButton{
-  color: #616161;
-  border: 1px solid #C0C0C0;
-  background-color: transparent;
 }
 
 .addCustomerButton{

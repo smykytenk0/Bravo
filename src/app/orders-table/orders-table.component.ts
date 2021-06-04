@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders/orders.reducer';
 import { OrdersService } from '../shared/services/orders.service';
 import { OrdersData } from '../store/interfaces/orders.interfaces';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { OrdersActions } from '../store/orders/orders.actions';
 
 export interface OdrerElement {
@@ -232,6 +232,7 @@ export class OrdersTableComponent implements AfterViewInit {
   uniqueCustomers: any;
   ordersData: OrdersData[];
   filteredOrdersData$: Observable<OrdersData[]>;
+  dataTable: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OdrerElement | null;
   startDate$: Observable<Date>;

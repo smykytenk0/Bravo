@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCustomerModalWindowComponent } from '../../../add-customer-modal-window/add-customer-modal-window.component';
+import { AddCustomerModalWindowComponent } from '../add-customer-modal-window/add-customer-modal-window.component';
 import { Router } from '@angular/router';
-import { AddProductModalWindowComponent } from '../../../add-product-modal-window/add-product-modal-window.component';
+import { AddProductModalWindowComponent } from '../add-product-modal-window/add-product-modal-window.component';
 
 @Component({
   selector: 'app-add',
@@ -12,7 +12,9 @@ import { AddProductModalWindowComponent } from '../../../add-product-modal-windo
 export class AddComponent  {
   @Input() addBtnText;
 
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(private dialog: MatDialog,
+              private router: Router) {
+  }
 
 
   openDialog() {

@@ -1,0 +1,15 @@
+<div class="modalWindow modalDeleteProductWindow">
+  <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close.png"></button>
+  <h2 class="modalTitle">Delete product?</h2>
+  <div class="modalMessage">Are you sure you want to delete <span class="boldText">“Apple”</span> from the catalog?</div>
+</div>
+
+<div class="ModalWindowButtons">
+  <button class="cancelModalButton modalWindowButton" mat-dialog-close>Cancel</button>
+  <button class="productDeleteButton modalWindowButton" type="submit" mat-dialog-close (click)="deleteProduct()">
+    <img src="../../../../assets/trash-modal.png">
+    Delete
+  </button>
+</div>
+
+
