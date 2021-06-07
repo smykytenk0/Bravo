@@ -10,27 +10,32 @@
 
   <ng-container matColumnDef="productCode">
     <th mat-header-cell *matHeaderCellDef> Product Code </th>
-    <td mat-cell *matCellDef="let element"> {{element.productCode}} </td>
+    <td mat-cell *matCellDef="let element" > {{element.productCode}} </td>
   </ng-container>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element" > {{element.name}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="units">
+  <ng-container matColumnDef="mainUnit">
     <th mat-header-cell *matHeaderCellDef> Unit </th>
-    <td mat-cell *matCellDef="let element"> {{element.units}} </td>
+    <td mat-cell *matCellDef="let element" > {{ transformUnits(element) }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="mainUnitPrice">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element" > {{ element.mainUnit.price}}</td>
   </ng-container>
 
   <ng-container matColumnDef="availability">
     <th mat-header-cell *matHeaderCellDef> Availability </th>
-    <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
+    <td mat-cell *matCellDef="let element" > {{element.availability}} </td>
   </ng-container>
 
   <ng-container matColumnDef="deleteButton">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let element"><div class="trashImgWrapper" (click)="openDeleteModalWindow(element)"></div></td>
+    <td mat-cell *matCellDef="let element"><app-delete-button (click)="openDeleteModalWindow(element)"></app-delete-button></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,10 +1,13 @@
+export interface IUnit {
+  unit: string,
+  price: number
+}
+
 export interface IProduct {
   productCode: string,
   name: string,
-  units: {
-    unit: string,
-    price: number
-  }[],
+  mainUnit: IUnit,
+  anotherUnits?: IUnit[],
   availability: string,
 }
 

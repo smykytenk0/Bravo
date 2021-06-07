@@ -4,30 +4,42 @@
 
 <app-search-field [placeholder]="placeholder"></app-search-field>
 
-<table mat-table [dataSource]="customers$" matSort class="mat-elevation-z8">
+<div>
+  <table mat-table [dataSource]="customers$" matSort class="mat-elevation-z8">
 
-  <ng-container matColumnDef="customerNo">
-    <th mat-header-cell *matHeaderCellDef> Customer No </th>
-    <td mat-cell *matCellDef="let element"> {{element.customerNo}} </td>
-  </ng-container>
+    <ng-container matColumnDef="customerNo">
+      <th mat-header-cell *matHeaderCellDef> Customer No </th>
+      <td mat-cell *matCellDef="let element"> {{element.customerNo}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="name" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
+    <ng-container matColumnDef="name" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef> Address </th>
-    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-  </ng-container>
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="deliveryDays">
-    <th mat-header-cell *matHeaderCellDef> Delivery Days </th>
-    <td mat-cell *matCellDef="let element"> {{element.deliveryDays.join(', ')}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="OpenCustomersTableTr(row)"></tr>
-</table>
+    <ng-container matColumnDef="deliveryDays">
+      <th mat-header-cell *matHeaderCellDef> Delivery Days </th>
+      <td mat-cell *matCellDef="let element"> {{element.deliveryDays.join(', ')}} </td>
+    </ng-container>
 
 
+    <ng-container  >
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="OpenCustomersTableTr(row)"></tr>
+    </ng-container>
+  </table>
+</div>
+
+<div *ngIf="(customers$|async).length==0" class="emptyTable">
+  <div class="emptyTableWrapper">
+    <div class="inboxImg"></div>
+    <div class="emptyTableHeading">No Data to Display</div>
+    <div class="emptyTableDescription">Seems like you don’t have any <br/>customer yet. Let’s create it now!</div>
+    <app-add [addBtnText]="addCustomer"></app-add>
+  </div>
+</div>

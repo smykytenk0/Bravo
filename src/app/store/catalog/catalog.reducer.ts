@@ -8,13 +8,14 @@ export const initialState: Catalog = {
     {
       productCode: 'APP123',
       name: 'Apples',
-      units: [{unit: 'kg', price: 2.03}],
+      mainUnit: {unit: 'kg', price: 2.03},
       availability: 'In Stock'
     },
     {
       productCode: 'APP456',
       name: 'Bananas',
-      units: [{unit: 'box', price: 12.03}],
+      mainUnit: {unit: 'box', price: 12.03},
+      anotherUnits: [{unit: 'kg', price: 2.03}],
       availability: 'Out of Stock'
     },
   ]

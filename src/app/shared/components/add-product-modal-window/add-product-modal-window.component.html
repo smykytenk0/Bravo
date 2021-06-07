@@ -1,24 +1,35 @@
-<form class="customerModalWindow" [formGroup]="customerForm">
-  <button class="closeBtn" mat-dialog-close><img src="../../../../assets/close.png"></button>
-  <h2>Add Product</h2>
+<form class="modalWindow" [formGroup]="productForm">
+  <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close.png"></button>
+  <h2 class="modalTitle"> {{ productModalTitle }}</h2>
   <div class="input">
     <label for="customerNo">Product Code</label>
-    <input id="customerNo" formControlName="customerNo">
+    <input id="customerNo" formControlName="productCode">
   </div>
   <div class="input">
     <label for="name">Name </label>
     <input id="name" formControlName="name">
   </div>
-  <div class="input">
-    <label for="shortlistedProducts">Shortlisted Products</label>
-    <textarea id="shortlistedProducts"></textarea>
+  <div class="mainUnit" >
+    <div class="unitName input">
+      <label for="unit">Unit </label>
+      <input id="unit" formControlName="unit">
+    </div>
+    <div class="unitPrice input">
+      <label for="price">Price (optional) </label>
+      <input id="price" formControlName="price">
+    </div>
   </div>
+  <div class="input">
+    <label for="availability">Availability </label>
+    <input id="availability" formControlName="availability">
+  </div>
+
 </form>
 
 <div class="customerModalWindowButtons">
   <button class="cancelCustomerButton modalWindowButton" mat-dialog-close>Cancel</button>
-  <button class="addCustomerButton modalWindowButton">
-    <img src="../../../../assets/math-plus-white.png" alt="white-plus">
-    Add Customer
+  <button class="addCustomerButton modalWindowButton" (click)="addNewProduct()" mat-dialog-close="">
+    <img src="../../../../assets/math-plus-white.png" alt="white-plus" >
+    Add Product
   </button>
 </div>

@@ -1,0 +1,11 @@
+.trashImgWrapper{
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: url("../../../../assets/trash.png") center no-repeat;
+  &:hover{
+    background-image: url("../../../../assets/trash-active.png");
+    background-color: #FCD0CF;
+  }
+}

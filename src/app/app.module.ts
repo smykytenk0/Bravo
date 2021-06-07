@@ -51,6 +51,7 @@ import { ReplaceCatalogComponent } from './shared/components/replace-catalog/rep
 import { ReplaceCatalogModalComponent } from './shared/components/replace-catalog-modal/replace-catalog-modal.component';
 import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { ProductDeleteModalWindowComponent } from './shared/components/product-delete-modal-window/product-delete-modal-window.component';
+import { DeleteButtonComponent } from './shared/components/delete-button/delete-button.component';
 
 
 const appRoutes: Routes = [
@@ -81,10 +82,15 @@ const appRoutes: Routes = [
     SidenavComponent,
     ReplaceCatalogComponent,
     ReplaceCatalogModalComponent,
-    ProductDeleteModalWindowComponent
+    ProductDeleteModalWindowComponent,
+    DeleteButtonComponent,
   ],
   imports: [
-    StoreModule.forRoot({ ordersReducer: OrdersReducer, customersReducer: CustomersReducer, catalogReducer: CatalogReducer}),
+    StoreModule.forRoot({
+      ordersReducer: OrdersReducer,
+      customersReducer: CustomersReducer,
+      catalogReducer: CatalogReducer
+    }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([OrdersEffect]),
     BrowserModule,
