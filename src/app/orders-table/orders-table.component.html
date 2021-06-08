@@ -3,7 +3,7 @@
 <app-search-field [placeholder]="placeholder"></app-search-field>
 
 <table mat-table
-       [dataSource]="filteredOrdersData$" multiTemplateDataRows
+       [dataSource]="dataTable" multiTemplateDataRows
        class="mat-elevation-z8">
   <ng-container matColumnDef="button">
     <th class="mainTableTh" mat-header-cell *matHeaderCellDef></th>
@@ -95,7 +95,7 @@
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
       <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
         <div class="tableDetails">
           <div class="notes">
             <div class="infoTitle">Notes:</div>

@@ -1,25 +1,36 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { DAYS_SHORT } from '../../constants';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { CustomersActions } from '../../../store/customers/customers.actions';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICustomerData } from '../../../store/interfaces/customers.interfacers';
+import { customersSelector } from '../../../store/customers/customers.reducer';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-add-customer-modal-window',
   templateUrl: './add-customer-modal-window.component.html',
   styleUrls: ['./add-customer-modal-window.component.scss']
 })
-export class AddCustomerModalWindowComponent implements OnInit {
+export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
   shortDays: string[] = DAYS_SHORT;
   customerForm: FormGroup;
   deliveryDaysForm: FormGroup;
   deliveryDays: string[] = [];
   modalTitle: string = this.data ? 'Edit customer' : 'Add customer';
   modalAcceptButton: string = this.data? 'Save' : 'Add Customer' ;
+  allCustomers: ICustomerData[];
+  customersName = [];
+  private unsubscribeAll: Subject<any> = new Subject<any>();
+
 
   constructor(private store: Store, @Inject(MAT_DIALOG_DATA) private data: ICustomerData) {
+    this.store.select(customersSelector).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.allCustomers = data);
+    for(let i of this.allCustomers){
+      this.customersName.push(i.name)
+    }
   }
 
   private initDeliveryForm(){
@@ -65,5 +76,10 @@ export class AddCustomerModalWindowComponent implements OnInit {
 
     this.store.dispatch(this.data ? CustomersActions.editCustomer({
       customer}) : CustomersActions.addNewCustomer({customer}));
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 }

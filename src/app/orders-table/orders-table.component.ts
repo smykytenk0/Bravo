@@ -225,14 +225,14 @@ export class OrdersTableComponent implements AfterViewInit {
   title: string = 'Orders';
   placeholder: string = "Order, Customer, Notes...";
   displayedColumns: string[] = ['button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status'];
-  dataSource: any;
+  dataSource: MatTableDataSource<OrdersData>;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any;
   ordersData: OrdersData[];
   filteredOrdersData$: Observable<OrdersData[]>;
-  dataTable: any;
+  dataTable: OrdersData[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OdrerElement | null;
   startDate$: Observable<Date>;
@@ -241,18 +241,16 @@ export class OrdersTableComponent implements AfterViewInit {
     end: new FormControl()
   });
 
-
   constructor(private store: Store, private orders: OrdersService) {
     this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
     this.store.dispatch(OrdersActions.filterCustomerSelect({ customers: this.ordersData }));
     this.filteredOrdersData$ = this.store.pipe(select(filterOrdersDataSelector));
-    this.dataSource = new MatTableDataSource(this.ordersData);
+    this.filteredOrdersData$.subscribe(data => this.dataTable = data);
+    this.dataSource = new MatTableDataSource(this.dataTable);
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc, elem) => acc.add(elem.customer), new Set()));
     this.startDate$ = this.store.pipe(select(rangeStartDateSelector))
   }
 
-  //TODO: pagination for my main table
-  //TODO: check ReplaySubject for dataSource$
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }

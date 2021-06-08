@@ -7,7 +7,12 @@
   </div>
   <div class="input">
     <label for="name">Name </label>
-    <input id="name" formControlName="name">
+    <input id="name" formControlName="name" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of customersName" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
   </div>
   <div class="input">
     <label for="address">Delivery Address </label>

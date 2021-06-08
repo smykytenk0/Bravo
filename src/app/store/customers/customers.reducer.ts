@@ -4,7 +4,18 @@ import { CustomersActions } from './customers.actions';
 
 export const initialState: ICustomers = {
   customers: [
-
+    {
+      customerNo: 'BB-123',
+      name: 'Sandwich Bar',
+      address: 'Shevchenko Street 123123',
+      deliveryDays: ['Mon', 'Fri'],
+    },
+    {
+      customerNo: 'BB-456',
+      name: 'Burger Bar',
+      address: 'Main Street, 1234 Zurich',
+      deliveryDays: ['Tue', 'Wed'],
+    }
   ]
 };
 

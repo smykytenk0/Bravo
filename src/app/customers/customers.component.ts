@@ -1,11 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { Observable, pipe, Subject } from 'rxjs';
 import { ICustomerData, ICustomers } from '../store/interfaces/customers.interfacers';
 import { select, Store } from '@ngrx/store';
 import { customersSelector } from '../store/customers/customers.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCustomerModalWindowComponent } from '../shared/components/add-customer-modal-window/add-customer-modal-window.component';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -13,25 +16,41 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss']
 })
-export class CustomersComponent{
+export class CustomersComponent implements AfterViewInit, OnDestroy{
   title: string = 'Customers';
   placeholder: string = "Customer No, Name, Address...";
   addCustomer: string = "Add Customer";
-  customers$: Observable<ICustomerData[]>;
+  customersData: ICustomerData[];
+  dataSource: MatTableDataSource<ICustomerData>;
   displayedColumns: string[] = ['customerNo', 'name', 'address', 'deliveryDays'];
+  private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatSort) sort: MatSort;
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private store: Store, private dialog: MatDialog) {
-    this.customers$ = this.store.pipe(select(customersSelector))
+    this.store.select(customersSelector)
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe((data)=>{
+        this.customersData = data;
+        this.dataSource = new MatTableDataSource<ICustomerData>(this.customersData);
+        this.dataSource.paginator = this.paginator;
+    });
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   OpenCustomersTableTr(row) {
     this.dialog.open(AddCustomerModalWindowComponent, {
       data: row
     })
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete()
   }
 }
 

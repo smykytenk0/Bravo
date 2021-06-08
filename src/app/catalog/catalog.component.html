@@ -6,7 +6,7 @@
 
 <app-search-field [placeholder]="placeholder"></app-search-field>
 
-<table mat-table [dataSource]="catalogData$">
+<table mat-table [dataSource]="catalogData">
 
   <ng-container matColumnDef="productCode">
     <th mat-header-cell *matHeaderCellDef> Product Code </th>
@@ -41,4 +41,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
 </table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 

@@ -5,7 +5,7 @@
 <app-search-field [placeholder]="placeholder"></app-search-field>
 
 <div>
-  <table mat-table [dataSource]="customers$" matSort class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <ng-container matColumnDef="customerNo">
       <th mat-header-cell *matHeaderCellDef> Customer No </th>
@@ -33,13 +33,16 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="OpenCustomersTableTr(row)"></tr>
     </ng-container>
   </table>
+  <div *ngIf="(customersData).length==0" class="emptyTable">
+    <div class="emptyTableWrapper">
+      <div class="inboxImg"></div>
+      <div class="emptyTableHeading">No Data to Display</div>
+      <div class="emptyTableDescription">Seems like you don’t have any <br/>customer yet. Let’s create it now!</div>
+      <app-add [addBtnText]="addCustomer"></app-add>
+    </div>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 
-<div *ngIf="(customers$|async).length==0" class="emptyTable">
-  <div class="emptyTableWrapper">
-    <div class="inboxImg"></div>
-    <div class="emptyTableHeading">No Data to Display</div>
-    <div class="emptyTableDescription">Seems like you don’t have any <br/>customer yet. Let’s create it now!</div>
-    <app-add [addBtnText]="addCustomer"></app-add>
-  </div>
-</div>
+
+

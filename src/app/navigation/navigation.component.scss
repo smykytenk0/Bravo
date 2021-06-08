@@ -29,6 +29,10 @@ a{
   &.customers-active .imgWrapper{
     background: url("../../assets/user-active.png") center no-repeat;
   }
+
+  &:nth-child(4) .imgWrapper{
+    background: url("../../assets/log-out.png") center no-repeat;
+  }
 }
 
 .imgWrapper{
@@ -62,4 +66,9 @@ a{
 
     }
   }
+}
+
+.logout{
+  position: absolute;
+  bottom: 8px;
 }

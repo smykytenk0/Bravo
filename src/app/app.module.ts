@@ -5,7 +5,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { OrdersTableComponent } from './orders-table/orders-table.component';
@@ -52,7 +52,7 @@ import { ReplaceCatalogModalComponent } from './shared/components/replace-catalo
 import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { ProductDeleteModalWindowComponent } from './shared/components/product-delete-modal-window/product-delete-modal-window.component';
 import { DeleteButtonComponent } from './shared/components/delete-button/delete-button.component';
-
+import { TestTableComponent } from './test-table/test-table.component';
 
 const appRoutes: Routes = [
   { path: '', component: OrdersTableComponent },
@@ -84,6 +84,7 @@ const appRoutes: Routes = [
     ReplaceCatalogModalComponent,
     ProductDeleteModalWindowComponent,
     DeleteButtonComponent,
+    TestTableComponent,
   ],
   imports: [
     StoreModule.forRoot({
@@ -106,7 +107,6 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatSelectModule,
     FormsModule,
-    NoopAnimationsModule,
     MatButtonModule,
     MatDialogModule,
     NgSelectModule,
