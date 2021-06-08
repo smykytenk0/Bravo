@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { DAYS_SHORT } from '../../constants';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   templateUrl: './add-customer-modal-window.component.html',
   styleUrls: ['./add-customer-modal-window.component.scss']
 })
-export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
+export class AddCustomerModalWindowComponent implements OnInit, OnDestroy, AfterViewInit {
   shortDays: string[] = DAYS_SHORT;
   customerForm: FormGroup;
   deliveryDaysForm: FormGroup;
@@ -23,6 +23,7 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
   modalAcceptButton: string = this.data? 'Save' : 'Add Customer' ;
   allCustomers: ICustomerData[];
   customersName = [];
+  disabled: boolean = !!this.data;
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
 
@@ -46,8 +47,8 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
   private initCustomerForm(){
     this.customerForm = new FormGroup({
       customerNo: new FormControl(this.data ? this.data.customerNo : ''),
-      name: new FormControl(this.data ? this.data.name : ''),
-      deliveryAddress: new FormControl(this.data ? this.data.address : ''),
+      name: new FormControl({value: this.data ? this.data.name : '', disabled: this.disabled}),
+      deliveryAddress: new FormControl({value: this.data ? this.data.address : '', disabled: this.disabled} ),
       contactName: new FormControl(),
       mobilePhone: new FormControl(),
       notify: new FormControl(),
@@ -81,5 +82,8 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
+  }
+
+  ngAfterViewInit(): void {
   }
 }
