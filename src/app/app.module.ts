@@ -52,7 +52,10 @@ import { ReplaceCatalogModalComponent } from './shared/components/replace-catalo
 import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { ProductDeleteModalWindowComponent } from './shared/components/product-delete-modal-window/product-delete-modal-window.component';
 import { DeleteButtonComponent } from './shared/components/delete-button/delete-button.component';
-import { TestTableComponent } from './test-table/test-table.component';
+import {HttpClientModule} from '@angular/common/http';
+import { DndDirective } from './dnd.directive';
+import { ProgressComponent } from './progress/progress.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: OrdersTableComponent },
@@ -84,7 +87,8 @@ const appRoutes: Routes = [
     ReplaceCatalogModalComponent,
     ProductDeleteModalWindowComponent,
     DeleteButtonComponent,
-    TestTableComponent,
+    DndDirective,
+    ProgressComponent,
   ],
   imports: [
     StoreModule.forRoot({
@@ -118,7 +122,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatCheckboxModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

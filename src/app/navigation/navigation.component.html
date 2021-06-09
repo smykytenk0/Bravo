@@ -6,19 +6,19 @@
     <a routerLink="/orders" [routerLinkActive]="['orders-active', 'active-link']" >
       <div class="item">
         <div class="imgWrapper"></div>
-        <div class="itemTitle">Orders</div>
+        <div class="itemTitle">{{navIsOpened? 'Orders': ''}}</div>
       </div>
     </a>
     <a routerLink="/catalog" [routerLinkActive]="['catalog-active', 'active-link']" >
       <div class="item">
         <div class="imgWrapper"></div>
-        <div class="itemTitle">Catalog</div>
+        <div class="itemTitle">{{navIsOpened? 'Catalog' : ''}}</div>
       </div>
     </a>
     <a routerLink="/customers" [routerLinkActive]="['customers-active', 'active-link']">
       <div class="item">
         <div class="imgWrapper"></div>
-        <div class="itemTitle">Customers</div>
+        <div class="itemTitle">{{navIsOpened? 'Customers': ''}}</div>
       </div>
     </a>
 

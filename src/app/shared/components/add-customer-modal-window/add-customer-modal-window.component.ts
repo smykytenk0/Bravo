@@ -47,8 +47,8 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy, After
   private initCustomerForm(){
     this.customerForm = new FormGroup({
       customerNo: new FormControl(this.data ? this.data.customerNo : ''),
-      name: new FormControl({value: this.data ? this.data.name : '', disabled: this.disabled}),
-      deliveryAddress: new FormControl({value: this.data ? this.data.address : '', disabled: this.disabled} ),
+      name: new FormControl(this.data ? this.data.name : ''),
+      deliveryAddress: new FormControl(this.data ? this.data.address : '' ),
       contactName: new FormControl(),
       mobilePhone: new FormControl(),
       notify: new FormControl(),

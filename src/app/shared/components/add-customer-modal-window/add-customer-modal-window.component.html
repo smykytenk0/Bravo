@@ -16,7 +16,7 @@
   </div>
   <div class="input">
     <label for="address">Delivery Address </label>
-    <input id="address" formControlName="deliveryAddress" class="disabled-field" [disabled]="false">
+    <input id="address" formControlName="deliveryAddress" class="disabled-field">
   </div>
   <div class="customerDaysCheckbox input">
     <label for="customersCheckbox">Delivery Days</label>
@@ -41,7 +41,7 @@
   </div>
 </form>
 
-<div class="ModalWindowButtons">
+<div class="modalWindowButtons">
   <button class="cancelModalButton modalWindowButton" mat-dialog-close>Cancel</button>
   <button class="addCustomerButton modalWindowButton" type="submit" (click)="addNewCustomer()" mat-dialog-close>
     <img src="../../../../assets/math-plus-white.png" alt="white-plus">
