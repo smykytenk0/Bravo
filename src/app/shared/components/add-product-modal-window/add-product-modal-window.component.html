@@ -1,6 +1,6 @@
 <form class="modalWindow" [formGroup]="productForm">
-  <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close.png"></button>
-  <h2 class="modalTitle"> {{ productModalTitle }}</h2>
+  <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close-black.png"></button>
+  <div class="modalTitle"> {{ productModalTitle }}</div>
   <div class="input">
     <label for="customerNo">Product Code</label>
     <input id="customerNo" formControlName="productCode">
@@ -11,17 +11,36 @@
   </div>
   <div class="mainUnit" >
     <div class="unitName input">
-      <label for="unit">Unit </label>
+      <label for="mainUnitName">Unit </label>
+      <input id="mainUnitName" formControlName="mainUintName">
+    </div>
+    <div class="unitPrice input">
+      <label for="mainUnitPrice">Price (optional) </label>
+      <input id="mainUnitPrice" formControlName="mainUnitPrice">
+    </div>
+  </div>
+  <div class="additionalUnits" *ngFor="let i of anotherUnits">
+    <div class="unitName input">
+      <label for="unit">Unit-{{anotherUnits.indexOf(i) + 1}} </label>
       <input id="unit" formControlName="unit">
     </div>
     <div class="unitPrice input">
       <label for="price">Price (optional) </label>
       <input id="price" formControlName="price">
     </div>
+    <app-delete-button></app-delete-button>
+  </div>
+  <div class="addUnitButton" (click)="addUnit()">
+    <div class="addUnitButtonImg"></div>
+    <div class="addUnitButtonText">Add Unit</div>
   </div>
   <div class="input">
     <label for="availability">Availability </label>
-    <input id="availability" formControlName="availability">
+    <select id="availability" formControlName="availability">
+      <option>In stock</option>
+      <option>Out of stock</option>
+      <option>Discounted</option>
+    </select>
   </div>
 </form>
 

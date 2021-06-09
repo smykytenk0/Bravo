@@ -1,6 +1,6 @@
 <div class="modalWindow">
-  <h2 class="modalTitle"> Replace Catalog</h2>
-  <h3 class="modalDescription"> Drops the existing catalog and imports the new one</h3>
+  <div class="modalTitle"> Replace Catalog</div>
+  <div class="modalDescription"> Drops the existing catalog and imports the new one</div>
   <div class="dropZone">
     <div   *ngIf="files.length === 0">
       <div class="container" appDnd (fileDropped)="onFileDropped($event)">
@@ -16,22 +16,19 @@
 
     <div class="files-list">
       <div class="single-file" *ngFor="let file of files; let i = index">
-        <div class="file-icon" style="width: 50px">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 6.66699C4 4.45785 5.79086 2.66699 8 2.66699H18.6667C23.8213 2.66699 28 6.84567 28 12.0003V25.3337C28 27.5428 26.2091 29.3337 24 29.3337H8C5.79086 29.3337 4 27.5428 4 25.3337V6.66699ZM17.3333 5.33366H8C7.26362 5.33366 6.66667 5.93061 6.66667 6.66699V25.3337C6.66667 26.07 7.26362 26.667 8 26.667H24C24.7364 26.667 25.3333 26.07 25.3333 25.3337V12.0003H17.3333V5.33366ZM24.7786 9.33366C23.9217 7.3724 22.1484 5.90313 20 5.46702V9.33366H24.7786Z" fill="black"/>
-          </svg>
+        <div class="file-icon">
         </div>
         <div class="info">
-          <h4 class="name">
+          <div class="fileName">
             {{ file?.name }}
-          </h4>
-          <p class="size">
+          </div>
+          <div class="fileSize">
             {{ formatBytes(file?.size, 10) }}
-          </p>
+          </div>
           <app-progress [progress]="file?.progress"></app-progress>
         </div>
 
-        <div class="delete" (click)="deleteFile(i)">
+        <div class="fileDelete" (click)="deleteFile(i)">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.22517 0.811448C1.83465 0.420924 1.20148 0.420924 0.81096 0.811448C0.420435 1.20197 0.420435 1.83514 0.81096 2.22566L6.58569 8.0004L0.811019 13.7751C0.420495 14.1656 0.420495 14.7988 0.811019 15.1893C1.20154 15.5798 1.83471 15.5798 2.22523 15.1893L7.99991 9.41461L13.7746 15.1893C14.1651 15.5798 14.7983 15.5798 15.1888 15.1893C15.5793 14.7988 15.5793 14.1656 15.1888 13.7751L9.41412 8.0004L15.1889 2.22566C15.5794 1.83514 15.5794 1.20197 15.1889 0.811448C14.7983 0.420924 14.1652 0.420924 13.7746 0.811448L7.99991 6.58618L2.22517 0.811448Z" fill="#616161"/>
           </svg>

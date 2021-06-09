@@ -28,6 +28,9 @@ export const CatalogReducer = createReducer(
   }),
   on(CatalogActions.deleteProduct, (state, {product}) => {
     return{ ...state, products: state.products.filter(data => data != product)}
+  }),
+  on(CatalogActions.addUnit, (state) => {
+    return{ ...state, products: [...state.products]}
   })
 );
 

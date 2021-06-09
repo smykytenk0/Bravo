@@ -55,6 +55,7 @@ import { DeleteButtonComponent } from './shared/components/delete-button/delete-
 import {HttpClientModule} from '@angular/common/http';
 import { DndDirective } from './dnd.directive';
 import { ProgressComponent } from './progress/progress.component';
+import { SuccessfulProductAddingComponent } from './shared/components/successful-product-adding/successful-product-adding.component';
 
 
 const appRoutes: Routes = [
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
     DeleteButtonComponent,
     DndDirective,
     ProgressComponent,
+    SuccessfulProductAddingComponent,
   ],
   imports: [
     StoreModule.forRoot({
