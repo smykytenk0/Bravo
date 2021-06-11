@@ -35,6 +35,9 @@ $calendar-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+body{
+  background-color: #E5E5E5;
+}
 *{
   margin: 0;
   font-family: 'Manrope', sans-serif !important;

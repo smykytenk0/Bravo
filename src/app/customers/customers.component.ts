@@ -35,11 +35,13 @@ export class CustomersComponent implements AfterViewInit, OnDestroy{
         this.customersData = data;
         this.dataSource = new MatTableDataSource<ICustomerData>(this.customersData);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort
   }
 
   OpenCustomersTableTr(row) {

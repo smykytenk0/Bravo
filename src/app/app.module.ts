@@ -59,6 +59,7 @@ import { SuccessfulProductAddingComponent } from './shared/components/successful
 import { StatusSelectComponent } from './status-select/status-select.component';
 import { SmallMenuComponent } from './small-menu/small-menu.component';
 import { PrintComponent } from './print/print.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 
 const appRoutes: Routes = [
@@ -97,6 +98,7 @@ const appRoutes: Routes = [
     StatusSelectComponent,
     SmallMenuComponent,
     PrintComponent,
+    LoginFormComponent,
   ],
   imports: [
     StoreModule.forRoot({
