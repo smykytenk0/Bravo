@@ -58,11 +58,12 @@ import { ProgressComponent } from './progress/progress.component';
 import { SuccessfulProductAddingComponent } from './shared/components/successful-product-adding/successful-product-adding.component';
 import { StatusSelectComponent } from './status-select/status-select.component';
 import { SmallMenuComponent } from './small-menu/small-menu.component';
+import { PrintComponent } from './print/print.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: OrdersTableComponent },
-  { path: 'orders', component: OrdersTableComponent },
+  { path: 'orders', component: OrdersTableComponent, children: [{path: 'print', component: PrintComponent}] },
   { path: 'customers', component: CustomersComponent },
   { path: 'catalog', component: CatalogComponent }
 ];
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
     SuccessfulProductAddingComponent,
     StatusSelectComponent,
     SmallMenuComponent,
+    PrintComponent,
   ],
   imports: [
     StoreModule.forRoot({

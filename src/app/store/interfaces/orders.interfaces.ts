@@ -1,13 +1,13 @@
 export interface OrdersData {
   orderNo: number,
   customer: string,
-  customerNo: number,
-  items: object[],
+  customerNo: string,
+  items: Item[],
   notes: string,
   ordered: Date,
   reqDelivery: Date,
   status: string,
-  address: string
+  address: Address
 }
 
 export interface IOrders {
@@ -16,4 +16,16 @@ export interface IOrders {
   filteredOrdersData: OrdersData[];
   rangeStartDate: Date;
   rangeEndDate: Date;
+}
+
+export interface Item {
+  productCode: string,
+  product: string
+  unit:string,
+  quantity: number
+}
+
+export interface Address {
+  street: string,
+  city: string
 }

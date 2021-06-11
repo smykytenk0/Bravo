@@ -1,0 +1,84 @@
+.print-content{
+  margin: 50px auto 0 auto;
+  width: 556px;
+}
+
+.logo{
+  height: 36px;
+  background:url("../../assets/BravoLogo.png") no-repeat ;
+  width: 110px;
+  margin-bottom: 24px;
+}
+
+.orderNo{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.orderedDate{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+  color:#616161;
+}
+
+.small-title{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: left;
+}
+
+.customerDeliveryInfo{
+  display: flex;
+  width: 100%;
+}
+
+.customer{
+  flex-grow: 1;
+}
+
+.reqDeliveryDate{
+  flex-grow: 1;
+}
+
+.totalItems{
+  text-align: end;
+}
+
+table{
+  border-radius: 6px;
+  border-spacing: 0;
+}
+
+th{
+  text-align: start!important;
+  border-bottom: 1px solid #E0E0E0;
+  height: 40px;
+  &:first-child{
+    width: 16px;
+  }
+  &:last-child{
+    width: 16px
+  }
+}
+
+tr td{
+  height: 40px;
+  border-bottom: 1px solid #E0E0E0;
+  &:first-child{
+    border-bottom: none;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+}

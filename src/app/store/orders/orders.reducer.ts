@@ -4,47 +4,47 @@ import {OrdersActions} from "./orders.actions";
 
 export const initialState: IOrders = {
   ordersData: [
-    {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
+    {orderNo: 1, customer: "Sasha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Alex", customerNo: 1, items:[
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Alex", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4},
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},] ,
-      notes: "Notes", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Dasha", customerNo: 1, items:[
+      notes: "Notes", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Dasha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "Notes", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Masha", customerNo: 1, items:[
+      notes: "Notes", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Masha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "Notes", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "Confirm", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Pasha", customerNo: 1, items:[
+      notes: "Notes", ordered: new Date(2017, 7, 9, 22, 18), reqDelivery: new Date(2017, 7, 9, 22, 18), status: "Confirm", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Pasha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date('1995-1-2'), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date('1995-1-2'), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Sasha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date('1995-1-2'), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Igor", customerNo: 1, items:[
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date('1995-1-2'), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Igor", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date('1995-1-2'), reqDelivery:new Date('1995-12-17'), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Valera", customerNo: 1, items:[
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date('1995-1-2'), reqDelivery:new Date('1995-12-17'), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Valera", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date(2021, 5, 1, 11, 3), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date(2021, 5, 1, 11, 3), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Sasha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered:new Date(2021, 4, 31, 7, 18), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
-    {orderNo: 1, customer: "Sasha", customerNo: 1, items:[
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered:new Date(2021, 4, 31, 7, 18), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: { street: 'Main Street 23', city: '1453 Zurich' }},
+    {orderNo: 1, customer: "Sasha", customerNo: 'BB-243', items:[
         {productCode: 'APP123',product: 'Apples', unit:'kg', quantity: 14},
         {productCode: 'TOM53',product: 'Tomatoes', unit:'box', quantity: 4}] ,
-      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date(2021, 4, 30, 11, 37), reqDelivery: new Date('1995-12-17'), status: "confirmed", address: "Main Street 23, 1453 Zurich"},
+      notes: "+1 Bottle Coca Cola Please, Need to be delivered Today!", ordered: new Date(2021, 4, 30, 11, 37), reqDelivery: new Date('1995-12-17'), status: "confirmed",address: { street: 'Main Street 23', city: '1453 Zurich' }},
       ],
   filteredCustomers: [],
   filteredOrdersData: [],

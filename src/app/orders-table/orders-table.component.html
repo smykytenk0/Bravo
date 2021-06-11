@@ -3,7 +3,7 @@
 <app-search-field [placeholder]="placeholder"></app-search-field>
 
 <table mat-table
-       [dataSource]="dataTable" multiTemplateDataRows
+       [dataSource]="dataSource" multiTemplateDataRows
        class="mat-elevation-z8">
   <ng-container matColumnDef="button">
     <th class="mainTableTh" mat-header-cell *matHeaderCellDef></th>
@@ -103,12 +103,12 @@
           </div>
           <div class="address">
             <div class="infoTitle">Delivery Address:</div>
-            <div class="info">{{ element.address }}</div>
+            <div class="info">{{ element.address.street }}, {{element.address.city}}</div>
           </div>
-          <div class="print">
+          <a class="print" [routerLink]="['/orders','print']" target="_blank" (click)="openPrint(element)">
             <img src="../../assets/print.png" height="20" width="20"/>
             <div>Print order</div>
-          </div>
+          </a>
         </div>
         <table class="tableInsideTable">
           <tr>

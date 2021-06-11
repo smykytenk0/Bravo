@@ -1,0 +1,46 @@
+<div class="print-content">
+  <div class="logo"></div>
+  <div class="printInto">
+    <div class="order">
+      <div class="orderNo">Order {{printInfo.orderNo}}</div>
+      <div class="orderedDate">{{printInfo.ordered | date}}</div>
+    </div>
+    <div class="customerDeliveryInfo">
+      <div class="customer">
+        <div class="small-title">Customer</div>
+        <div class="customerItem">{{printInfo.customerNo}}</div>
+        <div class="customerItem">{{printInfo.customer}}</div>
+        <div class="customerItem">{{printInfo.address.street}}</div>
+        <div class="customerItem">{{printInfo.address.city}}</div>
+      </div>
+      <div class="reqDeliveryDate">
+        <div class="small-title">Request Delivery Date</div>
+        <div>{{printInfo.reqDelivery | date}}</div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="small-title">Notes</div>
+      <div>{{printInfo.notes}}</div>
+    </div>
+    <table>
+      <tr>
+        <th> </th>
+        <th>ProductCode</th>
+        <th>Product</th>
+        <th>Unit</th>
+        <th>Quantity</th>
+        <th> </th>
+      </tr>
+      <tr *ngFor="let item of printInfo.items">
+        <td> </td>
+        <td>{{item.productCode}}</td>
+        <td>{{item.product}}</td>
+        <td>{{item.unit}}</td>
+        <td>{{item.quantity}}</td>
+        <td> </td>
+
+      </tr>
+    </table>
+    <div  class="totalItems">Total {{printInfo.items.length}} items</div>
+  </div>
+</div>

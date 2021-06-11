@@ -1,4 +1,4 @@
-<div class="pageWrapper">
+<div *ngIf="route.url!='/orders/print'; else print" class="pageWrapper">
 
   <div class="smallMenu">
     <app-small-menu></app-small-menu>
@@ -20,3 +20,6 @@
   </div>
 </div>
 
+<ng-template #print>
+  <app-print></app-print>
+</ng-template>

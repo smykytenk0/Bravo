@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders/orders.reducer';
 import { OrdersService } from '../shared/services/orders.service';
 import { OrdersData } from '../store/interfaces/orders.interfaces';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { OrdersActions } from '../store/orders/orders.actions';
 
 export interface OdrerElement {
@@ -234,7 +234,7 @@ export class OrdersTableComponent implements AfterViewInit {
   filteredOrdersData$: Observable<OrdersData[]>;
   dataTable: OrdersData[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  expandedElement: OdrerElement | null;
+  expandedElement: OrdersData | null;
   startDate$: Observable<Date>;
   range = new FormGroup({
     start: new FormControl(),
@@ -244,11 +244,11 @@ export class OrdersTableComponent implements AfterViewInit {
   constructor(private store: Store, private orders: OrdersService) {
     this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
     this.store.dispatch(OrdersActions.filterCustomerSelect({ customers: this.ordersData }));
-    this.filteredOrdersData$ = this.store.pipe(select(filterOrdersDataSelector));
-    this.filteredOrdersData$.subscribe(data => this.dataTable = data);
-    this.dataSource = new MatTableDataSource(this.dataTable);
+    this.store.select(filterOrdersDataSelector).subscribe( (data) => {
+      this.dataSource = new MatTableDataSource<OrdersData>(data);
+      this.dataSource.paginator = this.paginator;
+    });
     this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc, elem) => acc.add(elem.customer), new Set()));
-    this.startDate$ = this.store.pipe(select(rangeStartDateSelector))
   }
 
   ngAfterViewInit(): void {
@@ -274,5 +274,8 @@ export class OrdersTableComponent implements AfterViewInit {
   }
 
   cancelDatepickerData() {
+  }
+
+  openPrint(row) {
   }
 }

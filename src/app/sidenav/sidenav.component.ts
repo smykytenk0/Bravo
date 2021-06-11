@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
   navIsOpened: boolean = true;
-  constructor() { }
+
+  @ViewChild('drawer') sidenav: MatSidenav;
+  constructor(public route: Router) { }
 
   ngOnInit(): void {
   }
 
+  log() {
+    console.log(this.route.url);
+  }
 }
