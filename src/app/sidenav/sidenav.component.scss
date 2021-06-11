@@ -1,13 +1,17 @@
 .example-container {
-  width: 100vw;
+  width: 96.5vw;
   height: 100vh;
-  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .example-sidenav-content{
-  padding-left: 26px
+  padding: 0 26px;
 }
 
-.example-sidenav {
-  width: 16vw
+
+.pageWrapper{
+  display: flex;
+}
+
+.smallMenu{
+  width: 64px;
 }

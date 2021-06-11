@@ -1,0 +1,57 @@
+a{
+  text-decoration: none;
+  outline: none;
+  &:first-child .imgWrapper{
+    background: url("../../assets/shopping-cart.png") center no-repeat;
+  }
+
+  &.orders-active .imgWrapper{
+    background: url("../../assets/shopping-cart-active.png") center no-repeat;
+  }
+
+  &:nth-child(2) .imgWrapper{
+    background: url("../../assets/tag.png") center no-repeat;
+  }
+
+  &.catalog-active .imgWrapper{
+    background: url("../../assets/tag-active.png") center no-repeat;
+  }
+
+  &:nth-child(3) .imgWrapper{
+    background: url("../../assets/user.png") center no-repeat;
+  }
+
+  &.customers-active .imgWrapper{
+    background: url("../../assets/user-active.png") center no-repeat;
+  }
+
+  &:nth-child(4) .imgWrapper{
+    background: url("../../assets/log-out.png") center no-repeat;
+  }
+}
+
+.imgWrapper{
+  margin:0 8px;
+  width: 48px;
+  height: 48px;
+}
+
+.logout{
+  position: absolute;
+  bottom: 8px;
+}
+
+.logo{
+  padding: 20px 16px 20px 16px;
+  margin-bottom: 28px;
+}
+
+.active-link{
+  & .item{
+    background-color: rgba(197, 220, 250, 0.51);
+    & .itemTitle{
+      color: #1672EC;
+    }
+  }
+}
+
