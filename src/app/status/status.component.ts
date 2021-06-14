@@ -1,15 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { OrdersData } from '../store/interfaces/orders.interfaces';
+import { Store } from '@ngrx/store';
+import { OrdersActions } from '../store/orders/orders.actions';
 
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.scss']
 })
-export class StatusComponent {
+export class StatusComponent implements OnInit{
+  isConfirmedStatus: boolean;
+  @Input() element: OrdersData;
 
-  @Input() status: string;
+  constructor(private store: Store) {
+  }
+  ngOnInit(): void {
+    this.isConfirmedStatus = this.element.isConfirmedStatus;
+  }
 
   changeStatus() {
-    this.status = 'confirmed'
+    console.log(this.element);
+    this.store.dispatch(OrdersActions.changeStatus({order: this.element}))
   }
 }

@@ -47,7 +47,7 @@ export class AddProductModalWindowComponent implements OnInit {
     this.dialog.open(SuccessfulProductAddingComponent);
     setTimeout(()=>{
       this.dialog.closeAll()
-    },5000);
+    },2000);
   }
 
   addUnit() {

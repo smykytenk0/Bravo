@@ -6,8 +6,8 @@ export interface OrdersData {
   notes: string,
   ordered: Date,
   reqDelivery: Date,
-  status: string,
-  address: Address
+  isConfirmedStatus: boolean,
+  address: Address,
 }
 
 export interface IOrders {

@@ -1,5 +1,5 @@
-<div class="confirmedStatusWrapper" *ngIf="status == 'confirmed'; else notConfirmed">
-  <div class="confirmedStatus">
+<div class="confirmedStatusWrapper" *ngIf="isConfirmedStatus; else notConfirmed">
+  <div class="confirmedStatus" (click)="changeStatus()">
     Confirmed
   </div>
 </div>

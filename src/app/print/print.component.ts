@@ -16,7 +16,6 @@ export class PrintComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(history.state);
   }
 
 }
