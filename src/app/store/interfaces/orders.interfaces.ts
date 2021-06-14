@@ -16,6 +16,7 @@ export interface IOrders {
   filteredOrdersData: OrdersData[];
   rangeStartDate: Date;
   rangeEndDate: Date;
+  status: string
 }
 
 export interface Item {

@@ -48,30 +48,32 @@
   </ng-container>
 
   <ng-container matColumnDef="ordered">
-    <th mat-header-cell *matHeaderCellDef class="sortTh">
+    <th mat-header-cell *matHeaderCellDef >
       <div class="sortTh">
-        <div class="columnName"> Ordered</div>
-        <div>
-          <div class="datepicker">
-            <mat-date-range-input [rangePicker]="picker" [formGroup]="range"
-                                  style="width: 0; height: 0; visibility: hidden">
-              <input matStartDate placeholder="Start date" style="display: none" formControlName="start">
-              <input matEndDate placeholder="End date" style="display: none" formControlName="end">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker" style="display: none"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker>
-              <mat-date-range-picker-actions>
-                <button mat-button matDateRangePickerCancel (click)="toggleDataPicker(); cancelDatepickerData()">Cancel
-                </button>
-                <button type="submit" mat-raised-button color="primary" matDateRangePickerApply
-                        (click)="enterDatepickerData(); toggleDataPicker()">
-                  <img src="../../assets/check.png">
-                  Done
-                </button>
-              </mat-date-range-picker-actions>
-            </mat-date-range-picker>
-            <div class="sortSizeWrapper" *ngIf="!dataPickerOpened; else activeDatepicker">
-              <img src="../../assets/sort-size.png" (click)=" picker.open(); toggleDataPicker()"/>
+        <div class="sortTh">
+          <div class="columnName"> Ordered</div>
+          <div>
+            <div class="datepicker">
+              <mat-date-range-input [rangePicker]="picker" [formGroup]="range"
+                                    style="width: 0; height: 0; visibility: hidden">
+                <input matStartDate placeholder="Start date" style="display: none" formControlName="start">
+                <input matEndDate placeholder="End date" style="display: none" formControlName="end">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker" style="display: none"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker>
+                <mat-date-range-picker-actions>
+                  <button mat-button matDateRangePickerCancel (click)="toggleDataPicker(); cancelDatepickerData()">Cancel
+                  </button>
+                  <button type="submit" mat-raised-button color="primary" matDateRangePickerApply
+                          (click)="enterDatepickerData(); toggleDataPicker()">
+                    <img src="../../assets/check.png">
+                    Done
+                  </button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+              <div class="sortSizeWrapper" *ngIf="!dataPickerOpened; else activeDatepicker">
+                <img src="../../assets/sort-size.png" (click)=" picker.open(); toggleDataPicker()"/>
+              </div>
             </div>
           </div>
         </div>
@@ -95,6 +97,9 @@
         <div class="columnName"> Status</div>
         <div class="sortSizeWrapper" *ngIf="!isStatusOpened; else statusOpen">
           <img src="../../assets/sort-size.png" class="sort-size" (click)="openStatusSelect()"/>
+        </div>
+        <div *ngIf="isStatusOpened" class="statusSelect">
+          <app-status-select></app-status-select>
         </div>
       </div>
     </th>

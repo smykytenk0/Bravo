@@ -9,6 +9,7 @@ const toggleDatepicker = createAction('[Orders] toggle Datepicker');
 const getRangeStartDate = createAction('[Orders] getRangeStartDate', props<{ startDate: Date }>());
 const getRangeEndDate = createAction('[Orders] getRangeEndDate', props<{ endDate: Date }>());
 const changeStatus = createAction('[Orders] Change Status', props<{order: OrdersData}>());
+const filterStatus = createAction('[Orders] Filter Status', props<{status: string}>());
 
 export const OrdersActions = {
   applyCustomerFilter,
@@ -18,5 +19,6 @@ export const OrdersActions = {
   getRangeStartDate,
   getRangeEndDate,
   toggleDatepicker,
-  changeStatus
+  changeStatus,
+  filterStatus
 };

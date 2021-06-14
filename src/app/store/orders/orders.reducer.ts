@@ -140,6 +140,7 @@ export const initialState: IOrders = {
   filteredOrdersData: [],
   rangeStartDate: new Date(1970, 1, 1),
   rangeEndDate: new Date(2050, 12, 31),
+  status: 'Both',
 };
 
 export const OrdersReducer = createReducer(
@@ -180,6 +181,17 @@ export const OrdersReducer = createReducer(
       reqDelivery: newFilteredOrdersData[index].reqDelivery
     };
     return { ...state, filteredOrdersData: newFilteredOrdersData }
+  }),
+  on(OrdersActions.filterStatus, (state, {status}) =>{
+    switch (status) {
+      case 'Both':
+        break;
+      case 'Confirmed':
+        return {...state, filteredOrdersData: state.ordersData.filter(data => data.isConfirmedStatus)};
+      case 'Not confirmed':
+        return {...state, filteredOrdersData: state.ordersData.filter(data => !data.isConfirmedStatus)}
+    }
+    return {...state, filteredOrdersData: state.ordersData.filter( data => data.isConfirmedStatus || !data.isConfirmedStatus)};
   })
 );
 
@@ -189,3 +201,4 @@ export const filteredCustomersSelector = createSelector(defaultOrdersSelector, s
 export const filterOrdersDataSelector = createSelector(defaultOrdersSelector, state => state.filteredOrdersData);
 export const rangeStartDateSelector = createSelector(defaultOrdersSelector, state => state.rangeStartDate);
 export const rangeEndDateSelector = createSelector(defaultOrdersSelector, state => state.rangeEndDate);
+export const statusSelector = createSelector(defaultOrdersSelector, state => state.status);

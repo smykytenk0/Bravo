@@ -60,6 +60,7 @@ import { StatusSelectComponent } from './status-select/status-select.component';
 import { SmallMenuComponent } from './small-menu/small-menu.component';
 import { PrintComponent } from './print/print.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 const appRoutes: Routes = [
@@ -137,7 +138,8 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

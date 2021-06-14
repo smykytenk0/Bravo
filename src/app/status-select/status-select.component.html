@@ -1,1 +1,18 @@
-<p>status-select works!</p>
+<div class="statusSelectContainer">
+  <label id="statusLabel">Select status for search</label>
+  <mat-radio-group
+    aria-labelledby="statusLabel"
+    class="statusLabel"
+    [(ngModel)]="status" >
+    <mat-radio-button class="statusOption" *ngFor="let status of statusArray" [value]="status">
+      {{status}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <div class="radioButtonContainer">
+    <div class="confirmButton radioButton" (click)="enterStatusFilter()">
+      <img src="../../assets/check.png" alt="white-plus">
+      Confirm
+    </div>
+  </div>
+</div>
+
