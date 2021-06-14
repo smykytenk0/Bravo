@@ -14,7 +14,7 @@ a{
   }
 
   &.catalog-active .imgWrapper{
-    background: url("../../assets/tag-active.png") center no-repeat;
+      background: url("../../assets/tag-active.png") center no-repeat;
   }
 
   &:nth-child(3) .imgWrapper{
@@ -54,4 +54,3 @@ a{
     }
   }
 }
-

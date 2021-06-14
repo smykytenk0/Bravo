@@ -23,6 +23,7 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy, After
   modalAcceptButton: string = this.data? 'Save' : 'Add Customer' ;
   allCustomers: ICustomerData[];
   customersName = [];
+  confirmImgSrc: string = this.data? '../../../../assets/check.png' :  '../../../../assets/math-plus-white.png';
   disabled: boolean = !!this.data;
   private unsubscribeAll: Subject<any> = new Subject<any>();
 

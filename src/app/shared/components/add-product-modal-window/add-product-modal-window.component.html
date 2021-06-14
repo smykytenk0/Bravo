@@ -19,21 +19,31 @@
       <input id="mainUnitPrice" formControlName="mainUnitPrice">
     </div>
   </div>
-  <div class="additionalUnits" *ngFor="let i of anotherUnits">
-    <div class="unitName input">
-      <label for="unit">Unit-{{anotherUnits.indexOf(i) + 1}} </label>
-      <input id="unit" formControlName="unit">
-    </div>
-    <div class="unitPrice input">
-      <label for="price">Price (optional) </label>
-      <input id="price" formControlName="price">
-    </div>
-    <app-delete-button></app-delete-button>
-  </div>
-  <div class="addUnitButton" (click)="addUnit()">
+ <form [formGroup]="anotherUnitsForm">
+   <div class="additionalUnits" *ngFor="let unit of anotherUnits">
+     <div class="unitName input">
+       <label for="unit{{anotherUnits.indexOf(unit)}}">Unit-{{anotherUnits.indexOf(unit) + 1}} </label>
+       <input id="unit{{anotherUnits.indexOf(unit)}}"  placeholder="{{unit}}" formControlName="Unit-{{anotherUnits.indexOf(unit) + 1}}">
+     </div>
+     <div class="unitPrice input">
+       <label for="price{{anotherUnits.indexOf(unit)}}">Price (optional) </label>
+       <input id="price{{anotherUnits.indexOf(unit)}}" formControlName="Price-{{anotherUnits.indexOf(unit) + 1}}">
+     </div>
+     <div (click)="deleteUnit(unit)">
+       <app-delete-button ></app-delete-button>
+     </div>
+   </div>
+ </form>
+  <div *ngIf="anotherUnits.length<(maxUnitsAmount-1); else maxUnitsAmountText" class="addUnitButton" (click)="addUnit()">
     <div class="addUnitButtonImg"></div>
     <div class="addUnitButtonText">Add Unit</div>
   </div>
+  <ng-template #maxUnitsAmountText>
+    <div class="maxUnitsAmountText">
+      Max number of Units - {{maxUnitsAmount}}
+    </div>
+  </ng-template>
+
   <div class="input">
     <label for="availability">Availability </label>
     <select id="availability" formControlName="availability">

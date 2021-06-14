@@ -55,23 +55,6 @@
   text-align: end;
 }
 
-table{
-  border-radius: 6px;
-  border-spacing: 0;
-}
-
-th{
-  text-align: start!important;
-  border-bottom: 1px solid #E0E0E0;
-  height: 40px;
-  &:first-child{
-    width: 16px;
-  }
-  &:last-child{
-    width: 16px
-  }
-}
-
 tr td{
   height: 40px;
   border-bottom: 1px solid #E0E0E0;

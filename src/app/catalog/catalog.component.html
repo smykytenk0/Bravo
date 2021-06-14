@@ -1,6 +1,8 @@
-<app-add [addBtnText]="addBtnText"></app-add>
+<div class="mainContentButtons">
+  <app-add [addBtnText]="addBtnText"></app-add>
 
-<app-replace-catalog></app-replace-catalog>
+  <app-replace-catalog></app-replace-catalog>
+</div>
 
 <app-page-title [title]="title"></app-page-title>
 
@@ -41,5 +43,13 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
 </table>
+
+<div *ngIf="(catalogData).length==0" class="emptyTable">
+  <app-empty-table></app-empty-table>
+  <div class="emptyTableButtons">
+    <app-add [addBtnText]="addBtnText"></app-add>
+    <app-replace-catalog></app-replace-catalog>
+  </div>
+</div>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

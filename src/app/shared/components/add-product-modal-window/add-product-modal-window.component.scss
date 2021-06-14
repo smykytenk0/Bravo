@@ -1,9 +1,15 @@
-.mainUnit{
+.mainUnit, .additionalUnits{
   display: flex;
-  flex-basis: auto
+  flex-basis: auto;
+  align-items: center;
 }
 
-
+.additionalUnits{
+  align-items: flex-end;
+  & div:last-child{
+    margin-bottom: 8px;
+  }
+}
 
 :host ::ng-deep{
   .mat-checkbox-checked{
@@ -66,4 +72,9 @@ select, option{
     text-align: left;
     color: #1672EC;
   }
+}
+
+.maxUnitsAmountText{
+  width: fit-content;
+  margin: 0 auto;
 }

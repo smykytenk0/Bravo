@@ -112,19 +112,19 @@ mat-paginator {
   }
 
   .mat-paginator-range-actions button:nth-child(2) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background-image: url("../../assets/push-chevron-left.png");
+    background: url("../../assets/push-chevron-left.png") center no-repeat;
   }
 
   .mat-paginator-range-actions button:nth-child(3) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background-image: url("../../assets/chevron-left.png");
+    background: url("../../assets/chevron-left.png") center no-repeat;
   }
 
   .mat-paginator-range-actions button:nth-child(4) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background-image: url("../../assets/chevron-right.png");
+    background: url("../../assets/chevron-right.png") center no-repeat;
   }
 
   .mat-paginator-range-actions button:nth-child(5) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background-image: url("../../assets/push-chevron-right.png");
+    background: url("../../assets/push-chevron-right.png") center no-repeat;
   }
 
   .mat-form-field-underline {

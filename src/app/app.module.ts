@@ -61,6 +61,7 @@ import { SmallMenuComponent } from './small-menu/small-menu.component';
 import { PrintComponent } from './print/print.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { EmptyTableComponent } from './shared/components/empty-table/empty-table.component';
 
 
 const appRoutes: Routes = [
@@ -104,6 +105,7 @@ const appRoutes: Routes = [
     SmallMenuComponent,
     PrintComponent,
     LoginFormComponent,
+    EmptyTableComponent,
   ],
   imports: [
     StoreModule.forRoot({

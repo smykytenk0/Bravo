@@ -7,11 +7,13 @@
   border: 1px solid #E0E0E0;
   outline: none;
   margin-bottom: 24px;
+  align-items: center;
 
   &Img{
-    padding: 10.55px 14.55px;
-    height: 18.9px;
-    width: 18.9px;
+    height: 24px;
+    width: 24px;
+    padding: 8px 12px;
+    background: url("../../../../assets/search.png") center no-repeat;
   }
   &Input{
     width: 288px;
@@ -23,6 +25,14 @@
     line-height: 24px;
     letter-spacing: 0.0168em;
     text-align: left;
+  }
+
+  &:focus-within{
+    border: 1.5px solid #1672EC;
+
+    & .ordersSearchImg{
+      background: url("../../../../assets/search-blue.svg") center no-repeat;
+    }
   }
 }
 

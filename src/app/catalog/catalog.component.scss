@@ -1,22 +1,17 @@
-.titleAddWrapper{
+.mainContentButtons {
   display: flex;
-  align-items:center;
-}
-
-app-add{
   position: absolute;
   top: 24px;
-  right: 24px
+  right: 24px;
+  flex-direction: row-reverse;
+}
+
+app-replace-catalog{
+  margin-right: 16px;
 }
 
 app-page-title{
   margin-right: 56.2vw;
-}
-
-app-replace-catalog{
-  position: absolute;
-  right: 201px;
-  top: 24px
 }
 
 .trashImgWrapper{
@@ -32,4 +27,11 @@ app-replace-catalog{
 
 .moreUnits{
   color: rgb(160,160,160);
+}
+
+.emptyTableButtons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
 }

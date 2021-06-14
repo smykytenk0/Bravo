@@ -34,12 +34,8 @@
     </ng-container>
   </table>
   <div *ngIf="(customersData).length==0" class="emptyTable">
-    <div class="emptyTableWrapper">
-      <div class="inboxImg"></div>
-      <div class="emptyTableHeading">No Data to Display</div>
-      <div class="emptyTableDescription">Seems like you don’t have any <br/>customer yet. Let’s create it now!</div>
-      <app-add [addBtnText]="addCustomer"></app-add>
-    </div>
+    <app-empty-table></app-empty-table>
+    <app-add [addBtnText]="addCustomer"></app-add>
   </div>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
