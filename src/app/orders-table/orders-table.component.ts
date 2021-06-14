@@ -9,6 +9,7 @@ import { OrdersService } from '../shared/services/orders.service';
 import { OrdersData } from '../store/interfaces/orders.interfaces';
 import { Observable } from 'rxjs';
 import { OrdersActions } from '../store/orders/orders.actions';
+import { Router } from '@angular/router';
 
 export interface OdrerElement {
   orderNo: number,
@@ -241,7 +242,7 @@ export class OrdersTableComponent implements AfterViewInit {
     end: new FormControl()
   });
 
-  constructor(private store: Store, private orders: OrdersService) {
+  constructor(private store: Store, private orders: OrdersService, private router: Router) {
     this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
     this.store.dispatch(OrdersActions.filterCustomerSelect({ customers: this.ordersData }));
     this.store.select(filterOrdersDataSelector).subscribe( (data) => {
@@ -277,5 +278,6 @@ export class OrdersTableComponent implements AfterViewInit {
   }
 
   openPrint(row) {
+    this.router.navigate(['/orders/print'], {state: row})
   }
 }

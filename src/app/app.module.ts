@@ -63,10 +63,14 @@ import { LoginFormComponent } from './login-form/login-form.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: OrdersTableComponent },
-  { path: 'orders', component: OrdersTableComponent, children: [{path: 'print', component: PrintComponent}] },
-  { path: 'customers', component: CustomersComponent },
-  { path: 'catalog', component: CatalogComponent }
+  {
+    path: '', component: SidenavComponent, children:[
+      { path: 'orders', component: OrdersTableComponent, children: [{path: 'print', component: PrintComponent}] },
+      { path: 'customers', component: CustomersComponent },
+      { path: 'catalog', component: CatalogComponent }
+    ]
+  },
+  {path: 'login', component: LoginFormComponent}
 ];
 
 

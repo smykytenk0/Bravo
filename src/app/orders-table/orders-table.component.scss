@@ -378,3 +378,9 @@ table {
     letter-spacing: 0.005em;
     text-align: left;
   }
+
+  .customerPicker{
+    position: absolute;
+    margin-top: 120px;
+    z-index: 2;
+  }
