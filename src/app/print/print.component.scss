@@ -55,6 +55,24 @@
   text-align: end;
 }
 
+
+
+th{
+  text-align: start!important;
+  border-bottom: 1px solid #E0E0E0;
+  height: 40px;
+  &:first-child{
+    width: 16px;
+  }
+  &:last-child{
+    width: 16px
+  }
+}
+
+th:first-child:hover, th:last-child:hover{
+  border-bottom: 1px solid #E0E0E0!important;
+}
+
 tr td{
   height: 40px;
   border-bottom: 1px solid #E0E0E0;

@@ -80,6 +80,8 @@ table {
   width: 100%;
   box-shadow: none;
   border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  border-spacing: 0;
 }
 
 th.mat-header-cell{
@@ -253,7 +255,7 @@ table tr:not(.mat-header-row):hover{
 }
 
 th:hover{
-  border-bottom: 2px solid #1672EC;
+  border-bottom: 2px solid #1672EC!important;
 }
 
 .emptyTableHeading{
@@ -294,3 +296,85 @@ th:hover{
   border-top: none;
   padding: 64px 0 49px 0;
 }
+
+tr:last-child td{
+  border-bottom: none!important;
+}
+
+.mat-form-field-underline {
+  display: none;
+}
+
+.mat-paginator-page-size-label {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+  margin: 0 12px!important;
+}
+
+.mat-form-field-infix {
+  border: none;
+  padding: 8px 12px!important;
+  margin-right: 6px;
+}
+
+.mat-form-field-flex {
+  width: 80px;
+  border: 1px solid silver;
+  border-radius: 8px;
+}
+
+.mat-form-field-wrapper {
+  padding: 0!important;
+}
+
+.mat-paginator-page-size-select {
+  margin: 0!important;
+  width: 80px!important;
+  padding: 0;
+}
+
+.mat-select-min-line {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+}
+
+mat-paginator .mat-button-wrapper {
+  display: none!important;
+}
+
+.mat-icon-button {
+  margin-right: 12px!important;
+  width: 32px!important;
+  height: 32px!important;
+  background-color: #E0E0E0!important;
+  vertical-align: top!important;
+}
+
+.mat-paginator-range-actions button:nth-child(2) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
+  background: url("assets/push-chevron-left.png") center no-repeat;
+}
+
+.mat-paginator-range-actions button:nth-child(3) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
+  background: url("assets/chevron-left.png") center no-repeat;
+}
+
+.mat-paginator-range-actions button:nth-child(4) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
+  background: url("assets/chevron-right.png") center no-repeat;
+}
+
+.mat-paginator-range-actions button:nth-child(5) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
+  background: url("assets/push-chevron-right.png") center no-repeat;
+}
+
+.mat-paginator-container {
+  padding: 0!important;
+}
+

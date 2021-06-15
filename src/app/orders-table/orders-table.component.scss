@@ -7,10 +7,6 @@ td {
   text-align: left;
 }
 
-table {
-  box-shadow: none;
-}
-
 
 .sortTh {
   display: flex;
@@ -27,18 +23,13 @@ app-customerpicker {
   margin-right: 16px;
 }
 
-.sortSizeThContainer {
-  position: absolute;
-}
-
-.sortSize {
-  cursor: pointer;
-}
-
 mat-paginator {
-  width: 99.90%;
+  width: 100%;
+  box-sizing: border-box;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  border: 1px solid #E0E0E0;
+  border-top: none;
 }
 
 :host ::ng-deep {
@@ -47,48 +38,10 @@ mat-paginator {
     border-bottom: 1px solid #1672EC;
   }
 
-  .bigTable {
-    & th.mat-header-cell {
-      font-size: 14px;
-      padding: 0 0.7vw;
-      border-bottom: 1px solid #E0E0E0;
-
-      &:first-child {
-        width: 5vw;
-      }
-
-      &:nth-child(2) {
-        width: 5.6vw;
-      }
-
-      &:nth-child(3) {
-        width: 9.7vw;
-      }
-
-      &:nth-child(4) {
-        width: 7.7vw;
-      }
-
-      &:nth-child(5) {
-        width: 4.2vw;
-      }
-
-      &:nth-child(6) {
-        width: 7.7vw;
-      }
-
-      &:nth-child(7) {
-        width: 14.6vw;
-      }
-
-      &:nth-child(8) {
-        width: 14.6vw;
-      }
-
-      &:nth-child(9) {
-        width: 9vw;
-      }
-    }
+  .bigTable th.mat-header-cell{
+    font-size: 14px;
+    padding: 0 0.7vw;
+    border-bottom: 1px solid #E0E0E0;
   }
 
   mat-datepicker-content {
@@ -105,106 +58,8 @@ mat-paginator {
     background: url("../../assets/chevron-up.png") center no-repeat;
   }
 
-
-  .mat-paginator-range-actions button .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background-repeat: no-repeat;
-    margin: 11px;
-  }
-
-  .mat-paginator-range-actions button:nth-child(2) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background: url("../../assets/push-chevron-left.png") center no-repeat;
-  }
-
-  .mat-paginator-range-actions button:nth-child(3) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background: url("../../assets/chevron-left.png") center no-repeat;
-  }
-
-  .mat-paginator-range-actions button:nth-child(4) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background: url("../../assets/chevron-right.png") center no-repeat;
-  }
-
-  .mat-paginator-range-actions button:nth-child(5) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
-    background: url("../../assets/push-chevron-right.png") center no-repeat;
-  }
-
-  .mat-form-field-underline {
-    display: none;
-  }
-
-  .mat-form-field-flex {
-    width: 80px;
-    border: 1px solid silver;
-    border-radius: 8px;
-  }
-
-  .mat-form-field-infix {
-    border: none;
-    padding: 8px 12px;
-    margin-right: 6px;
-  }
-
-  .mat-form-field-wrapper {
-    padding: 0;
-  }
-
-  .mat-paginator-page-size-select {
-    margin: 0;
-    width: 80px;
-    padding: 0;
-  }
-
-  .mat-select-min-line {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: 0.0168em;
-    text-align: left;
-
-  }
-
-  .mat-paginator-page-size-label {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.0168em;
-    text-align: left;
-    margin: 0 12px;
-
-  }
-
-  .mat-button-ripple.mat-ripple {
-    border-radius: 0;
-  }
-
-  .mat-paginator-container {
-    padding: 0;
-  }
-
-  .mat-icon-button .mat-button-wrapper > * {
-    margin-top: 5px;
-    vertical-align: top;
-  }
-
-  mat-paginator .mat-button-wrapper {
-    display: none;
-  }
-
-  .mat-paginator-icon {
-    width: 23px;
-  }
-
-  .mat-icon-button {
-    margin-right: 12px;
-    width: 32px;
-    height: 32px;
-    background-color: #E0E0E0;
-    vertical-align: top;
-  }
-
   .example-expanded-row {
-    background: #C5DCFA80;
+    background: #C5DCFA80!important;
 
     & td:first-child {
       border-top-left-radius: 8px;
@@ -219,16 +74,6 @@ mat-paginator {
 
   td.mat-cell:last-of-type {
     padding: 0
-  }
-
-
-  .mat-paginator-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .mat-paginator-range-label {
-    margin: 0 32px
   }
 }
 
