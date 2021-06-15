@@ -10,6 +10,11 @@
 
 <table mat-table [dataSource]="dataSource">
 
+  <ng-container matColumnDef="firstEmptyColumn">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element" > </td>
+  </ng-container>
+
   <ng-container matColumnDef="productCode">
     <th mat-header-cell *matHeaderCellDef> Product Code </th>
     <td mat-cell *matCellDef="let element" > {{element.productCode}} </td>
@@ -38,6 +43,11 @@
   <ng-container matColumnDef="deleteButton">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element"><app-delete-button (click)="openDeleteModalWindow(element)"></app-delete-button></td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastEmptyColumn">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element" > </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

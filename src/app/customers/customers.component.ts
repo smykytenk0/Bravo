@@ -22,7 +22,7 @@ export class CustomersComponent implements AfterViewInit, OnDestroy{
   addCustomer: string = "Add Customer";
   customersData: ICustomerData[];
   dataSource: MatTableDataSource<ICustomerData>;
-  displayedColumns: string[] = ['customerNo', 'name', 'address', 'deliveryDays'];
+  displayedColumns: string[] = ['firstEmptyColumn', 'customerNo', 'name', 'address', 'deliveryDays', 'lastEmptyColumn'];
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatSort) sort: MatSort;

@@ -5,6 +5,12 @@
 <table mat-table
        [dataSource]="dataSource" multiTemplateDataRows
        class="bigTable">
+
+  <ng-container matColumnDef="firstEmptyColumn">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element" > </td>
+  </ng-container>
+
   <ng-container matColumnDef="button">
     <th class="mainTableTh" mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element"></td>
@@ -106,6 +112,11 @@
     <td mat-cell *matCellDef="let element">
       <app-status [element]="element"></app-status>
     </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastEmptyColumn">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element" > </td>
   </ng-container>
 
   <ng-container matColumnDef="expandedDetail">

@@ -34,10 +34,6 @@ mat-paginator {
 
 :host ::ng-deep {
 
-  .bigTable th.mat-header-cell:hover {
-    border-bottom: 1px solid #1672EC;
-  }
-
   .bigTable th.mat-header-cell{
     font-size: 14px;
     padding: 0 0.7vw;
@@ -50,11 +46,11 @@ mat-paginator {
     left: 50%;
   }
 
-  .example-element-row td:first-child {
+  .example-element-row td:nth-child(2) {
     background: url("../../assets/chevron-down.png") center no-repeat;
   }
 
-  .example-expanded-row td:first-child {
+  .example-expanded-row td:nth-child(2) {
     background: url("../../assets/chevron-up.png") center no-repeat;
   }
 
@@ -114,7 +110,6 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .example-element-row td {
-  border-bottom-width: 0;
   padding: 0 0.7vw;
 }
 
@@ -129,8 +124,17 @@ tr.example-element-row:not(.example-expanded-row):active {
   border: none;
 }
 
+th:nth-child(2):hover{
+  border-bottom: 1px solid#E0E0E0!important;
+}
+
 .tableInsideTable tr {
   height: 56px;
+  &:not(:last-child){
+    & td{
+      border-bottom: 1px solid #E0E0E0;
+    }
+  }
 
   & td {
     padding-left: 10px;

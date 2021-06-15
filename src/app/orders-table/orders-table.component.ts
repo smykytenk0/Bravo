@@ -225,7 +225,7 @@ const ELEMENT_DATA: OdrerElement[] = [
 export class OrdersTableComponent implements AfterViewInit {
   title: string = 'Orders';
   placeholder: string = "Order, Customer, Notes...";
-  displayedColumns: string[] = ['button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status'];
+  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'lastEmptyColumn'];
   dataSource: MatTableDataSource<OrdersData>;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;

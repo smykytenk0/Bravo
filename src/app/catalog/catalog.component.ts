@@ -22,7 +22,7 @@ export class CatalogComponent implements AfterViewInit, OnDestroy{
   addBtnText: string = 'Add Product';
   dataSource: MatTableDataSource<IProduct>;
   catalogData: IProduct[];
-  displayedColumns: string[] = ['productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton'];
+  displayedColumns: string[] = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'];
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
