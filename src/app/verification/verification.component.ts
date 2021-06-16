@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-verification',
@@ -6,10 +8,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./verification.component.scss']
 })
 export class VerificationComponent implements OnInit {
+  verificationForm: FormGroup;
 
-  constructor() { }
+  constructor(private route: Router) { }
 
-  ngOnInit(): void {
+  verificationFormInit(){
+    this.verificationForm = new FormGroup({
+      firstNumbers: new FormControl(),
+      anotherNumbers: new FormControl()
+    })
   }
 
+  enterVerificationForm(){
+    this.route.navigate(['orders']);
+  }
+
+  ngOnInit(): void {
+    this.verificationFormInit();
+  }
+
+  handleChange(v) {
+    if (this.verificationForm.value.firstNumbers.length == 3) {
+      document.getElementById('anotherNumbers').focus();
+      if (this.verificationForm.value.anotherNumbers.length == 3) {
+        this.enterVerificationForm()
+      }
+    }
+  }
 }

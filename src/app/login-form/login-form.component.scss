@@ -30,21 +30,25 @@
   flex-direction: column;
 }
 
-input{
+.loginFormInput{
   height: 24px;
   border-radius: 8px;
   outline: none;
   border: 1px solid #A1A1A1;
   padding: 12px;
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
 }
 
-input:focus{
-  border: 2px solid #1672EC;
+input{
+  border: none;
+  outline: none;
+  width: 90%;
+}
 
-  .email-label{
-    color: #1672EC;
-  }
+.loginFormInput:focus-within{
+  border: 2px solid #1672EC;
 }
 
 .hint{
@@ -75,4 +79,24 @@ input:focus{
 
 label{
   margin-left: 10px;
+}
+
+.inputImgWrapper{
+  width: 24px;
+  height: 24px;
+}
+
+.valid{
+  border: 1.5px solid #2AB930!important;
+  & .inputImgWrapper{
+    background: url("../../assets/valid-check.svg") no-repeat center;
+  }
+}
+
+
+.invalid{
+  border: 1.5px solid #F7716E!important;
+  & .inputImgWrapper{
+    background: url("../../assets/valid-danger.svg") no-repeat center;
+  }
 }

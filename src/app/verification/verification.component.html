@@ -2,15 +2,15 @@
   <div class="verificationContainer">
     <div class="verificationTitle">Please check your email</div>
     <div class="verificationDescription">We use this login code so you don’t have to <br/>remember or type in yet another long password</div>
-    <form class="verificationFormContainer">
+    <form class="verificationFormContainer" [formGroup]="verificationForm">
       <div class="verificationField">
         <label for="firstNumbers">Your login code</label>
-        <input id="firstNumbers" maxlength="3">
+        <input id="firstNumbers" maxlength="3" formControlName="firstNumbers" (ngModelChange)="handleChange($event)">
       </div>
       <div class="dash">-</div>
       <div class="verificationField">
         <label for="anotherNumbers"></label>
-        <input id="anotherNumbers" maxlength="3">
+        <input id="anotherNumbers" maxlength="3" formControlName="anotherNumbers" (ngModelChange)="handleChange($event)">
       </div>
     </form>
     <div class="verificationHelp">We've sent a 6 digit login code to <span class="helpEmail">example@email.com</span> <br/>Can't find it? Check your spam folder.</div>
