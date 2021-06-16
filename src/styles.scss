@@ -86,7 +86,6 @@ table {
 
 th.mat-header-cell{
   font-size: 14px;
-  margin-left: 10px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
@@ -394,6 +393,12 @@ mat-paginator {
   border-top: none;
 }
 
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 0 10px!important;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
   padding-left: 0!important;
 }
@@ -410,3 +415,5 @@ th:first-child, th:last-child, td:first-child, td:last-child{
   width: 16px!important;
   padding: 0!important;
 }
+
+//TODO: Refactor mat-datepicker styles

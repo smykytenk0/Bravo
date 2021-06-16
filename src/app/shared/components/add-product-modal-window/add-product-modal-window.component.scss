@@ -1,3 +1,6 @@
+.modalWindow{
+  width: 376px;
+}
 .mainUnit, .additionalUnits{
   display: flex;
   flex-basis: auto;
@@ -77,4 +80,26 @@ select, option{
 .maxUnitsAmountText{
   width: fit-content;
   margin: 0 auto;
+}
+
+.mainUnit .input{
+  & input{
+    width: 164px;
+  }
+
+  &:first-child input{
+    margin-right: 16px;
+  }
+}
+
+.additionalUnits .input{
+  &:first-child input{
+    width: 164px;
+    margin-right: 16px;
+  }
+
+  &:nth-child(2) input{
+    width: 108px;
+    margin-right: 16px;
+  }
 }

@@ -14,6 +14,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    this.route.navigate(['orders'])
+    this.route.navigate(['verification'])
   }
 }

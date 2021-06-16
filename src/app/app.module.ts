@@ -36,11 +36,9 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomersComponent } from './customers/customers.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { PageTitleComponent } from './shared/components/page-title/page-title.component';
 import { SearchFieldComponent } from './shared/components/search-field/search-field.component';
 import { AddComponent } from './shared/components/add/add.component';
 import { CustomersReducer } from './store/customers/customers.reducer';
-import { PaginatorComponent } from './paginator/paginator.component';
 import { AddCustomerModalWindowComponent } from './shared/components/add-customer-modal-window/add-customer-modal-window.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddProductModalWindowComponent } from './shared/components/add-product-modal-window/add-product-modal-window.component';
@@ -52,7 +50,7 @@ import { ReplaceCatalogModalComponent } from './shared/components/replace-catalo
 import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { ProductDeleteModalWindowComponent } from './shared/components/product-delete-modal-window/product-delete-modal-window.component';
 import { DeleteButtonComponent } from './shared/components/delete-button/delete-button.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { DndDirective } from './dnd.directive';
 import { ProgressComponent } from './progress/progress.component';
 import { SuccessfulProductAddingComponent } from './shared/components/successful-product-adding/successful-product-adding.component';
@@ -62,17 +60,19 @@ import { PrintComponent } from './print/print.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { EmptyTableComponent } from './shared/components/empty-table/empty-table.component';
+import { VerificationComponent } from './verification/verification.component';
 
 
 const appRoutes: Routes = [
   {
-    path: '', component: SidenavComponent, children:[
-      { path: 'orders', component: OrdersTableComponent, children: [{path: 'print', component: PrintComponent}] },
+    path: '', component: SidenavComponent, children: [
+      { path: 'orders', component: OrdersTableComponent, children: [{ path: 'print', component: PrintComponent }] },
       { path: 'customers', component: CustomersComponent },
       { path: 'catalog', component: CatalogComponent }
     ]
   },
-  {path: 'login', component: LoginFormComponent}
+  { path: 'login', component: LoginFormComponent },
+  { path: 'verification', component: VerificationComponent }
 ];
 
 
@@ -87,10 +87,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     CustomersComponent,
     CatalogComponent,
-    PageTitleComponent,
     SearchFieldComponent,
     AddComponent,
-    PaginatorComponent,
     AddCustomerModalWindowComponent,
     AddProductModalWindowComponent,
     SidenavComponent,
@@ -106,6 +104,7 @@ const appRoutes: Routes = [
     PrintComponent,
     LoginFormComponent,
     EmptyTableComponent,
+    VerificationComponent,
   ],
   imports: [
     StoreModule.forRoot({

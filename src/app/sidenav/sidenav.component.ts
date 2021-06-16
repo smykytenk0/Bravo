@@ -7,16 +7,15 @@ import { Router } from '@angular/router';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit{
   navIsOpened: boolean = true;
+  pageName: string = '';
 
   @ViewChild('drawer') sidenav: MatSidenav;
-  constructor(public route: Router) { }
+  constructor(public route: Router) {
 
-  ngOnInit(): void {
   }
 
-  log() {
-    console.log(this.route.url);
+  ngOnInit(): void {
   }
 }

@@ -15,3 +15,25 @@
 .smallMenu{
   width: 64px;
 }
+
+.pageTitle{
+  display: flex;
+  margin: 28px 0 24px 0;
+  align-items: center;
+  height: 32px;
+}
+
+.burgerImg{
+  margin-right: 18px;
+
+}
+
+.title{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  text-transform: capitalize;
+}

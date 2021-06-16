@@ -3,11 +3,13 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
+  background-color: rgb(247,247,247);
 }
+
 .loginContainer{
   width: 440px;
   background-color: white;
-  border: 1px solid #f7f7f7;
+  border: 1px solid #E0E0E0;
   border-radius: 8px;
   margin: auto;
   padding: 70px 48px;
@@ -18,10 +20,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: 32px;
-  letter-spacing: 0em;
+  letter-spacing: 0;
   text-align: center;
   margin-bottom:26px;
-
 }
 
 .loginForm{
@@ -36,6 +37,14 @@ input{
   border: 1px solid #A1A1A1;
   padding: 12px;
   margin-bottom: 16px;
+}
+
+input:focus{
+  border: 2px solid #1672EC;
+
+  .email-label{
+    color: #1672EC;
+  }
 }
 
 .hint{
@@ -62,5 +71,8 @@ input{
   line-height: 24px;
   letter-spacing: 0.05em;
   color:#C5DCFA;
+}
 
+label{
+  margin-left: 10px;
 }

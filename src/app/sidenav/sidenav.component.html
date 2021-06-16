@@ -11,10 +11,12 @@
       </mat-drawer>
 
       <div class="example-sidenav-content">
-        <button type="button" (click)="drawer.toggle()">
-          Toggle sidenav
-        </button>
+        <div class="pageTitle">
+          <img src="../../assets/menu.png" class="burgerImg" (click)="drawer.toggle()"/>
+          <div class="title">{{route.url.slice(1)}}</div>
+        </div>
         <router-outlet></router-outlet>
+        <div style="text-transform: capitalize">{{pageName}}</div>
       </div>
     </mat-drawer-container>
   </div>

@@ -1,0 +1,106 @@
+.verificationWrapper{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(247,247,247);
+}
+
+
+.verificationContainer{
+  width: 440px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  margin: auto;
+  padding: 70px 48px;
+}
+
+.verificationTitle{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0;
+  text-align: center;
+  margin-bottom:26px;
+}
+
+.verificationDescription{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.0168em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input{
+  height: 48px;
+  width: 156px;
+  border-radius: 8px;
+  border: 1px solid #A1A1A1;
+  outline: none;
+  box-sizing: border-box;
+  padding-left: 20px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
+  letter-spacing: 20px;
+
+  &:focus{
+    border: 1.5px solid #1672EC;
+  }
+}
+
+label{
+  margin-left: 10px;
+}
+
+.verificationFormContainer{
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.verificationField{
+  display: flex;
+  flex-direction: column;
+  &:first-child input{
+    margin-right: 8px;
+  }
+}
+
+.dash{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 16px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0.0075em;
+  text-align: center;
+  margin-right: 8px;
+}
+
+.helpEmail{
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-align: center;
+
+}
+
+.verificationHelp{
+  text-align: center;
+  margin-bottom: 10px;
+}
