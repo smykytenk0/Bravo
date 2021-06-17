@@ -1,0 +1,152 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "productCode": "APP123",
+      "name": "Apples",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "2.03"
+      },
+      "availability": "In Stock"
+    },
+    {
+      "productCode": "SM-1503",
+      "name": "Olexander Mykytenko",
+      "mainUnit": {
+        "unit": "pound",
+        "price": "17"
+      },
+      "anotherUnits": [],
+      "availability": "In stock",
+      "id": 2
+    },
+    {
+      "productCode": "SM-1503",
+      "name": "Olexander Mykytenko",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "17"
+      },
+      "anotherUnits": [
+        {
+          "unit": "",
+          "price": 0
+        }
+      ],
+      "availability": "Out of stock",
+      "id": 3
+    },
+    {
+      "productCode": "SM-1503",
+      "name": "Tomatoes",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "17"
+      },
+      "anotherUnits": [
+        {
+          "unit": "",
+          "price": 0
+        }
+      ],
+      "availability": "In stock",
+      "id": 4
+    },
+    {
+      "productCode": "SM-1503",
+      "name": "Olexander Mykytenko",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "17"
+      },
+      "anotherUnits": [],
+      "availability": "Out of stock",
+      "id": 5
+    },
+    {
+      "productCode": "ABC455",
+      "name": "Bananas",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "17"
+      },
+      "anotherUnits": null,
+      "availability": "Discounted",
+      "id": 6
+    },
+    {
+      "productCode": "CUC101",
+      "name": "Cucumbers",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "18"
+      },
+      "anotherUnits": null,
+      "availability": "Out of stock",
+      "id": 7
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "customerNo": "BB-123",
+      "name": "Sandwich Bar",
+      "address": "Shevchenko Street 123123",
+      "deliveryDays": [
+        "Mon",
+        "Fri"
+      ]
+    },
+    {
+      "id": 1,
+      "customerNo": "BB-123",
+      "name": "Sandwich Bar",
+      "address": "Shevchenko Street 123123",
+      "deliveryDays": [
+        "Mon",
+        "Fri"
+      ]
+    },
+    {
+      "id": 1,
+      "customerNo": "BB-123",
+      "name": "Sandwich Bar",
+      "address": "Shevchenko Street 123123",
+      "deliveryDays": [
+        "Mon",
+        "Fri"
+      ]
+    },
+    {
+      "id": 1,
+      "customerNo": "BB-123",
+      "name": "Sandwich Bar",
+      "address": "Shevchenko Street 123123",
+      "deliveryDays": [
+        "Mon",
+        "Fri"
+      ]
+    },
+    {
+      "id": 1,
+      "customerNo": "BB-123",
+      "name": "Sandwich Bar",
+      "address": "Shevchenko Street 123123",
+      "deliveryDays": [
+        "Mon",
+        "Fri"
+      ]
+    },
+    {
+      "id": 1,
+      "customerNo": "BB-123",
+      "name": "Sandwich Bar",
+      "address": "Shevchenko Street 123123",
+      "deliveryDays": [
+        "Mon",
+        "Fri"
+      ]
+    }
+  ]
+}

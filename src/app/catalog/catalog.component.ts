@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IProduct } from '../store/interfaces/catalog.interfaces';
 import { select, Store } from '@ngrx/store';
@@ -10,32 +10,36 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ICustomerData } from '../store/interfaces/customers.interfacers';
 import { MatPaginator } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs/operators';
+import { HttpService } from '../shared/services/http.service';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss']
 })
-export class CatalogComponent implements AfterViewInit, OnDestroy{
+export class CatalogComponent implements  OnDestroy, OnInit{
   title: string = 'Catalog';
   placeholder: string = 'Product code, Name...';
   addBtnText: string = 'Add Product';
   dataSource: MatTableDataSource<IProduct>;
-  catalogData: IProduct[];
+  catalogData: any = [];
   displayedColumns: string[] = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'];
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   constructor(private store: Store,
-              private dialog: MatDialog) {
-    this.store.select(catalogProductsSelector)
+              private dialog: MatDialog,
+              private httpService: HttpService) {
+    this.httpService.getCatalog()
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe((data)=>{
         this.catalogData = data;
         this.dataSource =   new MatTableDataSource<IProduct>(this.catalogData);
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  ngOnInit(): void {
   }
 
   transformUnits(element: IProduct):string{
@@ -49,10 +53,6 @@ export class CatalogComponent implements AfterViewInit, OnDestroy{
     this.dialog.open(ProductDeleteModalWindowComponent, {
       data: element
     })
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {

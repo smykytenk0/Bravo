@@ -23,7 +23,7 @@
    <div class="additionalUnits" *ngFor="let unit of anotherUnits">
      <div class="unitName input">
        <label for="unit{{anotherUnits.indexOf(unit)}}">Unit-{{anotherUnits.indexOf(unit) + 1}} </label>
-       <input id="unit{{anotherUnits.indexOf(unit)}}"  placeholder="{{unit}}" formControlName="Unit-{{anotherUnits.indexOf(unit) + 1}}">
+       <input id="unit{{anotherUnits.indexOf(unit)}}" formControlName="Unit-{{anotherUnits.indexOf(unit) + 1}}">
      </div>
      <div class="unitPrice input">
        <label for="price{{anotherUnits.indexOf(unit)}}">Price (optional) </label>

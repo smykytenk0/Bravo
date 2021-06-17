@@ -68,7 +68,7 @@ const appRoutes: Routes = [
     path: '', component: SidenavComponent, children: [
       { path: 'orders', component: OrdersTableComponent, children: [{ path: 'print', component: PrintComponent }] },
       { path: 'customers', component: CustomersComponent },
-      { path: 'catalog', component: CatalogComponent }
+      { path: 'catalog', component: CatalogComponent },
     ]
   },
   { path: 'login', component: LoginFormComponent },

@@ -1,24 +1,30 @@
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { CatalogActions } from '../../../store/catalog/catalog.actions';
 import { IProduct, IUnit } from '../../../store/interfaces/catalog.interfaces';
 import { SuccessfulProductAddingComponent } from '../successful-product-adding/successful-product-adding.component';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../services/http.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-product-modal-window',
   templateUrl: './add-product-modal-window.component.html',
   styleUrls: ['./add-product-modal-window.component.scss']
 })
-export class AddProductModalWindowComponent implements OnInit{
+export class AddProductModalWindowComponent implements OnInit, OnDestroy{
   anotherUnits: IUnit[] = [];
   maxUnitsAmount: number = 3;
   anotherUnitsForm: FormGroup;
+  private unsubscribeAll: Subject<any> = new Subject<any>();
   constructor(private dialog: MatDialog,
               private store: Store,
-              @Inject(MAT_DIALOG_DATA) private data: IProduct) {
+              @Inject(MAT_DIALOG_DATA) private data: IProduct,
+              private http: HttpClient,
+              private httpService: HttpService) {
   }
 
   private initAnotherUnitsForm(){
@@ -59,23 +65,44 @@ export class AddProductModalWindowComponent implements OnInit{
           unit: this.productForm.value.mainUintName,
           price: this.productForm.value.mainUnitPrice
         },
-        anotherUnits: [{unit: 'kg', price: 17}],
+        anotherUnits: this.anotherUnits,
         availability: this.productForm.value.availability
       }
     }));
+
     this.dialog.open(SuccessfulProductAddingComponent);
     setTimeout(()=>{
       this.dialog.closeAll()
     },2000);
+
+    const product = {
+      productCode: this.productForm.value.productCode,
+      name: this.productForm.value.name,
+      mainUnit: {
+        unit: this.productForm.value.mainUintName,
+        price: this.productForm.value.mainUnitPrice
+      },
+      anotherUnits: this.anotherUnits.length? this.anotherUnits: null,
+      availability: this.productForm.value.availability
+    };
+    console.log(this.productForm.value);
+    console.log(product);
+    this.httpService.addProduct(product).subscribe();
   }
 
   addUnit() {
-    this.anotherUnits.push({unit:'', price: 0});
-    this.initAnotherUnitsForm();
-    console.log(this.anotherUnitsForm.value);
+    this.anotherUnits.push({unit: '', price: 0});
+    this.initAnotherUnitsForm()
   }
 
   deleteUnit(unit) {
-    this.anotherUnits.filter( data => data == unit);
+    this.anotherUnits.shift();
+    this.initAnotherUnitsForm()
   }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
 }

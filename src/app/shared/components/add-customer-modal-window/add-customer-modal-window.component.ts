@@ -8,13 +8,15 @@ import { ICustomerData } from '../../../store/interfaces/customers.interfacers';
 import { customersSelector } from '../../../store/customers/customers.reducer';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-add-customer-modal-window',
   templateUrl: './add-customer-modal-window.component.html',
   styleUrls: ['./add-customer-modal-window.component.scss']
 })
-export class AddCustomerModalWindowComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
   shortDays: string[] = DAYS_SHORT;
   customerForm: FormGroup;
   deliveryDaysForm: FormGroup;
@@ -24,11 +26,13 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy, After
   allCustomers: ICustomerData[];
   customersName = [];
   confirmImgSrc: string = this.data? '../../../../assets/check.png' :  '../../../../assets/math-plus-white.png';
-  disabled: boolean = !!this.data;
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
 
-  constructor(private store: Store, @Inject(MAT_DIALOG_DATA) private data: ICustomerData) {
+  constructor(private store: Store,
+              @Inject(MAT_DIALOG_DATA) private data: ICustomerData,
+              private http: HttpClient,
+              private httpService: HttpService) {
     this.store.select(customersSelector).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.allCustomers = data);
     for(let i of this.allCustomers){
       this.customersName.push(i.name)
@@ -75,16 +79,11 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy, After
       address: this.customerForm.value.deliveryAddress,
       deliveryDays: this.deliveryDays
     };
-
-    this.store.dispatch(this.data ? CustomersActions.editCustomer({
-      customer}) : CustomersActions.addNewCustomer({customer}));
+    return this.httpService.addCustomer(customer);
   }
 
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
-  }
-
-  ngAfterViewInit(): void {
   }
 }

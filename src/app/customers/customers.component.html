@@ -1,6 +1,5 @@
 <app-add [addBtnText]="addCustomer"></app-add>
 
-
 <app-search-field [placeholder]="placeholder"></app-search-field>
 
 <div>
@@ -41,7 +40,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="OpenCustomersTableTr(row)"></tr>
     </ng-container>
   </table>
-  <div *ngIf="(customersData).length==0" class="emptyTable">
+  <div *ngIf="customersData.length==0" class="emptyTable">
     <app-empty-table></app-empty-table>
     <app-add [addBtnText]="addCustomer"></app-add>
   </div>
