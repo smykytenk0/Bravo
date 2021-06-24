@@ -30,7 +30,7 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
 
 
   constructor(private store: Store,
-              @Inject(MAT_DIALOG_DATA) private data: ICustomerData,
+              @Inject(MAT_DIALOG_DATA) private data,
               private http: HttpClient,
               private httpService: HttpService) {
     this.store.select(customersSelector).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.allCustomers = data);
@@ -79,7 +79,8 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
       address: this.customerForm.value.deliveryAddress,
       deliveryDays: this.deliveryDays
     };
-    return this.httpService.addCustomer(customer);
+
+    (this.data) ? this.httpService.editCustomer(customer, this.data.id).subscribe() : this.httpService.addCustomer(customer).subscribe();
   }
 
   ngOnDestroy(): void {

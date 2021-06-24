@@ -9,7 +9,7 @@ import { AddProductModalWindowComponent } from '../shared/components/add-product
 import { MatTableDataSource } from '@angular/material/table';
 import { ICustomerData } from '../store/interfaces/customers.interfacers';
 import { MatPaginator } from '@angular/material/paginator';
-import { takeUntil } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 import { HttpService } from '../shared/services/http.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { HttpService } from '../shared/services/http.service';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss']
 })
-export class CatalogComponent implements  OnDestroy, OnInit{
+export class CatalogComponent implements OnDestroy, OnInit {
   title: string = 'Catalog';
   placeholder: string = 'Product code, Name...';
   addBtnText: string = 'Add Product';
@@ -27,31 +27,48 @@ export class CatalogComponent implements  OnDestroy, OnInit{
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private store: Store,
               private dialog: MatDialog,
               private httpService: HttpService) {
+  }
+
+  refresh() {
     this.httpService.getCatalog()
-      .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe((data)=>{
+      .subscribe((data) => {
         this.catalogData = data;
-        this.dataSource =   new MatTableDataSource<IProduct>(this.catalogData);
+        this.dataSource = new MatTableDataSource<IProduct>(this.catalogData);
         this.dataSource.paginator = this.paginator;
       });
   }
 
   ngOnInit(): void {
+    this.refresh();
   }
 
-  transformUnits(element: IProduct):string{
-    if(element.anotherUnits){
-      return `${element.mainUnit.unit} +${element.anotherUnits.length} more`
+  transformUnits(element: IProduct): string {
+    if (element.anotherUnits) {
+      return `${ element.mainUnit.unit } +${ element.anotherUnits.length } more`
     }
-    return `${element.mainUnit.unit}`
+    return `${ element.mainUnit.unit }`
   }
 
   openDeleteModalWindow(element) {
     this.dialog.open(ProductDeleteModalWindowComponent, {
       data: element
+    }).afterClosed()
+      .pipe(takeUntil(this.unsubscribeAll)).subscribe(() => {
+      this.refresh();
+      this.refresh();
+    })
+  }
+
+  openAddProductModalWindow() {
+    this.dialog.open(AddProductModalWindowComponent)
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribeAll)).subscribe(() => {
+      this.refresh();
+      this.refresh();
     })
   }
 

@@ -34,6 +34,10 @@ export class CustomersComponent implements OnDestroy, OnInit{
               private httpService: HttpService) {}
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh(){
     this.httpService.getCustomers().subscribe(data=> {
       this.customersData = data;
       this.dataSource = new MatTableDataSource<ICustomerData>(this.customersData);
@@ -45,12 +49,25 @@ export class CustomersComponent implements OnDestroy, OnInit{
   OpenCustomersTableTr(row) {
     this.dialog.open(AddCustomerModalWindowComponent, {
       data: row
+    }).afterClosed()
+      .pipe(takeUntil(this.unsubscribeAll)).subscribe( () => {
+      this.refresh();
+      this.refresh();
     })
   }
 
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete()
+  }
+
+  openAddCustomerModalWindow() {
+    this.dialog.open(AddCustomerModalWindowComponent)
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribeAll)).subscribe( () => {
+        this.refresh();
+        this.refresh();
+      })
   }
 }
 

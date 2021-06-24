@@ -83,7 +83,7 @@
         </div>
       </div>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.ordered | dateFormat}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.ordered }} </td>
   </ng-container>
 
   <ng-container matColumnDef="reqDelivery">
@@ -92,7 +92,7 @@
         <div class="columnName" > Req Delivery</div>
       </div>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.reqDelivery | dateFormat}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.reqDelivery }} </td>
   </ng-container>
 
   <ng-container matColumnDef="status">
@@ -108,7 +108,7 @@
       </div>
     </th>
     <td mat-cell *matCellDef="let element">
-      <app-status [element]="element"></app-status>
+      <app-status [element]="element" (click)="refresh()"></app-status>
     </td>
   </ng-container>
 

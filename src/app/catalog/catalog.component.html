@@ -1,9 +1,8 @@
 <div class="mainContentButtons">
-  <app-add [addBtnText]="addBtnText"></app-add>
+  <app-add [addBtnText]="addBtnText" (click)="openAddProductModalWindow()"></app-add>
 
   <app-replace-catalog></app-replace-catalog>
 </div>
-
 
 <app-search-field [placeholder]="placeholder"></app-search-field>
 

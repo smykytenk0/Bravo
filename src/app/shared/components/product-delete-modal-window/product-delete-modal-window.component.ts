@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IProduct } from '../../../store/interfaces/catalog.interfaces';
 import { Store } from '@ngrx/store';
 import { CatalogActions } from '../../../store/catalog/catalog.actions';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-product-delete-modal-window',
@@ -12,11 +13,11 @@ import { CatalogActions } from '../../../store/catalog/catalog.actions';
 export class ProductDeleteModalWindowComponent{
 
   constructor(private store: Store,
-              @Inject(MAT_DIALOG_DATA) private data: IProduct) {
+              @Inject(MAT_DIALOG_DATA) private data,
+              private httpService: HttpService) {
   }
 
-
   deleteProduct() {
-    this.store.dispatch(CatalogActions.deleteProduct({product: this.data}))
+    this.httpService.deleteProduct(this.data.id).subscribe();
   }
 }

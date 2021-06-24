@@ -85,8 +85,6 @@ export class AddProductModalWindowComponent implements OnInit, OnDestroy{
       anotherUnits: this.anotherUnits.length? this.anotherUnits: null,
       availability: this.productForm.value.availability
     };
-    console.log(this.productForm.value);
-    console.log(product);
     this.httpService.addProduct(product).subscribe();
   }
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -10,6 +10,7 @@ import { OrdersData } from '../store/interfaces/orders.interfaces';
 import { Observable } from 'rxjs';
 import { OrdersActions } from '../store/orders/orders.actions';
 import { Router } from '@angular/router';
+import { HttpService } from '../shared/services/http.service';
 
 export interface OdrerElement {
   orderNo: number,
@@ -22,192 +23,6 @@ export interface OdrerElement {
   status: string,
   address: string
 }
-
-const ELEMENT_DATA: OdrerElement[] = [
-  {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Alex',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 },
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },],
-    notes: 'Notes',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Dasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: 'Notes',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Masha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: 'Notes',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'Confirm',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Pasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Igor',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Valera',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Andrey',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  }, {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-  {
-    orderNo: 1,
-    customer: 'Sasha',
-    customerNo: 1,
-    items: [
-      { productCode: 'APP123', product: 'Apples', unit: 'kg', quantity: 14 },
-      { productCode: 'TOM53', product: 'Tomatoes', unit: 'box', quantity: 4 }],
-    notes: '+1 Bottle Coca Cola Please, Need to be delivered Today!',
-    ordered: 'Ordered',
-    reqDelivery: 'Delivery',
-    status: 'confirmed',
-    address: 'Main Street 23, 1453 Zurich'
-  },
-];
-
 
 @Component({
   selector: 'app-orders-table',
@@ -222,7 +37,7 @@ const ELEMENT_DATA: OdrerElement[] = [
   ],
 })
 
-export class OrdersTableComponent implements AfterViewInit {
+export class OrdersTableComponent implements OnInit {
   title: string = 'Orders';
   placeholder: string = "Order, Customer, Notes...";
   displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'lastEmptyColumn'];
@@ -231,29 +46,31 @@ export class OrdersTableComponent implements AfterViewInit {
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any;
-  ordersData: OrdersData[];
-  filteredOrdersData$: Observable<OrdersData[]>;
-  dataTable: OrdersData[];
+  ordersData: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OrdersData | null;
-  startDate$: Observable<Date>;
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
 
-  constructor(private store: Store, private orders: OrdersService, private router: Router) {
-    this.store.pipe(select(ordersDataSelector)).subscribe(data => this.ordersData = data);
-    this.store.dispatch(OrdersActions.filterCustomerSelect({ customers: this.ordersData }));
-    this.store.select(filterOrdersDataSelector).subscribe( (data) => {
-      this.dataSource = new MatTableDataSource<OrdersData>(data);
+  refresh(){
+    this.httpService.getOrders().subscribe(  data => {
+      this.ordersData = data;
+      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
-    });
-    this.uniqueCustomers = Array.from(ELEMENT_DATA.reduce((acc, elem) => acc.add(elem.customer), new Set()));
+      this.uniqueCustomers = Array.from(this.ordersData.reduce((acc, elem) => acc.add(elem.customer), new Set()));
+    })
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  constructor(private store: Store,
+              private orders: OrdersService,
+              private router: Router,
+              private httpService: HttpService) {
+  }
+
+  ngOnInit(): void {
+    this.refresh();
   }
 
   toggleDataPicker() {

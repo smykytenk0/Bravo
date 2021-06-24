@@ -11,20 +11,4 @@ import { AddProductModalWindowComponent } from '../add-product-modal-window/add-
 })
 export class AddComponent  {
   @Input() addBtnText;
-
-  constructor(private dialog: MatDialog,
-              private router: Router) {
-  }
-
-
-  openDialog() {
-    switch (this.router.url) {
-      case '/customers':
-        this.dialog.open(AddCustomerModalWindowComponent);
-        break;
-      case '/catalog':
-        this.dialog.open(AddProductModalWindowComponent);
-        break
-    }
-  }
 }

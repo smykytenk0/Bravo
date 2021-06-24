@@ -11,21 +11,21 @@
       "availability": "In Stock"
     },
     {
-      "productCode": "SM-1503",
-      "name": "Olexander Mykytenko",
+      "productCode": "BAN746",
+      "name": "Bananas",
       "mainUnit": {
-        "unit": "pound",
-        "price": "17"
+        "unit": "kg",
+        "price": "30"
       },
-      "anotherUnits": [],
+      "anotherUnits": null,
       "availability": "In stock",
       "id": 2
     },
     {
-      "productCode": "SM-1503",
-      "name": "Olexander Mykytenko",
+      "productCode": "CUC101",
+      "name": "Cucumbers",
       "mainUnit": {
-        "unit": "kg",
+        "unit": "pound",
         "price": "17"
       },
       "anotherUnits": [
@@ -34,15 +34,15 @@
           "price": 0
         }
       ],
-      "availability": "Out of stock",
+      "availability": "Discounted",
       "id": 3
     },
     {
-      "productCode": "SM-1503",
+      "productCode": "TOM803",
       "name": "Tomatoes",
       "mainUnit": {
-        "unit": "kg",
-        "price": "17"
+        "unit": "ton",
+        "price": "23000"
       },
       "anotherUnits": [
         {
@@ -52,101 +52,61 @@
       ],
       "availability": "In stock",
       "id": 4
-    },
-    {
-      "productCode": "SM-1503",
-      "name": "Olexander Mykytenko",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "17"
-      },
-      "anotherUnits": [],
-      "availability": "Out of stock",
-      "id": 5
-    },
-    {
-      "productCode": "ABC455",
-      "name": "Bananas",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "17"
-      },
-      "anotherUnits": null,
-      "availability": "Discounted",
-      "id": 6
-    },
-    {
-      "productCode": "CUC101",
-      "name": "Cucumbers",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "18"
-      },
-      "anotherUnits": null,
-      "availability": "Out of stock",
-      "id": 7
     }
   ],
   "customers": [
     {
-      "id": 1,
       "customerNo": "BB-123",
       "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123123",
+      "address": "Shevchenko Street 123",
       "deliveryDays": [
         "Mon",
-        "Fri"
-      ]
+        "Tue",
+        "Fri",
+        "Sat"
+      ],
+      "id": 1
     },
     {
-      "id": 1,
-      "customerNo": "BB-123",
-      "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123123",
+      "customerNo": "BB-788",
+      "name": "Burger Bar",
+      "address": "Metalistiv, 3",
       "deliveryDays": [
+        "Sun",
         "Mon",
-        "Fri"
-      ]
-    },
+        "Sat"
+      ],
+      "id": 2
+    }
+  ],
+  "orders": [
     {
       "id": 1,
-      "customerNo": "BB-123",
-      "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123123",
-      "deliveryDays": [
-        "Mon",
-        "Fri"
-      ]
-    },
-    {
-      "id": 1,
-      "customerNo": "BB-123",
-      "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123123",
-      "deliveryDays": [
-        "Mon",
-        "Fri"
-      ]
-    },
-    {
-      "id": 1,
-      "customerNo": "BB-123",
-      "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123123",
-      "deliveryDays": [
-        "Mon",
-        "Fri"
-      ]
-    },
-    {
-      "id": 1,
-      "customerNo": "BB-123",
-      "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123123",
-      "deliveryDays": [
-        "Mon",
-        "Fri"
-      ]
+      "orderNo": 1,
+      "customer": "Sasha",
+      "customerNo": "BB-243",
+      "items": [
+        {
+          "productCode": "APP123",
+          "product": "Apples",
+          "unit": "kg",
+          "quantity": 14
+        },
+        {
+          "productCode": "TOM53",
+          "product": "Tomatoes",
+          "unit": "box",
+          "quantity": 4
+        }
+      ],
+      "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
+      "ordered": "2014-02-01T09:28:56.321-10:00",
+      "reqDelivery": "2014-02-01T09:28:56.321-10:00",
+      "isConfirmedStatus": true,
+      "address": {
+        "street": "Main Street 23",
+        "city": "1453 Zurich"
+      }
     }
   ]
 }
