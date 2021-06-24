@@ -25,7 +25,7 @@
        <div class="columnName"> Customer</div>
        <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
          <div class="sortSizeWrapper">
-           <img src="../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
+           <img src="../../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
          </div>
        </div>
        <div *ngIf="isCustomersOpened" class="customerPicker">
@@ -70,13 +70,13 @@
                   </button>
                   <button type="submit" mat-raised-button color="primary" matDateRangePickerApply
                           (click)="enterDatepickerData(); toggleDataPicker()">
-                    <img src="../../assets/check.png">
+                    <img src="../../../assets/check.png">
                     Done
                   </button>
                 </mat-date-range-picker-actions>
               </mat-date-range-picker>
               <div class="sortSizeWrapper" *ngIf="!dataPickerOpened; else activeDatepicker">
-                <img src="../../assets/sort-size.png" (click)=" picker.open(); toggleDataPicker()"/>
+                <img src="../../../assets/sort-size.png" (click)=" picker.open(); toggleDataPicker()"/>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
       <div class="sortTh">
         <div class="columnName"> Status</div>
         <div class="sortSizeWrapper" *ngIf="!isStatusOpened; else statusOpen">
-          <img src="../../assets/sort-size.png" class="sort-size" (click)="openStatusSelect()"/>
+          <img src="../../../assets/sort-size.png" class="sort-size" (click)="openStatusSelect()"/>
         </div>
         <div *ngIf="isStatusOpened" class="statusSelect">
           <app-status-select></app-status-select>
@@ -131,7 +131,7 @@
             <div class="info">{{ element.address.street }}, {{element.address.city}}</div>
           </div>
           <a class="print" target="_blank" (click)="openPrint(element)">
-            <img src="../../assets/print.png" height="20" width="20"/>
+            <img src="../../../assets/print.png" height="20" width="20"/>
             <div>Print order</div>
           </a>
         </div>
@@ -166,19 +166,19 @@
 
 <ng-template #activeDatepicker>
   <div class="sortSizeActiveWrapper">
-    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="toggleDataPicker()"/>
+    <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="toggleDataPicker()"/>
   </div>
 </ng-template>
 
 <ng-template #activeCustomerSelect>
   <div class="sortSizeActiveWrapper">
-    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="customerSelectOpen()"/>
+    <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="customerSelectOpen()"/>
   </div>
 </ng-template>
 
 <ng-template #statusOpen>
   <div class="sortSizeActiveWrapper">
-    <img src="../../assets/sort-size-active.png" alt="sort-size-active" (click)="openStatusSelect()"/>
+    <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="openStatusSelect()"/>
   </div>
 </ng-template>
 

@@ -2,31 +2,31 @@ a{
   text-decoration: none;
   outline: none;
   &:first-child .imgWrapper{
-    background: url("../../assets/shopping-cart.png") center no-repeat;
+    background: url("../../../../assets/shopping-cart.png") center no-repeat;
   }
 
   &.orders-active .imgWrapper{
-    background: url("../../assets/shopping-cart-active.png") center no-repeat;
+    background: url("../../../../assets/shopping-cart-active.png") center no-repeat;
   }
 
   &:nth-child(2) .imgWrapper{
-    background: url("../../assets/tag.png") center no-repeat;
+    background: url("../../../../assets/tag.png") center no-repeat;
   }
 
   &.catalog-active .imgWrapper{
-      background: url("../../assets/tag-active.png") center no-repeat;
+      background: url("../../../../assets/tag-active.png") center no-repeat;
   }
 
   &:nth-child(3) .imgWrapper{
-    background: url("../../assets/user.png") center no-repeat;
+    background: url("../../../../assets/user.png") center no-repeat;
   }
 
   &.customers-active .imgWrapper{
-    background: url("../../assets/user-active.png") center no-repeat;
+    background: url("../../../../assets/user-active.png") center no-repeat;
   }
 
   &:nth-child(4) .imgWrapper{
-    background: url("../../assets/log-out.png") center no-repeat;
+    background: url("../../../../assets/log-out.png") center no-repeat;
   }
 }
 

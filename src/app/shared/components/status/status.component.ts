@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrdersData } from '../store/interfaces/orders.interfaces';
+import { OrdersData } from '../../../store/interfaces/orders.interfaces';
 import { Store } from '@ngrx/store';
-import { OrdersActions } from '../store/orders/orders.actions';
-import { HttpService } from '../shared/services/http.service';
+import { OrdersActions } from '../../../store/orders/orders.actions';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-status',

@@ -8,18 +8,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { OrdersTableComponent } from './tables/orders-table/orders-table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import { CustomerpickerComponent } from './customerpicker/customerpicker.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { StatusComponent } from './status/status.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,60 +31,31 @@ import { StoreModule } from '@ngrx/store';
 import { OrdersEffect } from './store/orders/orders.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationComponent } from './navigation/navigation.component';
-import { RouterModule, Routes } from '@angular/router';
-import { CustomersComponent } from './customers/customers.component';
-import { CatalogComponent } from './catalog/catalog.component';
-import { SearchFieldComponent } from './shared/components/search-field/search-field.component';
-import { AddComponent } from './shared/components/add/add.component';
+import { CustomersComponent } from './tables/customers/customers.component';
+import { CatalogComponent } from './tables/catalog/catalog.component';
 import { CustomersReducer } from './store/customers/customers.reducer';
-import { AddCustomerModalWindowComponent } from './shared/components/add-customer-modal-window/add-customer-modal-window.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AddProductModalWindowComponent } from './shared/components/add-product-modal-window/add-product-modal-window.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { ReplaceCatalogComponent } from './shared/components/replace-catalog/replace-catalog.component';
-import { ReplaceCatalogModalComponent } from './shared/components/replace-catalog-modal/replace-catalog-modal.component';
 import { CatalogReducer } from './store/catalog/catalog.reducer';
-import { ProductDeleteModalWindowComponent } from './shared/components/product-delete-modal-window/product-delete-modal-window.component';
-import { DeleteButtonComponent } from './shared/components/delete-button/delete-button.component';
 import { HttpClientModule } from '@angular/common/http';
-import { DndDirective } from './dnd.directive';
-import { ProgressComponent } from './progress/progress.component';
 import { SuccessfulProductAddingComponent } from './shared/components/successful-product-adding/successful-product-adding.component';
-import { StatusSelectComponent } from './status-select/status-select.component';
-import { SmallMenuComponent } from './small-menu/small-menu.component';
 import { PrintComponent } from './print/print.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { EmptyTableComponent } from './shared/components/empty-table/empty-table.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdersTableComponent,
     DatepickerComponent,
-    CustomerpickerComponent,
-    StatusComponent,
     dateFormatPipe,
     NavigationComponent,
     CustomersComponent,
     CatalogComponent,
-    SearchFieldComponent,
-    AddComponent,
-    AddCustomerModalWindowComponent,
-    AddProductModalWindowComponent,
     SidenavComponent,
-    ReplaceCatalogComponent,
-    ReplaceCatalogModalComponent,
-    ProductDeleteModalWindowComponent,
-    DeleteButtonComponent,
-    DndDirective,
-    ProgressComponent,
-    SuccessfulProductAddingComponent,
-    StatusSelectComponent,
-    SmallMenuComponent,
     PrintComponent,
-    EmptyTableComponent,
   ],
   imports: [
     StoreModule.forRoot({
@@ -122,7 +91,8 @@ import { EmptyTableComponent } from './shared/components/empty-table/empty-table
     MatSidenavModule,
     MatToolbarModule,
     HttpClientModule,
-    MatRadioModule
+    MatRadioModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

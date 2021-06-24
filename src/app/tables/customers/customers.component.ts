@@ -1,15 +1,15 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, pipe, Subject } from 'rxjs';
-import { ICustomerData, ICustomers } from '../store/interfaces/customers.interfacers';
+import { ICustomerData, ICustomers } from '../../store/interfaces/customers.interfacers';
 import { select, Store } from '@ngrx/store';
-import { customersSelector } from '../store/customers/customers.reducer';
+import { customersSelector } from '../../store/customers/customers.reducer';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCustomerModalWindowComponent } from '../shared/components/add-customer-modal-window/add-customer-modal-window.component';
+import { AddCustomerModalWindowComponent } from '../../shared/components/add-customer-modal-window/add-customer-modal-window.component';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs/operators';
-import { HttpService } from '../shared/services/http.service';
+import { HttpService } from '../../shared/services/http.service';
 
 
 @Component({

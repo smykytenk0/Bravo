@@ -4,13 +4,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../store/orders/orders.reducer';
-import { OrdersService } from '../shared/services/orders.service';
-import { OrdersData } from '../store/interfaces/orders.interfaces';
+import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../../store/orders/orders.reducer';
+import { OrdersService } from '../../shared/services/orders.service';
+import { OrdersData } from '../../store/interfaces/orders.interfaces';
 import { Observable } from 'rxjs';
-import { OrdersActions } from '../store/orders/orders.actions';
+import { OrdersActions } from '../../store/orders/orders.actions';
 import { Router } from '@angular/router';
-import { HttpService } from '../shared/services/http.service';
+import { HttpService } from '../../shared/services/http.service';
 
 export interface OdrerElement {
   orderNo: number,

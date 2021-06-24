@@ -102,7 +102,7 @@
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
       "ordered": "2014-02-01T09:28:56.321-10:00",
       "reqDelivery": "2014-02-01T09:28:56.321-10:00",
-      "isConfirmedStatus": true,
+      "isConfirmedStatus": false,
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"

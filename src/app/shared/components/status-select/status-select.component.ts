@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { OrdersActions } from '../store/orders/orders.actions';
+import { OrdersActions } from '../../../store/orders/orders.actions';
 
 @Component({
   selector: 'app-status-select',
