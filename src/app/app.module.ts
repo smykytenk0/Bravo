@@ -57,24 +57,8 @@ import { SuccessfulProductAddingComponent } from './shared/components/successful
 import { StatusSelectComponent } from './status-select/status-select.component';
 import { SmallMenuComponent } from './small-menu/small-menu.component';
 import { PrintComponent } from './print/print.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { EmptyTableComponent } from './shared/components/empty-table/empty-table.component';
-import { VerificationComponent } from './verification/verification.component';
-
-
-const appRoutes: Routes = [
-  {
-    path: '', component: SidenavComponent, children: [
-      { path: 'orders', component: OrdersTableComponent, children: [{ path: 'print', component: PrintComponent }] },
-      { path: 'customers', component: CustomersComponent },
-      { path: 'catalog', component: CatalogComponent },
-    ]
-  },
-  { path: 'login', component: LoginFormComponent },
-  { path: 'verification', component: VerificationComponent }
-];
-
 
 @NgModule({
   declarations: [
@@ -102,9 +86,7 @@ const appRoutes: Routes = [
     StatusSelectComponent,
     SmallMenuComponent,
     PrintComponent,
-    LoginFormComponent,
     EmptyTableComponent,
-    VerificationComponent,
   ],
   imports: [
     StoreModule.forRoot({
@@ -135,7 +117,7 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatMenuModule,
     MatTooltipModule,
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,

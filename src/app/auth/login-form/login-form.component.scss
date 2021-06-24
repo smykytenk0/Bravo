@@ -89,7 +89,7 @@ label{
 .valid{
   border: 1.5px solid #2AB930!important;
   & .inputImgWrapper{
-    background: url("../../assets/valid-check.svg") no-repeat center;
+    background: url("../../../assets/valid-check.svg") no-repeat center;
   }
 }
 
@@ -97,6 +97,6 @@ label{
 .invalid{
   border: 1.5px solid #F7716E!important;
   & .inputImgWrapper{
-    background: url("../../assets/valid-danger.svg") no-repeat center;
+    background: url("../../../assets/valid-danger.svg") no-repeat center;
   }
 }

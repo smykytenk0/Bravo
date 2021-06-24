@@ -24,7 +24,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    this.route.navigate(['verification'])
+    this.route.navigate(['auth/verification'])
   }
 
   handleChange(event) {
