@@ -8,11 +8,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { OrdersTableComponent } from './tables/orders-table/orders-table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DatepickerComponent } from './datepicker/datepicker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
@@ -31,8 +29,6 @@ import { StoreModule } from '@ngrx/store';
 import { OrdersEffect } from './store/orders/orders.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationComponent } from './navigation/navigation.component';
-import { CustomersComponent } from './tables/customers/customers.component';
-import { CatalogComponent } from './tables/catalog/catalog.component';
 import { CustomersReducer } from './store/customers/customers.reducer';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -40,22 +36,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { HttpClientModule } from '@angular/common/http';
-import { SuccessfulProductAddingComponent } from './shared/components/successful-product-adding/successful-product-adding.component';
-import { PrintComponent } from './print/print.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrdersTableComponent,
-    DatepickerComponent,
     dateFormatPipe,
     NavigationComponent,
-    CustomersComponent,
-    CatalogComponent,
     SidenavComponent,
-    PrintComponent,
   ],
   imports: [
     StoreModule.forRoot({

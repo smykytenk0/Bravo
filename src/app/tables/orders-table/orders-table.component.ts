@@ -95,6 +95,6 @@ export class OrdersTableComponent implements OnInit {
   }
 
   openPrint(row) {
-    this.router.navigate(['/orders/print'], {state: row})
+    this.router.navigate(['/print'], { state: row })
   }
 }
