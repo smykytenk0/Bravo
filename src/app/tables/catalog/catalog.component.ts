@@ -11,6 +11,7 @@ import { ICustomerData } from '../../store/interfaces/customers.interfacers';
 import { MatPaginator } from '@angular/material/paginator';
 import { first, takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/http.service';
+import { OrdersActions } from '../../store/orders/orders.actions';
 
 @Component({
   selector: 'app-catalog',

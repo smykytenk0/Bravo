@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/http.service';
+import { OrdersActions } from '../../store/orders/orders.actions';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class CustomersComponent implements OnDestroy, OnInit{
 
   constructor(private store: Store,
               private dialog: MatDialog,
-              private httpService: HttpService) {}
+              private httpService: HttpService) {
+  }
 
   ngOnInit(): void {
     this.refresh();

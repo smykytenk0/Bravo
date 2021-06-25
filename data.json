@@ -56,7 +56,7 @@
   ],
   "customers": [
     {
-      "customerNo": "BB-123",
+      "customerNo": "SB-123",
       "name": "Sandwich Bar",
       "address": "Shevchenko Street 123",
       "deliveryDays": [
@@ -74,6 +74,7 @@
       "deliveryDays": [
         "Sun",
         "Mon",
+        "Wed",
         "Sat"
       ],
       "id": 2
@@ -83,6 +84,62 @@
     {
       "id": 1,
       "orderNo": 1,
+      "customer": "Sasha",
+      "customerNo": "BB-243",
+      "items": [
+        {
+          "productCode": "APP123",
+          "product": "Apples",
+          "unit": "kg",
+          "quantity": 14
+        },
+        {
+          "productCode": "TOM53",
+          "product": "Tomatoes",
+          "unit": "box",
+          "quantity": 4
+        }
+      ],
+      "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
+      "ordered": "2014-02-01T09:28:56.321-10:00",
+      "reqDelivery": "2014-02-01T09:28:56.321-10:00",
+      "isConfirmedStatus": false,
+      "address": {
+        "street": "Main Street 23",
+        "city": "1453 Zurich"
+      }
+    },
+    {
+      "id": 2,
+      "orderNo": 2,
+      "customer": "Masha",
+      "customerNo": "BB-243",
+      "items": [
+        {
+          "productCode": "APP123",
+          "product": "Apples",
+          "unit": "kg",
+          "quantity": 14
+        },
+        {
+          "productCode": "TOM53",
+          "product": "Tomatoes",
+          "unit": "box",
+          "quantity": 4
+        }
+      ],
+      "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
+      "ordered": "2021-06-26T09:28:56.321-10:00",
+      "reqDelivery": "2014-02-01T09:28:56.321-10:00",
+      "isConfirmedStatus": true,
+      "address": {
+        "street": "Main Street 23",
+        "city": "1453 Zurich"
+      }
+    },
+    {
+      "id": 3,
+      "orderNo": 3,
       "customer": "Sasha",
       "customerNo": "BB-243",
       "items": [

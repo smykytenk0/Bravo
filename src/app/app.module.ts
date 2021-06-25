@@ -24,7 +24,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { OrdersReducer } from './store/orders/orders.reducer';
 import { environment } from '../environments/environment';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { dateFormatPipe } from './shared/pipes/date.pipe';
 import { StoreModule } from '@ngrx/store';
 import { OrdersEffect } from './store/orders/orders.effects';
 import { EffectsModule } from '@ngrx/effects';
@@ -42,7 +41,6 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    dateFormatPipe,
     NavigationComponent,
     SidenavComponent,
   ],

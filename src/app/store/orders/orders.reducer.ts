@@ -182,16 +182,11 @@ export const OrdersReducer = createReducer(
     };
     return { ...state, filteredOrdersData: newFilteredOrdersData }
   }),
-  on(OrdersActions.filterStatus, (state, {status}) =>{
-    switch (status) {
-      case 'Both':
-        break;
-      case 'Confirmed':
-        return {...state, filteredOrdersData: state.ordersData.filter(data => data.isConfirmedStatus)};
-      case 'Not confirmed':
-        return {...state, filteredOrdersData: state.ordersData.filter(data => !data.isConfirmedStatus)}
-    }
-    return {...state, filteredOrdersData: state.ordersData.filter( data => data.isConfirmedStatus || !data.isConfirmedStatus)};
+  on(OrdersActions.filterStatus, (state, { status }) => {
+    return{...state, status: status}
+  }),
+  on(OrdersActions.clearAllFilters, (state) => {
+    return {...state, filteredCustomers: [], status: 'Both'}
   })
 );
 

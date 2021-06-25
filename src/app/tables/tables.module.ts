@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { PrintComponent } from '../print/print.component';
 import { CommonModule } from '@angular/common';
+import { dateFormatPipe } from '../shared/pipes/date.pipe';
 
 export const routes: Routes = [
   { path: 'orders', component: OrdersTableComponent, children: [{ path: 'print', component: PrintComponent }] },
@@ -21,11 +22,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    OrdersTableComponent,
-    CustomersComponent,
-    CatalogComponent,
-  ],
+    declarations: [
+        OrdersTableComponent,
+        CustomersComponent,
+        CatalogComponent,
+        dateFormatPipe,
+    ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),

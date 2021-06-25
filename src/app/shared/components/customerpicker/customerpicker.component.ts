@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, ElementRef, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Observable} from "rxjs";
@@ -23,13 +23,13 @@ export class CustomerpickerComponent  {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   customerCtrl = new FormControl();
   filteredCustomers: Observable<string[]>;
-  customers$: Observable<string[]>;
+  @Output() customers$: Observable<string[]>;
 
   @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private store: Store, private orders: OrdersService) {
-    this. customers$ = this.store.pipe(select(filteredCustomersSelector));
+    this.customers$ = this.store.pipe(select(filteredCustomersSelector));
     this.filteredCustomers = this.customerCtrl.valueChanges.pipe(
       startWith(null),
       map((customers: string | null) => customers ? this._filter(customers) : this.allCustomers.slice()));
@@ -37,7 +37,6 @@ export class CustomerpickerComponent  {
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-
     if (value) {
       this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({customer: value}));
     }

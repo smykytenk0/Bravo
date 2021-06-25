@@ -32,6 +32,27 @@ mat-paginator {
   border-top: none;
 }
 
+.searchButtonContainer{
+  display: flex;
+}
+
+.removeFiltersButton{
+  height: 42px;
+  margin-left: 24px;
+  background-color: #1672EC;
+  color: #C5DCFA;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+  outline: none;
+  cursor: pointer;
+  padding: 0 12px;
+}
+
 :host ::ng-deep {
 
   .bigTable th.mat-header-cell{

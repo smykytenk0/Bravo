@@ -1,28 +1,21 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
-import { filterOrdersDataSelector, ordersDataSelector, rangeStartDateSelector } from '../../store/orders/orders.reducer';
+import { Store } from '@ngrx/store';
 import { OrdersService } from '../../shared/services/orders.service';
 import { OrdersData } from '../../store/interfaces/orders.interfaces';
-import { Observable } from 'rxjs';
 import { OrdersActions } from '../../store/orders/orders.actions';
 import { Router } from '@angular/router';
 import { HttpService } from '../../shared/services/http.service';
-
-export interface OdrerElement {
-  orderNo: number,
-  customer: string,
-  customerNo: number,
-  items: object,
-  notes: string,
-  ordered: string,
-  reqDelivery: string,
-  status: string,
-  address: string
-}
+import {
+  filteredCustomersSelector,
+  rangeEndDateSelector,
+  rangeStartDateSelector,
+  statusSelector
+} from '../../store/orders/orders.reducer';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-orders-table',
@@ -37,9 +30,9 @@ export interface OdrerElement {
   ],
 })
 
-export class OrdersTableComponent implements OnInit {
+export class OrdersTableComponent implements OnInit, OnDestroy {
   title: string = 'Orders';
-  placeholder: string = "Order, Customer, Notes...";
+  placeholder: string = 'Order, Customer, Notes...';
   displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'lastEmptyColumn'];
   dataSource: MatTableDataSource<OrdersData>;
   dataPickerOpened: boolean = false;
@@ -47,15 +40,23 @@ export class OrdersTableComponent implements OnInit {
   isStatusOpened: boolean = false;
   uniqueCustomers: any;
   ordersData: any;
+  filteredCustomers: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OrdersData | null;
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
+  testArray: string[];
+  requestCustomers: string;
+  status: string;
+  requestStatus: string;
+  startDate: Date;
+  endDate: Date;
+  requestDate: string;
 
-  refresh(){
-    this.httpService.getOrders().subscribe(  data => {
+  refresh() {
+    this.httpService.getOrders().subscribe(data => {
       this.ordersData = data;
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
@@ -66,10 +67,15 @@ export class OrdersTableComponent implements OnInit {
   constructor(private store: Store,
               private orders: OrdersService,
               private router: Router,
-              private httpService: HttpService) {
+              private httpService: HttpService,
+              private http: HttpClient) {
   }
 
   ngOnInit(): void {
+    this.store.select(filteredCustomersSelector).subscribe(data => this.testArray = data);
+    this.store.select(statusSelector).subscribe(data => this.status = data);
+    this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
+    this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
     this.refresh();
   }
 
@@ -82,7 +88,33 @@ export class OrdersTableComponent implements OnInit {
   }
 
   openStatusSelect() {
-    this.isStatusOpened = !this.isStatusOpened
+    this.isStatusOpened = !this.isStatusOpened;
+  }
+
+  JsonDateParse(date): Date {
+    return new Date(date);
+  }
+
+  filterData() {
+    switch (this.status) {
+      case 'Confirmed':
+        this.requestStatus = '&isConfirmedStatus=true';
+        break;
+      case 'Both':
+        this.requestStatus = '';
+        break;
+      case 'Not confirmed':
+        this.requestStatus = '&isConfirmedStatus=false';
+        break;
+    }
+    this.testArray.length ? this.requestCustomers = 'customer=' + this.testArray.join('&customer=') : this.requestCustomers = '';
+    console.log(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }`);
+    this.http.get(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }${ this.requestDate }`).subscribe(data => {
+        this.ordersData = data;
+        this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
+        this.dataSource.paginator = this.paginator;
+      }
+    )
   }
 
   enterDatepickerData() {
@@ -96,5 +128,14 @@ export class OrdersTableComponent implements OnInit {
 
   openPrint(row) {
     this.router.navigate(['/print'], { state: row })
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(OrdersActions.clearAllFilters());
+  }
+
+  removeAllFilters() {
+    this.store.dispatch(OrdersActions.clearAllFilters());
+    this.refresh();
   }
 }
