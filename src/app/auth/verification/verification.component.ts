@@ -20,7 +20,7 @@ export class VerificationComponent implements OnInit {
   }
 
   enterVerificationForm(){
-    this.route.navigate(['orders']);
+    this.route.navigate(['tables/orders']);
   }
 
   ngOnInit(): void {
