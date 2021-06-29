@@ -53,11 +53,19 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   requestStatus: string;
   startDate: Date;
   endDate: Date;
-  requestDate: string;
+  customer: object;
 
   refresh() {
     this.httpService.getOrders().subscribe(data => {
+      for (let i in data) {
+        this.http.get(`http://localhost:3000/customers?id=${ data[i].customerId }`).subscribe(customerData => {
+          data[i].customerData = customerData[0];
+        });
+      }
+      console.log(data[1].customerData);
+      console.log(data);
       this.ordersData = data;
+      console.log(this.ordersData);
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
       this.uniqueCustomers = Array.from(this.ordersData.reduce((acc, elem) => acc.add(elem.customer), new Set()));
@@ -72,11 +80,11 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.refresh();
     this.store.select(filteredCustomersSelector).subscribe(data => this.testArray = data);
     this.store.select(statusSelector).subscribe(data => this.status = data);
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
-    this.refresh();
   }
 
   toggleDataPicker() {
@@ -107,12 +115,17 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
         this.requestStatus = '&isConfirmedStatus=false';
         break;
     }
-    this.testArray.length ? this.requestCustomers = 'customer=' + this.testArray.join('&customer=') : this.requestCustomers = '';
-    console.log(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }`);
-    this.http.get(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }${ this.requestDate }`).subscribe(data => {
-        this.ordersData = data;
-        this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
-        this.dataSource.paginator = this.paginator;
+    this.testArray.length ? this.requestCustomers = 'customerData/customerName=' + this.testArray.join('&customerData/  customer=') : this.requestCustomers = '';
+    this.http.get(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }`).subscribe(data => {
+      for (let i in data) {
+        this.http.get(`http://localhost:3000/customers?id=${ data[i].customerId }`).subscribe(customerData => {
+          data[i].customerData = customerData[0];
+        });
+      }
+      console.log(data);
+      this.ordersData = data;
+      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
+      this.dataSource.paginator = this.paginator;
       }
     )
   }

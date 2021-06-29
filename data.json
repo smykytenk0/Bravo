@@ -57,7 +57,7 @@
   "customers": [
     {
       "customerNo": "SB-123",
-      "name": "Sandwich Bar",
+      "customerName": "Sandwich Bar",
       "address": "Shevchenko Street 123",
       "deliveryDays": [
         "Mon",
@@ -69,12 +69,15 @@
     },
     {
       "customerNo": "BB-788",
-      "name": "Burger Bar",
+      "customerName": "Burger Bar",
       "address": "Metalistiv, 3",
       "deliveryDays": [
         "Sun",
         "Mon",
+        "Tue",
         "Wed",
+        "Thu",
+        "Fri",
         "Sat"
       ],
       "id": 2
@@ -83,9 +86,7 @@
   "orders": [
     {
       "id": 1,
-      "orderNo": 1,
-      "customer": "Sasha",
-      "customerNo": "BB-243",
+      "customerId": 2,
       "items": [
         {
           "productCode": "APP123",
@@ -107,13 +108,26 @@
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
+      },
+      "customerData": {
+        "customerNo": "BB-788",
+        "customerName": "Burger Bar",
+        "address": "Metalistiv, 3",
+        "deliveryDays": [
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat"
+        ],
+        "id": 2
       }
     },
     {
       "id": 2,
-      "orderNo": 2,
-      "customer": "Masha",
-      "customerNo": "BB-243",
+      "customerId": 2,
       "items": [
         {
           "productCode": "APP123",
@@ -129,9 +143,9 @@
         }
       ],
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
-      "ordered": "2021-06-26T09:28:56.321-10:00",
+      "ordered": "2021-06-26  T09:28:56.321-10:00",
       "reqDelivery": "2014-02-01T09:28:56.321-10:00",
-      "isConfirmedStatus": true,
+      "isConfirmedStatus": false,
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
@@ -139,9 +153,7 @@
     },
     {
       "id": 3,
-      "orderNo": 3,
-      "customer": "Sasha",
-      "customerNo": "BB-243",
+      "customerId": 1,
       "items": [
         {
           "productCode": "APP123",
