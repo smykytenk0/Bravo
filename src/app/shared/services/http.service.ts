@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICustomerData } from '../../store/interfaces/customers.interfacers';
 import { IProduct } from '../../store/interfaces/catalog.interfaces';
+import { tap } from 'rxjs/operators';
 
 @Injectable({providedIn:'root'})
 export class HttpService{
@@ -34,8 +35,25 @@ export class HttpService{
     return this.http.delete('http://localhost:3000/products/' + productId);
   }
 
+  getCustomerById(order: any) {
+    this.http.get(`http://localhost:3000/customers?id=${ order.customerId }`).subscribe(data => order.customerData = data)
+  }
+
+  getProductById(order: any) {
+    let productReq = 'http://localhost:3000/products?';
+    for (let i of order.items){
+      productReq+=`&id=${i.productId}`
+    }
+    this.http.get(productReq).subscribe(data => order.products = data);
+  }
+
   getOrders(){
-    return this.http.get('http://localhost:3000/orders');
+    return this.http.get('http://localhost:3000/orders').pipe(tap(item => {
+      for (let i in item) {
+        this.getCustomerById(item[i]);
+        this.getProductById(item[i]);
+      }
+    }));
   }
 
   changeOrdersStatus(element, id){

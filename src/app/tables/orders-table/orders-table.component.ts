@@ -16,6 +16,8 @@ import {
   statusSelector
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
+import { first, map, switchMap, tap } from 'rxjs/operators';
+import { ICustomerData, ICustomers } from '../../store/interfaces/customers.interfacers';
 
 @Component({
   selector: 'app-orders-table',
@@ -38,7 +40,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
-  uniqueCustomers: any;
+  uniqueCustomers: any = [];
   ordersData: any;
   filteredCustomers: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,22 +56,24 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   startDate: Date;
   endDate: Date;
   customer: object;
+  productReq: string;
+
+
 
   refresh() {
     this.httpService.getOrders().subscribe(data => {
-      for (let i in data) {
-        this.http.get(`http://localhost:3000/customers?id=${ data[i].customerId }`).subscribe(customerData => {
-          data[i].customerData = customerData[0];
-        });
-      }
-      console.log(data[1].customerData);
-      console.log(data);
       this.ordersData = data;
-      console.log(this.ordersData);
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
-      this.uniqueCustomers = Array.from(this.ordersData.reduce((acc, elem) => acc.add(elem.customer), new Set()));
     })
+  }
+
+  getUniqueCustomers(array: any) {
+    for (let i of array) {
+      if (this.uniqueCustomers.indexOf(i.name) == -1) {
+        this.uniqueCustomers.push(i.name);
+      }
+    }
   }
 
   constructor(private store: Store,
@@ -81,6 +85,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refresh();
+    this.httpService.getCustomers().subscribe(data => this.getUniqueCustomers(data));
     this.store.select(filteredCustomersSelector).subscribe(data => this.testArray = data);
     this.store.select(statusSelector).subscribe(data => this.status = data);
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
@@ -117,15 +122,9 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     }
     this.testArray.length ? this.requestCustomers = 'customerData/customerName=' + this.testArray.join('&customerData/  customer=') : this.requestCustomers = '';
     this.http.get(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }`).subscribe(data => {
-      for (let i in data) {
-        this.http.get(`http://localhost:3000/customers?id=${ data[i].customerId }`).subscribe(customerData => {
-          data[i].customerData = customerData[0];
-        });
-      }
-      console.log(data);
-      this.ordersData = data;
-      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
-      this.dataSource.paginator = this.paginator;
+        this.ordersData = data;
+        this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
+        this.dataSource.paginator = this.paginator;
       }
     )
   }

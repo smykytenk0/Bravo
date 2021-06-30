@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 
 export class PrintComponent implements OnInit {
-  printInfo: OrdersData = history.state;
+  printInfo = history.state;
   displayedColumns: string[] = ['productCode', 'product', 'unit', 'quantity'];
 
   constructor(private route: Router) {

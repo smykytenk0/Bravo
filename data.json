@@ -57,11 +57,13 @@
   "customers": [
     {
       "customerNo": "SB-123",
-      "customerName": "Sandwich Bar",
+      "name": "Sandwich Bar",
       "address": "Shevchenko Street 123",
       "deliveryDays": [
         "Mon",
         "Tue",
+        "Wed",
+        "Thu",
         "Fri",
         "Sat"
       ],
@@ -69,14 +71,12 @@
     },
     {
       "customerNo": "BB-788",
-      "customerName": "Burger Bar",
+      "name": "Burger Bar",
       "address": "Metalistiv, 3",
       "deliveryDays": [
         "Sun",
-        "Mon",
         "Tue",
         "Wed",
-        "Thu",
         "Fri",
         "Sat"
       ],
@@ -89,36 +89,30 @@
       "customerId": 2,
       "items": [
         {
-          "productCode": "APP123",
-          "product": "Apples",
-          "unit": "kg",
-          "quantity": 14
+          "productId": 1,
+          "quantity": 10
         },
         {
-          "productCode": "TOM53",
-          "product": "Tomatoes",
-          "unit": "box",
-          "quantity": 4
+          "productId": 2,
+          "quantity": 10
         }
       ],
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
       "ordered": "2014-02-01T09:28:56.321-10:00",
       "reqDelivery": "2014-02-01T09:28:56.321-10:00",
-      "isConfirmedStatus": false,
+      "isConfirmedStatus": true,
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
       },
       "customerData": {
         "customerNo": "BB-788",
-        "customerName": "Burger Bar",
+        "name": "Burger Bar",
         "address": "Metalistiv, 3",
         "deliveryDays": [
           "Sun",
-          "Mon",
           "Tue",
           "Wed",
-          "Thu",
           "Fri",
           "Sat"
         ],
@@ -130,16 +124,12 @@
       "customerId": 2,
       "items": [
         {
-          "productCode": "APP123",
-          "product": "Apples",
-          "unit": "kg",
-          "quantity": 14
+          "productId": 4,
+          "quantity": 10
         },
         {
-          "productCode": "TOM53",
-          "product": "Tomatoes",
-          "unit": "box",
-          "quantity": 4
+          "productId": 3,
+          "quantity": 10
         }
       ],
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
@@ -156,16 +146,12 @@
       "customerId": 1,
       "items": [
         {
-          "productCode": "APP123",
-          "product": "Apples",
-          "unit": "kg",
-          "quantity": 14
+          "productId": 5,
+          "quantity": 10
         },
         {
-          "productCode": "TOM53",
-          "product": "Tomatoes",
-          "unit": "box",
-          "quantity": 4
+          "productId": 4,
+          "quantity": 10
         }
       ],
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
