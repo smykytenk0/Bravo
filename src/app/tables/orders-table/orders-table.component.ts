@@ -16,8 +16,7 @@ import {
   statusSelector
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
-import { first, map, switchMap, tap } from 'rxjs/operators';
-import { ICustomerData, ICustomers } from '../../store/interfaces/customers.interfacers';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders-table',
@@ -49,15 +48,14 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     start: new FormControl(),
     end: new FormControl()
   });
-  testArray: string[];
-  requestCustomers: string;
+  requestCustomers: string = '';
   status: string;
   requestStatus: string;
   startDate: Date;
   endDate: Date;
   customer: object;
-  productReq: string;
-
+  selectedCustomersArray: string[];
+  selectedCustomersIdArray: string[] = [];
 
   refresh() {
     this.httpService.getOrders().subscribe(data => {
@@ -106,6 +104,23 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
+  getCustomerId(customer){
+    return customer.id
+  }
+
+  convertSelectedCustomerToRequest(selectedCustomer: string[]){
+    let customerRequest = '';
+    for (let i of selectedCustomer){
+      this.http.get(`http://localhost:3000/customers?name=${i}`).subscribe(data => {
+        console.log(this.getCustomerId(data[0]));
+        customerRequest += `id=${this.getCustomerId(data[0])}&`;
+        console.log(customerRequest);
+      });
+    }
+    console.log(customerRequest);
+    return customerRequest
+  }
+
   filterData() {
     switch (this.status) {
       case 'Confirmed':
@@ -118,8 +133,8 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
         this.requestStatus = '&isConfirmedStatus=false';
         break;
     }
-    this.store.select(filteredCustomersSelector).subscribe(data => this.testArray = data);
-    this.testArray.length ? this.requestCustomers = 'customerData/customerName=' + this.testArray.join('&customerData/  customer=') : this.requestCustomers = '';
+    this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
+    this.httpService.convertSelectedCustomers(this.selectedCustomersArray);
     this.httpService.getOrders(this.requestCustomers + this.requestStatus).subscribe(data => {
         this.ordersData = data;
         this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);

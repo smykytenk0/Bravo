@@ -48,6 +48,7 @@ export class HttpService{
   }
 
   getOrders(params = ''){
+    console.log(`http://localhost:3000/orders?${params}`);
     return this.http.get(`http://localhost:3000/orders?${params}`).pipe(tap(item => {
       for (let i in item) {
         this.getCustomerById(item[i]);
@@ -59,5 +60,20 @@ export class HttpService{
   changeOrdersStatus(element, id){
     element.isConfirmedStatus=!element.isConfirmedStatus;
     return this.http.put('http://localhost:3000/orders/' + id, element)
+  }
+
+  convertSelectedCustomers(selectedCustomers: string[]){
+    let customerSelect = '';
+    let customersId = [];
+    for (let customerName of selectedCustomers){
+      customerSelect += `name=${customerName}&`
+    }
+    this.http.get(`http://localhost:3000/customers?${customerSelect}`).subscribe( data => {
+      for (let item in data){
+        customersId.push(data[item].id);
+        console.log(customersId);
+      }
+    });
+    console.log(customersId)
   }
 }
