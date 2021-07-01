@@ -5,33 +5,33 @@ import { ICustomerData } from '../../store/interfaces/customers.interfacers';
 import { IProduct } from '../../store/interfaces/catalog.interfaces';
 import { tap } from 'rxjs/operators';
 
-@Injectable({providedIn:'root'})
-export class HttpService{
+@Injectable({ providedIn: 'root' })
+export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  getCustomers(): Observable<any>{
+  getCustomers(): Observable<any> {
     return this.http.get('http://localhost:3000/customers');
   }
 
-  addCustomer(customer: ICustomerData){
+  addCustomer(customer: ICustomerData) {
     return this.http.post('http://localhost:3000/customers', customer);
   }
 
-  editCustomer(customer, id){
-    return this.http.put( 'http://localhost:3000/customers/' + id, customer);
+  editCustomer(customer, id) {
+    return this.http.put('http://localhost:3000/customers/' + id, customer);
   }
 
-  getCatalog(){
+  getCatalog() {
     console.log('it works');
     return this.http.get('http://localhost:3000/products');
   }
 
-  addProduct(product: IProduct){
+  addProduct(product: IProduct) {
     return this.http.post('http://localhost:3000/products', product);
   }
 
-  deleteProduct(productId: number){
+  deleteProduct(productId: number) {
     return this.http.delete('http://localhost:3000/products/' + productId);
   }
 
@@ -41,15 +41,18 @@ export class HttpService{
 
   getProductById(order: any) {
     let productReq = 'http://localhost:3000/products?';
-    for (let i of order.items){
-      productReq+=`&id=${i.productId}`
+    for (let i of order.items) {
+      productReq += `&id=${ i.productId }`
     }
     this.http.get(productReq).subscribe(data => order.products = data);
   }
 
-  getOrders(params = ''){
-    console.log(`http://localhost:3000/orders?${params}`);
-    return this.http.get(`http://localhost:3000/orders?${params}`).pipe(tap(item => {
+  convertSelectedCustomers(selectedCustomers: string[]) {
+    return this.http.get(`http://localhost:3000/customers`, { params: { name: selectedCustomers } });
+  }
+
+  getOrders(params = {}) {
+    return this.http.get(`http://localhost:3000/orders`, {params: params}).pipe(tap(item => {
       for (let i in item) {
         this.getCustomerById(item[i]);
         this.getProductById(item[i]);
@@ -57,23 +60,8 @@ export class HttpService{
     }));
   }
 
-  changeOrdersStatus(element, id){
-    element.isConfirmedStatus=!element.isConfirmedStatus;
+  changeOrdersStatus(element, id) {
+    element.isConfirmedStatus = !element.isConfirmedStatus;
     return this.http.put('http://localhost:3000/orders/' + id, element)
-  }
-
-  convertSelectedCustomers(selectedCustomers: string[]){
-    let customerSelect = '';
-    let customersId = [];
-    for (let customerName of selectedCustomers){
-      customerSelect += `name=${customerName}&`
-    }
-    this.http.get(`http://localhost:3000/customers?${customerSelect}`).subscribe( data => {
-      for (let item in data){
-        customersId.push(data[item].id);
-        console.log(customersId);
-      }
-    });
-    console.log(customersId)
   }
 }

@@ -50,7 +50,7 @@
         "Sat"
       ],
       "id": 1,
-      "email": "sandwichbar@gmail.com",
+      "email": "sandwichbar@gmail.com"
     },
     {
       "customerNo": "BB-788",
@@ -107,7 +107,38 @@
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
-      }
+      },
+      "customerData": [
+        {
+          "customerNo": "BB-788",
+          "name": "Burger Bar",
+          "address": "Metalistiv, 3",
+          "deliveryDays": [
+            "Sun",
+            "Tue",
+            "Wed"
+          ],
+          "id": 2
+        }
+      ],
+      "products": [
+        {
+          "productCode": "CUC101",
+          "name": "Cucumbers",
+          "mainUnit": {
+            "unit": "pound",
+            "price": "17"
+          },
+          "anotherUnits": [
+            {
+              "unit": "",
+              "price": 0
+            }
+          ],
+          "availability": "Discounted",
+          "id": 3
+        }
+      ]
     },
     {
       "id": 3,

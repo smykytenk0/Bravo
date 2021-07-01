@@ -16,7 +16,6 @@ import {
   statusSelector
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders-table',
@@ -48,17 +47,16 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     start: new FormControl(),
     end: new FormControl()
   });
-  requestCustomers: string = '';
   status: string;
-  requestStatus: string;
+  requestStatus: boolean[];
   startDate: Date;
   endDate: Date;
   customer: object;
   selectedCustomersArray: string[];
-  selectedCustomersIdArray: string[] = [];
+  customersId: number[];
 
-  refresh() {
-    this.httpService.getOrders().subscribe(data => {
+  refresh(params = {}) {
+    this.httpService.getOrders(params).subscribe(data => {
       this.ordersData = data;
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
@@ -104,43 +102,25 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
-  getCustomerId(customer){
-    return customer.id
-  }
-
-  convertSelectedCustomerToRequest(selectedCustomer: string[]){
-    let customerRequest = '';
-    for (let i of selectedCustomer){
-      this.http.get(`http://localhost:3000/customers?name=${i}`).subscribe(data => {
-        console.log(this.getCustomerId(data[0]));
-        customerRequest += `id=${this.getCustomerId(data[0])}&`;
-        console.log(customerRequest);
-      });
-    }
-    console.log(customerRequest);
-    return customerRequest
-  }
-
   filterData() {
     switch (this.status) {
       case 'Confirmed':
-        this.requestStatus = '&isConfirmedStatus=true';
+        this.requestStatus = [true];
         break;
       case 'Both':
-        this.requestStatus = '';
+        this.requestStatus = [true, false];
         break;
       case 'Not confirmed':
-        this.requestStatus = '&isConfirmedStatus=false';
+        this.requestStatus = [false];
         break;
     }
     this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
-    this.httpService.convertSelectedCustomers(this.selectedCustomersArray);
-    this.httpService.getOrders(this.requestCustomers + this.requestStatus).subscribe(data => {
-        this.ordersData = data;
-        this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
-        this.dataSource.paginator = this.paginator;
-      }
-    )
+    this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
+      let customersId = [];
+      Object.values(data).map(item => customersId.push(item.id));
+      this.customersId = customersId;
+      this.refresh({ isConfirmedStatus: this.requestStatus, customerId: customersId })
+    });
   }
 
   enterDatepickerData() {
