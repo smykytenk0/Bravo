@@ -36,22 +36,6 @@
       ],
       "availability": "Discounted",
       "id": 3
-    },
-    {
-      "productCode": "TOM803",
-      "name": "Tomatoes",
-      "mainUnit": {
-        "unit": "ton",
-        "price": "23000"
-      },
-      "anotherUnits": [
-        {
-          "unit": "",
-          "price": 0
-        }
-      ],
-      "availability": "In stock",
-      "id": 4
     }
   ],
   "customers": [
@@ -62,8 +46,6 @@
       "deliveryDays": [
         "Mon",
         "Tue",
-        "Wed",
-        "Thu",
         "Fri",
         "Sat"
       ],
@@ -76,9 +58,7 @@
       "deliveryDays": [
         "Sun",
         "Tue",
-        "Wed",
-        "Fri",
-        "Sat"
+        "Wed"
       ],
       "id": 2
     }
@@ -104,19 +84,6 @@
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
-      },
-      "customerData": {
-        "customerNo": "BB-788",
-        "name": "Burger Bar",
-        "address": "Metalistiv, 3",
-        "deliveryDays": [
-          "Sun",
-          "Tue",
-          "Wed",
-          "Fri",
-          "Sat"
-        ],
-        "id": 2
       }
     },
     {
@@ -133,7 +100,7 @@
         }
       ],
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
-      "ordered": "2021-06-26  T09:28:56.321-10:00",
+      "ordered": "2021-06-30T09:28:56.321-10:00",
       "reqDelivery": "2014-02-01T09:28:56.321-10:00",
       "isConfirmedStatus": false,
       "address": {

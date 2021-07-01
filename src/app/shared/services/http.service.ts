@@ -47,8 +47,8 @@ export class HttpService{
     this.http.get(productReq).subscribe(data => order.products = data);
   }
 
-  getOrders(){
-    return this.http.get('http://localhost:3000/orders').pipe(tap(item => {
+  getOrders(params = ''){
+    return this.http.get(`http://localhost:3000/orders?${params}`).pipe(tap(item => {
       for (let i in item) {
         this.getCustomerById(item[i]);
         this.getProductById(item[i]);
