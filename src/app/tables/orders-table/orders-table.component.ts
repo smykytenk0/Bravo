@@ -59,7 +59,6 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   productReq: string;
 
 
-
   refresh() {
     this.httpService.getOrders().subscribe(data => {
       this.ordersData = data;
@@ -86,7 +85,6 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.refresh();
     this.httpService.getCustomers().subscribe(data => this.getUniqueCustomers(data));
-    this.store.select(filteredCustomersSelector).subscribe(data => this.testArray = data);
     this.store.select(statusSelector).subscribe(data => this.status = data);
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
@@ -120,8 +118,9 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
         this.requestStatus = '&isConfirmedStatus=false';
         break;
     }
+    this.store.select(filteredCustomersSelector).subscribe(data => this.testArray = data);
     this.testArray.length ? this.requestCustomers = 'customerData/customerName=' + this.testArray.join('&customerData/  customer=') : this.requestCustomers = '';
-    this.http.get(`http://localhost:3000/orders?${ this.requestCustomers }${ this.requestStatus }`).subscribe(data => {
+    this.httpService.getOrders(this.requestCustomers + this.requestStatus).subscribe(data => {
         this.ordersData = data;
         this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
         this.dataSource.paginator = this.paginator;
