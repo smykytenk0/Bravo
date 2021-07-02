@@ -36,6 +36,17 @@
       ],
       "availability": "Discounted",
       "id": 3
+    },
+    {
+      "productCode": "TOM803",
+      "name": "Tomatoes",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "55"
+      },
+      "anotherUnits": null,
+      "availability": "In stock",
+      "id": 4
     }
   ],
   "customers": [
@@ -85,7 +96,43 @@
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
-      }
+      },
+      "customerData": [
+        {
+          "customerNo": "BB-788",
+          "name": "Burger Bar",
+          "address": "Metalistiv, 3",
+          "deliveryDays": [
+            "Sun",
+            "Tue",
+            "Wed"
+          ],
+          "id": 2
+        }
+      ],
+      "products": [
+        {
+          "id": 1,
+          "productCode": "APP123",
+          "name": "Apples",
+          "mainUnit": {
+            "unit": "kg",
+            "price": "2.03"
+          },
+          "availability": "In Stock"
+        },
+        {
+          "productCode": "BAN746",
+          "name": "Bananas",
+          "mainUnit": {
+            "unit": "kg",
+            "price": "30"
+          },
+          "anotherUnits": null,
+          "availability": "In stock",
+          "id": 2
+        }
+      ]
     },
     {
       "id": 2,

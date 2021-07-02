@@ -168,7 +168,6 @@ export const OrdersReducer = createReducer(
     const index = state.filteredOrdersData.indexOf(order);
     const newFilteredOrdersData = [...state.filteredOrdersData];
     const status = newFilteredOrdersData[index].isConfirmedStatus;
-    console.log(status);
     newFilteredOrdersData[index] = {
       isConfirmedStatus: !newFilteredOrdersData[index].isConfirmedStatus,
       orderNo: newFilteredOrdersData[index].orderNo,

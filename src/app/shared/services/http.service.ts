@@ -23,7 +23,6 @@ export class HttpService {
   }
 
   getCatalog() {
-    console.log('it works');
     return this.http.get('http://localhost:3000/products');
   }
 

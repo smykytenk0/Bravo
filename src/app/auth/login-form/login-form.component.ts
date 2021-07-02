@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-login-form',
@@ -10,7 +12,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private route: Router) {
+  constructor(private route: Router,
+              private store: Store) {
   }
 
   initLoginForm(): void {
@@ -24,6 +27,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
+    this.store.dispatch(AuthActions.enterEmail({email: this.loginForm.value.email}));
     this.route.navigate(['auth/verification'])
   }
 

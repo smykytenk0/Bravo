@@ -17,7 +17,6 @@ export class StatusSelectComponent implements OnInit {
   }
 
   enterStatusFilter() {
-    console.log(this.status);
     this.store.dispatch(OrdersActions.filterStatus({status: this.status}))
   }
 }

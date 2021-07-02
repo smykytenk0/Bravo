@@ -37,6 +37,7 @@ import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { HttpClientModule } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
 import { SharedModule } from './shared/shared.module';
+import { AuthReducer } from './store/auth/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({
       ordersReducer: OrdersReducer,
       customersReducer: CustomersReducer,
-      catalogReducer: CatalogReducer
+      catalogReducer: CatalogReducer,
+      authReducer: AuthReducer
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([OrdersEffect]),
