@@ -47,6 +47,17 @@
       "anotherUnits": null,
       "availability": "In stock",
       "id": 4
+    },
+    {
+      "productCode": "COR740",
+      "name": "Corn",
+      "mainUnit": {
+        "unit": "kg",
+        "price": "80"
+      },
+      "anotherUnits": null,
+      "availability": "In stock",
+      "id": 5
     }
   ],
   "customers": [
@@ -90,8 +101,8 @@
         }
       ],
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
-      "ordered": "2014-02-01T09:28:56.321-10:00",
-      "reqDelivery": "2014-02-01T09:28:56.321-10:00",
+      "ordered": "5/10/2021",
+      "reqDelivery": "5/10/2021",
       "isConfirmedStatus": true,
       "address": {
         "street": "Main Street 23",
