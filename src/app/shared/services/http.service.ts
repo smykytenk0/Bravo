@@ -10,8 +10,8 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  getCustomers(): Observable<any> {
-    return this.http.get('http://localhost:3000/customers');
+  getCustomers(params = {}): Observable<any> {
+    return this.http.get('http://localhost:3000/customers', {params: params});
   }
 
   addCustomer(customer: ICustomerData) {

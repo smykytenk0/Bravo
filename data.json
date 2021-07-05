@@ -72,7 +72,8 @@
         "Sat"
       ],
       "id": 1,
-      "email": "sandwichbar@gmail.com"
+      "email": "sandwichbar@gmail.com",
+      "role": "customer"
     },
     {
       "customerNo": "BB-788",
@@ -83,7 +84,14 @@
         "Tue",
         "Wed"
       ],
-      "id": 2
+      "id": 2,
+      "email": "burgerbar@gmail.com",
+      "role": "customer"
+    },
+    {
+      "id": 3,
+      "email": "mykytenk00s@gmail.com",
+      "role": "admin"
     }
   ],
   "orders": [
