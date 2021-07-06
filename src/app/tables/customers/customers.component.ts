@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/http.service';
 import { OrdersActions } from '../../store/orders/orders.actions';
+import { loginStatusSelector, roleSelector } from '../../store/auth/auth.reducer';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class CustomersComponent implements OnDestroy, OnInit{
   dataSource: MatTableDataSource<ICustomerData>;
   displayedColumns: string[] = ['firstEmptyColumn', 'customerNo', 'name', 'address', 'deliveryDays', 'lastEmptyColumn'];
   private unsubscribeAll: Subject<any> = new Subject<any>();
+  role: string;
+  parameters: any;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,7 +43,7 @@ export class CustomersComponent implements OnDestroy, OnInit{
   }
 
   refresh(){
-    this.httpService.getCustomers().subscribe(data=> {
+    this.httpService.getCustomers({role: 'customer'}).subscribe(data=> {
       this.customersData = data;
       this.dataSource = new MatTableDataSource<ICustomerData>(this.customersData);
       this.dataSource.paginator = this.paginator;

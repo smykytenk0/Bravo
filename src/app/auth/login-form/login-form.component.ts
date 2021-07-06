@@ -30,12 +30,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    let emailSender = require('../../shared/services/emailSender.service');
-    emailSender.send();
+    /*let emailSender = require('../../shared/services/emailSender.service');
+    emailSender.send();*/
     this.httpService.getCustomers({email: this.loginForm.value.email}).subscribe(data =>{
       if (Object.keys(data).length){
         this.store.dispatch(AuthActions.enterEmail({email: this.loginForm.value.email}));
-        this.route.navigate(['auth/verification'])
+        this.route.navigate(['auth/verification']);
+        this.store.dispatch(AuthActions.login());
       }
       else {
         console.log("Incorrect");

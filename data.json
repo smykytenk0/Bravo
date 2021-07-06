@@ -126,7 +126,9 @@
             "Tue",
             "Wed"
           ],
-          "id": 2
+          "id": 2,
+          "email": "burgerbar@gmail.com",
+          "role": "customer"
         }
       ],
       "products": [
@@ -169,7 +171,7 @@
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
       "ordered": "2021-06-30T09:28:56.321-10:00",
       "reqDelivery": "2014-02-01T09:28:56.321-10:00",
-      "isConfirmedStatus": false,
+      "isConfirmedStatus": true,
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
@@ -184,7 +186,9 @@
             "Tue",
             "Wed"
           ],
-          "id": 2
+          "id": 2,
+          "email": "burgerbar@gmail.com",
+          "role": "customer"
         }
       ],
       "products": [
@@ -203,6 +207,17 @@
           ],
           "availability": "Discounted",
           "id": 3
+        },
+        {
+          "productCode": "TOM803",
+          "name": "Tomatoes",
+          "mainUnit": {
+            "unit": "kg",
+            "price": "55"
+          },
+          "anotherUnits": null,
+          "availability": "In stock",
+          "id": 4
         }
       ]
     },
@@ -226,7 +241,47 @@
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"
-      }
+      },
+      "customerData": [
+        {
+          "customerNo": "SB-123",
+          "name": "Sandwich Bar",
+          "address": "Shevchenko Street 123",
+          "deliveryDays": [
+            "Mon",
+            "Tue",
+            "Fri",
+            "Sat"
+          ],
+          "id": 1,
+          "email": "sandwichbar@gmail.com",
+          "role": "customer"
+        }
+      ],
+      "products": [
+        {
+          "productCode": "TOM803",
+          "name": "Tomatoes",
+          "mainUnit": {
+            "unit": "kg",
+            "price": "55"
+          },
+          "anotherUnits": null,
+          "availability": "In stock",
+          "id": 4
+        },
+        {
+          "productCode": "COR740",
+          "name": "Corn",
+          "mainUnit": {
+            "unit": "kg",
+            "price": "80"
+          },
+          "anotherUnits": null,
+          "availability": "In stock",
+          "id": 5
+        }
+      ]
     }
   ]
 }

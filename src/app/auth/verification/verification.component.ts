@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { emailSelector } from '../../store/auth/auth.reducer';
 import { HttpService } from '../../shared/services/http.service';
+import { AuthActions } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-verification',
@@ -27,27 +28,18 @@ export class VerificationComponent implements OnInit {
   }
 
   enterVerificationForm() {
-    console.log(this.currentRole);
-    switch(this.currentRole){
-      case 'admin':
-        this.route.navigate(['/tables/orders']);
-        break;
-      case 'customer':
-        this.route.navigate(['/tables/customers']);
-        break;
-      default:
-        this.route.navigate(['/tables/catalog']);
-        break;
-    }
+    this.store.dispatch(AuthActions.getRole({role: this.currentRole}));
+    this.route.navigate(['/tables/orders']);
   }
 
   ngOnInit(): void {
     this.verificationFormInit();
     this.store.select(emailSelector).subscribe(data => this.currentEmail = data);
-    this.httpService.getCustomers({ email: this.currentEmail }).subscribe(data => {
-      Object.keys(data).length? this.currentRole = data[0].role : this.currentRole = 'none';
-      console.log(this.currentRole);
-    });
+    this.currentEmail.length ?
+      this.httpService.getCustomers({ email: this.currentEmail }).subscribe(data => {
+        this.currentRole = data[0].role;
+      }) :
+      this.route.navigate(['auth/login']);
   }
 
   handleChange(v) {

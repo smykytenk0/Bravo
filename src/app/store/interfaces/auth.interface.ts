@@ -1,3 +1,5 @@
 export interface Auth{
-  email: string
+  email: string,
+  isLoggedIn: boolean,
+  activeRole: string
 }

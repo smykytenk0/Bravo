@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -16,6 +16,7 @@ import {
   statusSelector
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
+import { emailSelector, loginStatusSelector, roleSelector } from '../../store/auth/auth.reducer';
 
 @Component({
   selector: 'app-orders-table',
@@ -54,6 +55,8 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   customer: object;
   selectedCustomersArray: string[];
   customersId: number[];
+  email: string;
+  role: string;
 
   refresh(params = {}) {
     this.httpService.getOrders(params).subscribe(data => {
@@ -79,11 +82,15 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refresh();
-    this.httpService.getCustomers().subscribe(data => this.getUniqueCustomers(data));
+    this.store.select(roleSelector).subscribe(data => this.role = data);
+    this.store.select(emailSelector).subscribe(data => this.email = data);
+    this.httpService.getCustomers({ role: 'customer' }).subscribe(data => this.getUniqueCustomers(data));
     this.store.select(statusSelector).subscribe(data => this.status = data);
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
+    this.role == 'customer' ?
+      this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
+      :this.refresh();
   }
 
   toggleDataPicker() {

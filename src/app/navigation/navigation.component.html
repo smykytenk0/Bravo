@@ -13,12 +13,11 @@
         <div class="itemTitle">Catalog</div>
       </div>
     </a>
-    <a routerLink="/tables/customers" [routerLinkActive]="['customers-active', 'active-link']">
-      <div class="item">
-        <div class="itemTitle">{{navIsOpened? 'Customers': ''}}</div>
-      </div>
-    </a>
-
+    <a id="customers" routerLink="/tables/customers" [routerLinkActive]="['customers-active', 'active-link']">
+        <div class="item">
+          <div class="itemTitle">{{navIsOpened? 'Customers': ''}}</div>
+        </div>
+      </a>
     <a routerLink="/auth/login">
       <div class="item logout">
         <div class="itemTitle">Log Out</div>
