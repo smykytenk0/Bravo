@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrdersData } from '../../../store/interfaces/orders.interfaces';
 import { Store } from '@ngrx/store';
-import { OrdersActions } from '../../../store/orders/orders.actions';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -21,7 +19,6 @@ export class StatusComponent implements OnInit{
   }
 
   changeStatus() {
-    this.httpService.changeOrdersStatus(this.element, this.element.id).subscribe();
-    this.store.dispatch(OrdersActions.changeStatus({order: this.element}))
+    this.httpService.changeOrdersStatus(this.element).subscribe();
   }
 }

@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { first, takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/http.service';
 import { OrdersActions } from '../../store/orders/orders.actions';
+import { roleSelector } from '../../store/auth/auth.reducer';
 
 @Component({
   selector: 'app-catalog',
@@ -24,7 +25,8 @@ export class CatalogComponent implements OnDestroy, OnInit {
   addBtnText: string = 'Add Product';
   dataSource: MatTableDataSource<IProduct>;
   catalogData: any = [];
-  displayedColumns: string[] = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'];
+  displayedColumns: string[];
+  role: string;
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,6 +47,11 @@ export class CatalogComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.refresh();
+    this.store.select(roleSelector).subscribe(data => {
+      this.role = data;
+      this.role == 'admin'? this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'] : this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'lastEmptyColumn']
+    });
+
   }
 
   transformUnits(element: IProduct): string {

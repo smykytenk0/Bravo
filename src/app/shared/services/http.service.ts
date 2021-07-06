@@ -59,8 +59,8 @@ export class HttpService {
     }));
   }
 
-  changeOrdersStatus(element, id) {
+  changeOrdersStatus(element) {
     element.isConfirmedStatus = !element.isConfirmedStatus;
-    return this.http.put('http://localhost:3000/orders/' + id, element)
+    return this.http.patch('http://localhost:3000/orders/' + element.id, element)
   }
 }

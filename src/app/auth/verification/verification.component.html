@@ -13,7 +13,7 @@
         <input id="anotherNumbers" maxlength="3" formControlName="anotherNumbers" (ngModelChange)="handleChange($event)">
       </div>
     </form>
-    <div class="verificationHelp">We've sent a 6 digit login code to <span class="helpEmail">example@email.com</span> <br/>Can't find it? Check your spam folder.</div>
+    <div class="verificationHelp">We've sent a 6 digit login code to <span class="helpEmail">{{currentEmail}}</span> <br/>Can't find it? Check your spam folder.</div>
   </div>
 </div>
 
