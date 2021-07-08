@@ -39,8 +39,6 @@ export class AddProductModalWindowComponent implements OnInit, OnDestroy{
     this.anotherUnitsForm = new FormGroup(anotherUnitsControl);
   };
 
-
-
   productForm = new FormGroup({
     productCode: new FormControl(this.data? this.data.productCode: ''),
     name: new FormControl(this.data? this.data.name: ''),
@@ -57,24 +55,6 @@ export class AddProductModalWindowComponent implements OnInit, OnDestroy{
   }
 
   addNewProduct() {
-    this.store.dispatch(CatalogActions.addNewProduct({
-      product: {
-        productCode: this.productForm.value.productCode,
-        name: this.productForm.value.name,
-        mainUnit: {
-          unit: this.productForm.value.mainUintName,
-          price: this.productForm.value.mainUnitPrice
-        },
-        anotherUnits: this.anotherUnits,
-        availability: this.productForm.value.availability
-      }
-    }));
-
-    this.dialog.open(SuccessfulProductAddingComponent);
-    setTimeout(()=>{
-      this.dialog.closeAll()
-    },2000);
-
     const product = {
       productCode: this.productForm.value.productCode,
       name: this.productForm.value.name,
@@ -86,6 +66,11 @@ export class AddProductModalWindowComponent implements OnInit, OnDestroy{
       availability: this.productForm.value.availability
     };
     this.httpService.addProduct(product).subscribe();
+    this.dialog.open(SuccessfulProductAddingComponent);
+    setTimeout(()=>{
+      this.dialog.closeAll()
+    },2000);
+
   }
 
   addUnit() {

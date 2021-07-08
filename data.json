@@ -1,287 +1,55 @@
 {
   "products": [
     {
-      "id": 1,
-      "productCode": "APP123",
-      "name": "Apples",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "2.03"
-      },
-      "availability": "In Stock"
-    },
-    {
-      "productCode": "BAN746",
-      "name": "Bananas",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "30"
-      },
-      "anotherUnits": null,
-      "availability": "In stock",
-      "id": 2
-    },
-    {
       "productCode": "CUC101",
       "name": "Cucumbers",
       "mainUnit": {
-        "unit": "pound",
-        "price": "17"
-      },
-      "anotherUnits": [
-        {
-          "unit": "",
-          "price": 0
-        }
-      ],
-      "availability": "Discounted",
-      "id": 3
-    },
-    {
-      "productCode": "TOM803",
-      "name": "Tomatoes",
-      "mainUnit": {
         "unit": "kg",
-        "price": "55"
+        "price": "15"
       },
       "anotherUnits": null,
       "availability": "In stock",
-      "id": 4
-    },
-    {
-      "productCode": "COR740",
-      "name": "Corn",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "80"
-      },
-      "anotherUnits": null,
-      "availability": "In stock",
-      "id": 5
+      "id": 1
     }
   ],
   "customers": [
     {
-      "customerNo": "SB-123",
-      "name": "Sandwich Bar",
-      "address": "Shevchenko Street 123",
-      "deliveryDays": [
-        "Mon",
-        "Tue",
-        "Fri",
-        "Sat"
-      ],
       "id": 1,
-      "email": "sandwichbar@gmail.com",
-      "role": "customer"
+      "email": "mykytenk00s@gmail.com",
+      "role": "admin"
     },
     {
       "customerNo": "BB-788",
       "name": "Burger Bar",
-      "address": "Metalistiv, 3",
+      "deliveryAddress": "Solomianska, 10, Kyiv",
+      "contactName": "Olena",
+      "mobilePhone": "+380676767865",
+      "notify": true,
+      "email": "burgerbar@gmail.com",
       "deliveryDays": [
         "Sun",
+        "Mon",
         "Tue",
         "Wed"
       ],
-      "id": 2,
-      "email": "burgerbar@gmail.com",
-      "role": "customer"
+      "role": "customer",
+      "id": 2
     },
     {
-      "id": 3,
-      "email": "mykytenk00s@gmail.com",
-      "role": "admin"
+      "customerNo": "SB-123",
+      "name": "Sandwich Bar",
+      "deliveryAddress": "Mayakovskogo, 46, Kyiv",
+      "contactName": "Victor",
+      "mobilePhone": "+380995599999",
+      "notify": null,
+      "email": "sandwichbar@gmail.com",
+      "deliveryDays": [
+        "Mon",
+        "Wed"
+      ],
+      "role": "customer",
+      "id": 3
     }
   ],
-  "orders": [
-    {
-      "id": 1,
-      "customerId": 2,
-      "items": [
-        {
-          "productId": 1,
-          "quantity": 10
-        },
-        {
-          "productId": 2,
-          "quantity": 10
-        }
-      ],
-      "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
-      "ordered": "5/10/2021",
-      "reqDelivery": "5/10/2021",
-      "isConfirmedStatus": false,
-      "address": {
-        "street": "Main Street 23",
-        "city": "1453 Zurich"
-      },
-      "customerData": [
-        {
-          "customerNo": "BB-788",
-          "name": "Burger Bar",
-          "address": "Metalistiv, 3",
-          "deliveryDays": [
-            "Sun",
-            "Tue",
-            "Wed"
-          ],
-          "id": 2,
-          "email": "burgerbar@gmail.com",
-          "role": "customer"
-        }
-      ],
-      "products": [
-        {
-          "id": 1,
-          "productCode": "APP123",
-          "name": "Apples",
-          "mainUnit": {
-            "unit": "kg",
-            "price": "2.03"
-          },
-          "availability": "In Stock"
-        },
-        {
-          "productCode": "BAN746",
-          "name": "Bananas",
-          "mainUnit": {
-            "unit": "kg",
-            "price": "30"
-          },
-          "anotherUnits": null,
-          "availability": "In stock",
-          "id": 2
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "customerId": 2,
-      "items": [
-        {
-          "productId": 4,
-          "quantity": 10
-        },
-        {
-          "productId": 3,
-          "quantity": 10
-        }
-      ],
-      "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
-      "ordered": "2021-06-30T09:28:56.321-10:00",
-      "reqDelivery": "2014-02-01T09:28:56.321-10:00",
-      "isConfirmedStatus": true,
-      "address": {
-        "street": "Main Street 23",
-        "city": "1453 Zurich"
-      },
-      "customerData": [
-        {
-          "customerNo": "BB-788",
-          "name": "Burger Bar",
-          "address": "Metalistiv, 3",
-          "deliveryDays": [
-            "Sun",
-            "Tue",
-            "Wed"
-          ],
-          "id": 2,
-          "email": "burgerbar@gmail.com",
-          "role": "customer"
-        }
-      ],
-      "products": [
-        {
-          "productCode": "CUC101",
-          "name": "Cucumbers",
-          "mainUnit": {
-            "unit": "pound",
-            "price": "17"
-          },
-          "anotherUnits": [
-            {
-              "unit": "",
-              "price": 0
-            }
-          ],
-          "availability": "Discounted",
-          "id": 3
-        },
-        {
-          "productCode": "TOM803",
-          "name": "Tomatoes",
-          "mainUnit": {
-            "unit": "kg",
-            "price": "55"
-          },
-          "anotherUnits": null,
-          "availability": "In stock",
-          "id": 4
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "customerId": 1,
-      "items": [
-        {
-          "productId": 5,
-          "quantity": 10
-        },
-        {
-          "productId": 4,
-          "quantity": 10
-        }
-      ],
-      "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
-      "ordered": "2014-02-01T09:28:56.321-10:00",
-      "reqDelivery": "2014-02-01T09:28:56.321-10:00",
-      "isConfirmedStatus": true,
-      "address": {
-        "street": "Main Street 23",
-        "city": "1453 Zurich"
-      },
-      "customerData": [
-        {
-          "customerNo": "SB-123",
-          "name": "Sandwich Bar",
-          "address": "Shevchenko Street 123",
-          "deliveryDays": [
-            "Mon",
-            "Tue",
-            "Fri",
-            "Sat"
-          ],
-          "id": 1,
-          "email": "sandwichbar@gmail.com",
-          "role": "customer"
-        }
-      ],
-      "products": [
-        {
-          "productCode": "TOM803",
-          "name": "Tomatoes",
-          "mainUnit": {
-            "unit": "kg",
-            "price": "55"
-          },
-          "anotherUnits": null,
-          "availability": "In stock",
-          "id": 4
-        },
-        {
-          "productCode": "COR740",
-          "name": "Corn",
-          "mainUnit": {
-            "unit": "kg",
-            "price": "80"
-          },
-          "anotherUnits": null,
-          "availability": "In stock",
-          "id": 5
-        }
-      ]
-    }
-  ]
+  "orders": []
 }

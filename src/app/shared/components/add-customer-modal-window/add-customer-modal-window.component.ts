@@ -33,10 +33,6 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) private data,
               private http: HttpClient,
               private httpService: HttpService) {
-    this.store.select(customersSelector).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.allCustomers = data);
-    for(let i of this.allCustomers){
-      this.customersName.push(i.name)
-    }
   }
 
   private initDeliveryForm(){
@@ -53,10 +49,11 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
     this.customerForm = new FormGroup({
       customerNo: new FormControl(this.data ? this.data.customerNo : ''),
       name: new FormControl(this.data ? this.data.name : ''),
-      deliveryAddress: new FormControl(this.data ? this.data.address : '' ),
-      contactName: new FormControl(),
-      mobilePhone: new FormControl(),
-      notify: new FormControl(),
+      deliveryAddress: new FormControl(this.data ? this.data.deliveryAddress : '' ),
+      contactName: new FormControl( this.data? this.data.contactName : ''),
+      mobilePhone: new FormControl(this.data? this.data.mobilePhone: ''),
+      notify: new FormControl( this.data? this.data.notify: ''),
+      email: new FormControl( this.data? this.data.email: '')
     });
   }
 
@@ -72,13 +69,7 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
         this.deliveryDays.push(day);
       }
     }
-
-    const customer = {
-      customerNo: this.customerForm.value.customerNo,
-      name: this.customerForm.value.name,
-      address: this.customerForm.value.deliveryAddress,
-      deliveryDays: this.deliveryDays
-    };
+    const customer = Object.assign(this.customerForm.value,{deliveryDays: this.deliveryDays, role: 'customer'});
 
     (this.data) ? this.httpService.editCustomer(customer, this.data.id).subscribe() : this.httpService.addCustomer(customer).subscribe();
   }

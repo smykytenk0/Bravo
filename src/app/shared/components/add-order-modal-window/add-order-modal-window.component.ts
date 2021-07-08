@@ -10,26 +10,23 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./add-order-modal-window.component.scss']
 })
 export class AddOrderModalWindowComponent implements OnInit {
-
   role: string;
   orderForm: FormGroup;
   itemsForm: FormGroup;
   counterArr = [];
   counter: number = 2;
 
-  initItems(){
-    const itemsControl = this.counterArr.reduce((previous, current) => {
-      return {...previous,
-      [`item-${current}`]: new FormControl()
-      }
-    });
-    this.itemsForm = new FormGroup(itemsControl);
-    for(let i of this.counterArr){
-      console.log(`Item-${i}`);
-    }
+  addItemInForm(num) {
+    this.itemsForm.addControl(`item-${num}-productName`, new FormControl());
+    this.itemsForm.addControl(`item-${num}-quantity`, new FormControl())
   }
 
-  initOrderForm(){
+  deleteItemInForm(num){
+    this.itemsForm.removeControl(`item-${num}-productName`);
+    this.itemsForm.removeControl(`item-${num}-quantity`)
+  }
+
+  initOrderForm() {
     this.orderForm = new FormGroup({
       notes: new FormControl(),
       reqDelivery: new FormControl()
@@ -41,29 +38,32 @@ export class AddOrderModalWindowComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.itemsForm = new FormGroup({});
     this.store.select(roleSelector).subscribe(data => this.role = data);
     this.initOrderForm();
   }
 
   incrementCounter() {
+    this.addItemInForm(this.counter);
     this.counterArr.push(this.counter);
     this.counter++;
-    this.initItems();
   }
 
   addOrder() {
+    let items = [{
+      productId: this.itemsForm.value[`item-1-productName`],
+      quantity: this.itemsForm.value[`item-1-quantity`]
+    }];
+    for (let i of this.counterArr){
+      const item = {
+        productId: this.itemsForm.value[`item-${ i }-productName`],
+        quantity: this.itemsForm.value[`item-${ i }-quantity`]
+      };
+      items.push(item)
+    }
     const order = {
       customerId: 2,
-      items: [
-        {
-          productId: 1,
-          quantity: 10
-        },
-        {
-          productId: 2,
-          quantity: 10
-        }
-      ],
+      items: items,
       notes: this.orderForm.value.notes,
       ordered: new Date(),
       reqDelivery: this.orderForm.value.reqDelivery,
@@ -73,6 +73,7 @@ export class AddOrderModalWindowComponent implements OnInit {
   }
 
   deleteItem() {
+    this.deleteItemInForm(this.counter);
     this.counterArr.pop();
     this.counter--;
   }

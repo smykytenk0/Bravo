@@ -4,28 +4,28 @@
   <div class="item">
     <div class="input">
       <label for="item-1-productName">Item - 1 product name</label>
-      <input id="item-1-productName">
+      <input id="item-1-productName" formControlName="item-1-productName">
     </div>
     <div class="input">
       <label for="item-1-quantity">Item - 1 quantity</label>
-      <input id="item-1-quantity">
+      <input id="item-1-quantity" formControlName="item-1-quantity">
     </div>
   </div>
-  <div *ngFor = 'let i of counterArr' [formGroup]="itemsForm">
+  <form *ngFor = 'let i of counterArr' [formGroup]="itemsForm">
     <div class="item">
       <div class="input">
         <label for="item-{{i}}-productName">Item - {{i}} product name</label>
-        <input id="item-{{i}}-productName">
+        <input id="item-{{i}}-productName" formControlName="item-{{i}}-productName">
       </div>
       <div class="input">
         <label for="item-{{i}}-quantity">Item - {{i}} product name</label>
-        <input id="item-{{i}}-quantity" >
+        <input id="item-{{i}}-quantity" formControlName="item-{{i}}-quantity">
       </div>
       <div class="item-delete-button" (click)="deleteItem()">
         <app-delete-button ></app-delete-button>
       </div>
     </div>
-  </div>
+  </form>
   <div (click)="incrementCounter()"  class="addUnitButton">
     <div class="addUnitButtonImg"></div>
     <div class="addUnitButtonText">Add Item</div>

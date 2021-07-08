@@ -7,12 +7,11 @@
   </div>
   <div class="input">
     <label for="name">Name </label>
-    <input id="name" formControlName="name"  class="disabled-field" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of customersName" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
+    <input id="name" formControlName="name"  class="disabled-field">
+  </div>
+  <div class="input">
+    <label for="email">Email </label>
+    <input id="email" formControlName="email"  class="disabled-field">
   </div>
   <div class="input">
     <label for="address">Delivery Address </label>
