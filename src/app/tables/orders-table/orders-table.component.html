@@ -1,3 +1,9 @@
+<ng-container *ngIf="role=='customer'">
+  <div class="addButton">
+    <app-add [addBtnText]="'Add Order'" (click)="openAddOrderModalWindow()"></app-add>
+  </div>
+</ng-container>
+
 <div class="searchButtonContainer">
   <app-search-field [placeholder]="placeholder"></app-search-field>
   <button class="removeFiltersButton" (click)="removeAllFilters()">Remove all filters</button>
@@ -26,14 +32,16 @@
     <th mat-header-cell *matHeaderCellDef class="sortTh">
       <div class="sortTh">
         <div class="columnName"> Customer</div>
-        <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
-          <div class="sortSizeWrapper">
-            <img src="../../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
+        <ng-container *ngIf="role == 'admin'">
+          <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
+            <div class="sortSizeWrapper">
+              <img src="../../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
+            </div>
           </div>
-        </div>
-        <div *ngIf="isCustomersOpened" class="customerPicker">
-          <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
-        </div>
+          <div *ngIf="isCustomersOpened" class="customerPicker">
+            <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
+          </div>
+        </ng-container>
       </div>
     </th>
     <td mat-cell *matCellDef="let element"><div *ngFor="let customer of (element?.customerData) | keyvalue"> <div *ngFor = "let field of customer.value | keyvalue"><div *ngIf="(field.key == 'name')">{{field.value}}</div></div></div></td>

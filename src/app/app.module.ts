@@ -38,12 +38,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
 import { SharedModule } from './shared/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
+import { AddOrderModalWindowComponent } from './shared/components/add-order-modal-window/add-order-modal-window.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     SidenavComponent,
+    AddOrderModalWindowComponent,
   ],
   imports: [
     StoreModule.forRoot({
@@ -66,7 +68,8 @@ import { AuthReducer } from './store/auth/auth.reducer';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatSelectModule,
-    FormsModule,
+
+
     MatButtonModule,
     MatDialogModule,
     NgSelectModule,

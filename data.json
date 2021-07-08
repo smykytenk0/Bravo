@@ -111,7 +111,7 @@
       "notes": "+1 Bottle Coca Cola Please, Need to be delivered Today!",
       "ordered": "5/10/2021",
       "reqDelivery": "5/10/2021",
-      "isConfirmedStatus": true,
+      "isConfirmedStatus": false,
       "address": {
         "street": "Main Street 23",
         "city": "1453 Zurich"

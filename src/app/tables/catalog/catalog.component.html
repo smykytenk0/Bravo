@@ -1,8 +1,10 @@
-<div class="mainContentButtons">
-  <app-add [addBtnText]="addBtnText" (click)="openAddProductModalWindow()"></app-add>
+<ng-container *ngIf="role == 'admin'">
+  <div class="mainContentButtons">
+    <app-add [addBtnText]="addBtnText" (click)="openAddProductModalWindow()"></app-add>
 
-  <app-replace-catalog></app-replace-catalog>
-</div>
+    <app-replace-catalog></app-replace-catalog>
+  </div>
+</ng-container>
 
 <app-search-field [placeholder]="placeholder"></app-search-field>
 

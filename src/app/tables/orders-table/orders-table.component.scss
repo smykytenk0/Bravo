@@ -233,7 +233,6 @@ tr tr:last-child td {
   border-bottom: none;
 }
 
-
 .info {
   font-size: 16px;
   font-style: normal;
@@ -276,4 +275,10 @@ tr tr:last-child td {
 
 .reqDeliverySortTh {
   vertical-align: center;
+}
+
+.addButton app-add{
+  position: absolute;
+  right: 24px;
+  top: 24px;
 }

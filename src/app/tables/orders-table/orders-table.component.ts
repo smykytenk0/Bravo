@@ -17,6 +17,8 @@ import {
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
 import { emailSelector, loginStatusSelector, roleSelector } from '../../store/auth/auth.reducer';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOrderModalWindowComponent } from '../../shared/components/add-order-modal-window/add-order-modal-window.component';
 
 @Component({
   selector: 'app-orders-table',
@@ -78,7 +80,8 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
               private orders: OrdersService,
               private router: Router,
               private httpService: HttpService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -90,7 +93,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
     this.role == 'customer' ?
       this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
-      :this.refresh();
+      : this.refresh();
   }
 
   toggleDataPicker() {
@@ -126,7 +129,9 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
       let customersId = [];
       Object.values(data).map(item => customersId.push(item.id));
       this.customersId = customersId;
-      this.refresh({ isConfirmedStatus: this.requestStatus, customerId: customersId })
+      this.role == 'admin' ?
+        this.refresh({ isConfirmedStatus: this.requestStatus, customerId: customersId })
+        : this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id, isConfirmedStatus: this.requestStatus }))
     });
   }
 
@@ -149,6 +154,16 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
 
   removeAllFilters() {
     this.store.dispatch(OrdersActions.clearAllFilters());
-    this.refresh();
+    console.log(this.role);
+    this.role == 'customer' ?
+      this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
+      : this.refresh();
+  }
+
+  openAddOrderModalWindow() {
+    this.dialog.open(AddOrderModalWindowComponent).afterClosed().subscribe(() => {
+      this.refresh();
+    })
+
   }
 }

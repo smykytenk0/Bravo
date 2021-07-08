@@ -1,17 +1,14 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
 import { IProduct } from '../../store/interfaces/catalog.interfaces';
-import { select, Store } from '@ngrx/store';
-import { catalogProductsSelector } from '../../store/catalog/catalog.reducer';
+import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDeleteModalWindowComponent } from '../../shared/components/product-delete-modal-window/product-delete-modal-window.component';
 import { AddProductModalWindowComponent } from '../../shared/components/add-product-modal-window/add-product-modal-window.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { ICustomerData } from '../../store/interfaces/customers.interfacers';
 import { MatPaginator } from '@angular/material/paginator';
-import { first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/http.service';
-import { OrdersActions } from '../../store/orders/orders.actions';
 import { roleSelector } from '../../store/auth/auth.reducer';
 
 @Component({
