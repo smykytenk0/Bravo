@@ -26,7 +26,7 @@ export class HttpService {
     return this.http.get('http://localhost:3000/products');
   }
 
-  addProduct(product: IProduct) {
+  addProduct(product) {
     return this.http.post('http://localhost:3000/products', product);
   }
 
@@ -51,12 +51,7 @@ export class HttpService {
   }
 
   getOrders(params = {}) {
-    return this.http.get(`http://localhost:3000/orders`, {params: params}).pipe(tap(item => {
-      for (let i in item) {
-        this.getCustomerById(item[i]);
-        this.getProductById(item[i]);
-      }
-    }));
+    return this.http.get(`http://localhost:3000/orders`, {params: params})
   }
 
   addOrder(order){

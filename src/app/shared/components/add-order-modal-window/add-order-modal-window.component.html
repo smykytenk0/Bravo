@@ -3,23 +3,23 @@
   <div class="modalTitle">Add Order</div>
   <div class="item">
     <div class="input">
-      <label for="item-1-productName">Item - 1 product name</label>
-      <input id="item-1-productName" formControlName="item-1-productName">
+      <label for="item1productName">Item - 1 product name</label>
+      <input id="item1productName" formControlName="item1productName">
     </div>
     <div class="input">
-      <label for="item-1-quantity">Item - 1 quantity</label>
-      <input id="item-1-quantity" formControlName="item-1-quantity">
+      <label for="item1quantity">Item - 1 quantity</label>
+      <input id="item1quantity" formControlName="item1quantity">
     </div>
   </div>
   <form *ngFor = 'let i of counterArr' [formGroup]="itemsForm">
     <div class="item">
       <div class="input">
-        <label for="item-{{i}}-productName">Item - {{i}} product name</label>
-        <input id="item-{{i}}-productName" formControlName="item-{{i}}-productName">
+        <label for="item{{i}}productName">Item - {{i}} product name</label>
+        <input id="item{{i}}productName" formControlName="item{{i}}productName">
       </div>
       <div class="input">
-        <label for="item-{{i}}-quantity">Item - {{i}} product name</label>
-        <input id="item-{{i}}-quantity" formControlName="item-{{i}}-quantity">
+        <label for="item{{i}}quantity">Item - {{i}} product name</label>
+        <input id="item{{i}}quantity" formControlName="item{{i}}quantity">
       </div>
       <div class="item-delete-button" (click)="deleteItem()">
         <app-delete-button ></app-delete-button>

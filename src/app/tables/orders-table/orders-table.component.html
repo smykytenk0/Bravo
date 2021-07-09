@@ -44,12 +44,12 @@
         </ng-container>
       </div>
     </th>
-    <td mat-cell *matCellDef="let element"><div *ngFor="let customer of (element?.customerData) | keyvalue"> <div *ngFor = "let field of customer.value | keyvalue"><div *ngIf="(field.key == 'name')">{{field.value}}</div></div></div></td>
+    <td mat-cell *matCellDef="let element"> {{element.customerData.name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="customerNo">
     <th class="mainTableTh" mat-header-cell *matHeaderCellDef> Customer No</th>
-    <td mat-cell *matCellDef="let element"><div *ngFor="let customer of (element?.customerData) | keyvalue"> <div *ngFor = "let field of customer.value | keyvalue"><div *ngIf="(field.key == 'customerNo')">{{field.value}}</div></div></div> </td>
+    <td mat-cell *matCellDef="let element"> {{element.customerData.customerNo}} </td>
   </ng-container>
 
   <ng-container matColumnDef="items">
@@ -140,7 +140,7 @@
           </div>
           <div class="address">
             <div class="infoTitle">Delivery Address:</div>
-            <div class="info">{{ element.address.street }}, {{element.address.city}}</div>
+            <div class="info">{{ element.customerData.deliveryAddress}}</div>
           </div>
           <a class="print" target="_blank" (click)="openPrint(element)">
             <img src="../../../assets/print.png" height="20" width="20"/>
@@ -176,6 +176,7 @@
 
 <div *ngIf="(ordersData).length == 0" class="emptyTable">
   <app-empty-table></app-empty-table>
+  <app-add [addBtnText]="'Add Order'" (click)="openAddOrderModalWindow()"></app-add>
 </div>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

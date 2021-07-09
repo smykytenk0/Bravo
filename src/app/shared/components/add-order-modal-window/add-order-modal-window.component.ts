@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { roleSelector } from '../../../store/auth/auth.reducer';
+import { emailSelector, roleSelector } from '../../../store/auth/auth.reducer';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 
@@ -15,15 +15,17 @@ export class AddOrderModalWindowComponent implements OnInit {
   itemsForm: FormGroup;
   counterArr = [];
   counter: number = 2;
+  email: string;
+  customerData: any;
 
   addItemInForm(num) {
-    this.itemsForm.addControl(`item-${num}-productName`, new FormControl());
-    this.itemsForm.addControl(`item-${num}-quantity`, new FormControl())
+    this.itemsForm.addControl(`item${ num }productName`, new FormControl());
+    this.itemsForm.addControl(`item${ num }quantity`, new FormControl())
   }
 
-  deleteItemInForm(num){
-    this.itemsForm.removeControl(`item-${num}-productName`);
-    this.itemsForm.removeControl(`item-${num}-quantity`)
+  deleteItemFromForm(num) {
+    this.itemsForm.removeControl(`item${ num }productName`);
+    this.itemsForm.removeControl(`item${ num }quantity`)
   }
 
   initOrderForm() {
@@ -33,14 +35,19 @@ export class AddOrderModalWindowComponent implements OnInit {
     });
   }
 
-  constructor(private store: Store, private httpService: HttpService) {
+  constructor(private store: Store,
+              private httpService: HttpService) {
   }
 
-
   ngOnInit(): void {
-    this.itemsForm = new FormGroup({});
+    this.itemsForm = new FormGroup({
+      item1productName: new FormControl(),
+      item1quantity: new FormControl()
+    });
     this.store.select(roleSelector).subscribe(data => this.role = data);
     this.initOrderForm();
+    this.store.select(emailSelector).subscribe(data => this.email = data);
+    this.httpService.getCustomers({ email: this.email }).subscribe(data => this.customerData = data);
   }
 
   incrementCounter() {
@@ -51,29 +58,29 @@ export class AddOrderModalWindowComponent implements OnInit {
 
   addOrder() {
     let items = [{
-      productId: this.itemsForm.value[`item-1-productName`],
-      quantity: this.itemsForm.value[`item-1-quantity`]
+      productId: this.itemsForm.value[`item1productName`],
+      quantity: this.itemsForm.value[`item1quantity`]
     }];
-    for (let i of this.counterArr){
+    for (let i of this.counterArr) {
       const item = {
-        productId: this.itemsForm.value[`item-${ i }-productName`],
-        quantity: this.itemsForm.value[`item-${ i }-quantity`]
+        productId: this.itemsForm.value[`item${ i }productName`],
+        quantity: this.itemsForm.value[`item${ i }quantity`]
       };
       items.push(item)
     }
-    const order = {
-      customerId: 2,
+
+    const order = Object.assign(this.orderForm.value, {
+      customerData: this.customerData[0],
       items: items,
-      notes: this.orderForm.value.notes,
+      role: 'customer',
       ordered: new Date(),
-      reqDelivery: this.orderForm.value.reqDelivery,
-      isConfirmedStatus: false,
-    };
+      isConfirmedStatus: false
+    });
     this.httpService.addOrder(order).subscribe();
   }
 
   deleteItem() {
-    this.deleteItemInForm(this.counter);
+    this.deleteItemFromForm(this.counter);
     this.counterArr.pop();
     this.counter--;
   }

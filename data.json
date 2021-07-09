@@ -3,11 +3,12 @@
     {
       "productCode": "CUC101",
       "name": "Cucumbers",
-      "mainUnit": {
-        "unit": "kg",
-        "price": "15"
-      },
-      "anotherUnits": null,
+      "units": [
+        {
+          "unit": "kg",
+          "price": 12.03
+        }
+      ],
       "availability": "In stock",
       "id": 1
     }
@@ -49,7 +50,58 @@
       ],
       "role": "customer",
       "id": 3
+    },
+    {
+      "customerNo": "PH-987",
+      "name": "Pizza House",
+      "deliveryAddress": "Koroliova, 17, Kyiv",
+      "contactName": "Olexander",
+      "mobilePhone": "+3806675223121",
+      "notify": true,
+      "email": "pizzahouse@gmail.com",
+      "deliveryDays": [
+        "Tue",
+        "Sat"
+      ],
+      "role": "customer",
+      "id": 4
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "notes": "Deliver it as fast as it possible",
+      "reqDelivery": "2021-08-15",
+      "customerData": {
+        "customerNo": "BB-788",
+        "name": "Burger Bar",
+        "deliveryAddress": "Solomianska, 10, Kyiv",
+        "contactName": "Olena",
+        "mobilePhone": "+380676767865",
+        "notify": true,
+        "email": "burgerbar@gmail.com",
+        "deliveryDays": [
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed"
+        ],
+        "role": "customer",
+        "id": 2
+      },
+      "items": [
+        {
+          "productId": null,
+          "quantity": null
+        },
+        {
+          "productId": "Bananas",
+          "quantity": "80"
+        }
+      ],
+      "role": "customer",
+      "ordered": "2021-07-08T14:53:30.390Z",
+      "isConfirmedStatus": true,
+      "id": 1
+    }
+  ]
 }

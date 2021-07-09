@@ -11,30 +11,30 @@
   </div>
   <div class="mainUnit" >
     <div class="unitName input">
-      <label for="mainUnitName">Unit </label>
-      <input id="mainUnitName" formControlName="mainUintName">
+      <label for="unit1">Unit </label>
+      <input id="unit1" formControlName="unit1">
     </div>
     <div class="unitPrice input">
-      <label for="mainUnitPrice">Price (optional) </label>
-      <input id="mainUnitPrice" formControlName="mainUnitPrice">
+      <label for="price1">Price (optional) </label>
+      <input id="price1" formControlName="price1">
     </div>
   </div>
  <form [formGroup]="anotherUnitsForm">
-   <div class="additionalUnits" *ngFor="let unit of anotherUnits">
+   <div class="additionalUnits" *ngFor="let unit of unitsArr">
      <div class="unitName input">
-       <label for="unit{{anotherUnits.indexOf(unit)}}">Unit-{{anotherUnits.indexOf(unit) + 1}} </label>
-       <input id="unit{{anotherUnits.indexOf(unit)}}" formControlName="Unit-{{anotherUnits.indexOf(unit) + 1}}">
+       <label for="unit{{unit}}">Unit-{{unit}} </label>
+       <input id="unit{{unit}}" formControlName="unit{{unit}}">
      </div>
      <div class="unitPrice input">
-       <label for="price{{anotherUnits.indexOf(unit)}}">Price (optional) </label>
-       <input id="price{{anotherUnits.indexOf(unit)}}" formControlName="Price-{{anotherUnits.indexOf(unit) + 1}}">
+       <label for="price{{unit}}">Price (optional) </label>
+       <input id="price{{unit}}" formControlName="price{{unit}}">
      </div>
-     <div (click)="deleteUnit(unit)">
+     <div (click)="deleteUnit()">
        <app-delete-button ></app-delete-button>
      </div>
    </div>
  </form>
-  <div *ngIf="anotherUnits.length<(maxUnitsAmount-1); else maxUnitsAmountText" class="addUnitButton" (click)="addUnit()">
+  <div *ngIf="unitsArr.length<(maxUnitsAmount-1); else maxUnitsAmountText" class="addUnitButton" (click)="addUnit()">
     <div class="addUnitButtonImg"></div>
     <div class="addUnitButtonText">Add Unit</div>
   </div>

@@ -42,7 +42,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any = [];
-  ordersData: any;
+  ordersData: any = [];
   filteredCustomers: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OrdersData | null;
@@ -56,7 +56,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   endDate: Date;
   customer: object;
   selectedCustomersArray: string[];
-  customersId: number[];
+  customerEmails: string[];
   email: string;
   role: string;
 
@@ -92,7 +92,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
     this.role == 'customer' ?
-      this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
+      this.refresh({ customerData: { email: this.email } })
       : this.refresh();
   }
 
@@ -126,12 +126,16 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     }
     this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
     this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
-      let customersId = [];
-      Object.values(data).map(item => customersId.push(item.id));
-      this.customersId = customersId;
+      let customerEmails = [];
+      Object.values(data).map(item => customerEmails.push(item.email));
+      this.customerEmails = customerEmails;
+      console.log(customerEmails, this.customerEmails);
       this.role == 'admin' ?
-        this.refresh({ isConfirmedStatus: this.requestStatus, customerId: customersId })
-        : this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id, isConfirmedStatus: this.requestStatus }))
+        this.refresh({ isConfirmedStatus: this.requestStatus})
+        : this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({
+          customerId: data[0].id,
+          isConfirmedStatus: this.requestStatus
+        }))
     });
   }
 

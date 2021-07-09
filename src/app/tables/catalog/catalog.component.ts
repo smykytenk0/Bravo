@@ -48,14 +48,6 @@ export class CatalogComponent implements OnDestroy, OnInit {
       this.role = data;
       this.role == 'admin'? this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'] : this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'lastEmptyColumn']
     });
-
-  }
-
-  transformUnits(element: IProduct): string {
-    if (element.anotherUnits) {
-      return `${ element.mainUnit.unit } +${ element.anotherUnits.length } more`
-    }
-    return `${ element.mainUnit.unit }`
   }
 
   openDeleteModalWindow(element) {
