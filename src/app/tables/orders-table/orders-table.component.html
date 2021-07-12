@@ -154,11 +154,11 @@
             <td>Unit</td>
             <td>Quantity</td>
           </tr>
-          <tr *ngFor="let item of (element.products)">
+          <tr *ngFor="let item of (element.items)">
             <td>{{ item.productCode }}</td>
             <td>{{ item.name }}</td>
-            <td>{{ item.mainUnit.unit }}</td>
-            <td>{{ item.mainUnit.price }}</td>
+            <td>{{ item.units[0].unit }}</td>
+            <td>{{ item.quantity }}</td>
           </tr>
         </table>
       </div>
@@ -200,6 +200,8 @@
 </ng-template>
 
 <button (click)="filterData()">Filter</button>
+
+
 
 
 

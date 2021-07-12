@@ -14,12 +14,10 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./add-product-modal-window.component.scss']
 })
 export class AddProductModalWindowComponent implements OnInit, OnDestroy{
-  anotherUnits: IUnit[] = [];
   maxUnitsAmount: number = 3;
-  anotherUnitsForm: FormGroup;
   unitsArr: number[] = [];
   unitsForm: FormGroup;
-  counter: number = 1;
+  counter: number = 2;
   productForm: FormGroup;
   private unsubscribeAll: Subject<any> = new Subject<any>();
   constructor(private dialog: MatDialog,
@@ -27,6 +25,10 @@ export class AddProductModalWindowComponent implements OnInit, OnDestroy{
               @Inject(MAT_DIALOG_DATA) private data: IProduct,
               private http: HttpClient,
               private httpService: HttpService) {
+    this.unitsForm = new FormGroup({
+      unit1: new FormControl(),
+      price1: new FormControl()
+    });
   }
 
   addUnitInForm(num){
@@ -51,21 +53,26 @@ export class AddProductModalWindowComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.initProductForm();
-    this.unitsForm = new FormGroup({
-      unit1: new FormControl(),
-      price1: new FormControl()
-    });
   }
 
   addNewProduct() {
-    const product = Object.assign(this.productForm, {units: this.unitsForm.value});
-    console.log(product);
+    let units = [{
+      unit: this.unitsForm.value.unit1,
+      price: this.unitsForm.value.price1
+    }];
+    for (let i of this.unitsArr){
+      const unit = {
+        unit: this.unitsForm.value[`unit${i}`],
+        price: this.unitsForm.value[`price${i}`]
+      };
+      units.push(unit)
+    }
+    const product = Object.assign(this.productForm.value, {units: units});
     this.httpService.addProduct(product).subscribe();
     this.dialog.open(SuccessfulProductAddingComponent);
     setTimeout(()=>{
       this.dialog.closeAll()
     },2000);
-
   }
 
   addUnit() {

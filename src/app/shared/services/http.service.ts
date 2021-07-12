@@ -22,8 +22,8 @@ export class HttpService {
     return this.http.put('http://localhost:3000/customers/' + id, customer);
   }
 
-  getCatalog() {
-    return this.http.get('http://localhost:3000/products');
+  getCatalog(params = {}) {
+    return this.http.get('http://localhost:3000/products', {params: params});
   }
 
   addProduct(product) {

@@ -19,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 import { emailSelector, loginStatusSelector, roleSelector } from '../../store/auth/auth.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrderModalWindowComponent } from '../../shared/components/add-order-modal-window/add-order-modal-window.component';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders-table',
@@ -42,6 +43,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any = [];
+  uniqueProductCodes: any = [];
   ordersData: any = [];
   filteredCustomers: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,7 +63,12 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   role: string;
 
   refresh(params = {}) {
-    this.httpService.getOrders(params).subscribe(data => {
+    (this.role == 'customer' ? this.httpService.getOrders(params)
+      .pipe(
+        map(item => Object.values(item)
+          .filter(item => item.customerData.email == this.email)
+        )
+      ) : this.httpService.getOrders(params)).subscribe(data => {
       this.ordersData = data;
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
@@ -72,6 +79,14 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     for (let i of array) {
       if (this.uniqueCustomers.indexOf(i.name) == -1) {
         this.uniqueCustomers.push(i.name);
+      }
+    }
+  }
+
+  getUniqueProductNames(array: any) {
+    for (let i of array) {
+      if (this.uniqueProductCodes.indexOf(i.productCode) == -1) {
+        this.uniqueProductCodes.push(i.productCode);
       }
     }
   }
@@ -88,6 +103,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.store.select(roleSelector).subscribe(data => this.role = data);
     this.store.select(emailSelector).subscribe(data => this.email = data);
     this.httpService.getCustomers({ role: 'customer' }).subscribe(data => this.getUniqueCustomers(data));
+    this.httpService.getCatalog({ availability: 'In stock' }).subscribe(data => this.getUniqueProductNames(data));
     this.store.select(statusSelector).subscribe(data => this.status = data);
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
@@ -129,9 +145,8 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
       let customerEmails = [];
       Object.values(data).map(item => customerEmails.push(item.email));
       this.customerEmails = customerEmails;
-      console.log(customerEmails, this.customerEmails);
       this.role == 'admin' ?
-        this.refresh({ isConfirmedStatus: this.requestStatus})
+        this.refresh({ isConfirmedStatus: this.requestStatus })
         : this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({
           customerId: data[0].id,
           isConfirmedStatus: this.requestStatus
@@ -165,7 +180,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   }
 
   openAddOrderModalWindow() {
-    this.dialog.open(AddOrderModalWindowComponent).afterClosed().subscribe(() => {
+    this.dialog.open(AddOrderModalWindowComponent, { data: this.uniqueProductCodes }).afterClosed().subscribe(() => {
       this.refresh();
     })
 

@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { emailSelector, roleSelector } from '../../../store/auth/auth.reducer';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { from, Observable, of } from 'rxjs';
+import { concat, map, mergeMap, switchMap, tap, toArray } from 'rxjs/operators';
+
+interface AnyObj {
+  [key: string]: any
+}
 
 @Component({
   selector: 'app-add-order-modal-window',
@@ -17,14 +24,16 @@ export class AddOrderModalWindowComponent implements OnInit {
   counter: number = 2;
   email: string;
   customerData: any;
+  uniqueProducts: string[] = [];
+  items: any = [];
 
   addItemInForm(num) {
-    this.itemsForm.addControl(`item${ num }productName`, new FormControl());
+    this.itemsForm.addControl(`item${ num }productCode`, new FormControl());
     this.itemsForm.addControl(`item${ num }quantity`, new FormControl())
   }
 
   deleteItemFromForm(num) {
-    this.itemsForm.removeControl(`item${ num }productName`);
+    this.itemsForm.removeControl(`item${ num }productCode`);
     this.itemsForm.removeControl(`item${ num }quantity`)
   }
 
@@ -36,12 +45,14 @@ export class AddOrderModalWindowComponent implements OnInit {
   }
 
   constructor(private store: Store,
-              private httpService: HttpService) {
+              private httpService: HttpService,
+              @Inject(MAT_DIALOG_DATA) private data) {
   }
 
   ngOnInit(): void {
+    this.uniqueProducts = this.data;
     this.itemsForm = new FormGroup({
-      item1productName: new FormControl(),
+      item1productCode: new FormControl(),
       item1quantity: new FormControl()
     });
     this.store.select(roleSelector).subscribe(data => this.role = data);
@@ -56,27 +67,32 @@ export class AddOrderModalWindowComponent implements OnInit {
     this.counter++;
   }
 
-  addOrder() {
-    let items = [{
-      productId: this.itemsForm.value[`item1productName`],
-      quantity: this.itemsForm.value[`item1quantity`]
-    }];
-    for (let i of this.counterArr) {
-      const item = {
-        productId: this.itemsForm.value[`item${ i }productName`],
-        quantity: this.itemsForm.value[`item${ i }quantity`]
-      };
-      items.push(item)
-    }
+  getProductByProductCode(index: any) {
+    console.log(this.itemsForm.value[`item${ index }quantity`]);
+    return this.httpService.getCatalog({ productCode: this.itemsForm.value[`item${ index }productCode`] }).pipe(map(item => Object.assign(item[0], {quantity: this.itemsForm.value[`item${ index }quantity`]})))
+  }
 
+  addOrder() {
+    this.counterArr.unshift(1);
+    from(this.counterArr)
+      .pipe(
+        mergeMap(item => this.getProductByProductCode(item))
+      )
+      .subscribe(data => {
+        console.log(data);
+        this.items.push(data);
+      });
     const order = Object.assign(this.orderForm.value, {
       customerData: this.customerData[0],
-      items: items,
+      items: this.items,
       role: 'customer',
       ordered: new Date(),
       isConfirmedStatus: false
     });
-    this.httpService.addOrder(order).subscribe();
+    setTimeout(() => {
+        this.httpService.addOrder(order).subscribe();
+      }, 1000
+    )
   }
 
   deleteItem() {

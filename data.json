@@ -11,6 +11,34 @@
       ],
       "availability": "In stock",
       "id": 1
+    },
+    {
+      "productCode": "TOM803",
+      "name": "Tomatoes",
+      "availability": "Out of stock",
+      "units": [
+        {
+          "unit": "kg",
+          "price": "30"
+        },
+        {
+          "unit": "pound",
+          "price": "25"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "productCode": "POT203",
+      "name": "Potato",
+      "availability": "In stock",
+      "units": [
+        {
+          "unit": "kg",
+          "price": "15"
+        }
+      ],
+      "id": 3
     }
   ],
   "customers": [
@@ -65,12 +93,28 @@
       ],
       "role": "customer",
       "id": 4
+    },
+    {
+      "customerNo": "IM 209",
+      "name": "Il Molino",
+      "deliveryAddress": "Peremogy, 45, Kyiv",
+      "contactName": "Olexander",
+      "mobilePhone": "+380667578846",
+      "notify": true,
+      "email": "inmolino@gmail.com",
+      "deliveryDays": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "role": "customer",
+      "id": 5
     }
   ],
   "orders": [
     {
       "notes": "Deliver it as fast as it possible",
-      "reqDelivery": "2021-08-15",
+      "reqDelivery": "2021-07-13",
       "customerData": {
         "customerNo": "BB-788",
         "name": "Burger Bar",
@@ -90,17 +134,35 @@
       },
       "items": [
         {
-          "productId": null,
-          "quantity": null
+          "productCode": "CUC101",
+          "name": "Cucumbers",
+          "units": [
+            {
+              "unit": "kg",
+              "price": 12.03
+            }
+          ],
+          "availability": "In stock",
+          "id": 1,
+          "quantity": "50"
         },
         {
-          "productId": "Bananas",
+          "productCode": "POT203",
+          "name": "Potato",
+          "availability": "In stock",
+          "units": [
+            {
+              "unit": "kg",
+              "price": "15"
+            }
+          ],
+          "id": 3,
           "quantity": "80"
         }
       ],
       "role": "customer",
-      "ordered": "2021-07-08T14:53:30.390Z",
-      "isConfirmedStatus": true,
+      "ordered": "2021-07-12T15:37:43.648Z",
+      "isConfirmedStatus": false,
       "id": 1
     }
   ]

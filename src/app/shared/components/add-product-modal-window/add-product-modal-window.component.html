@@ -9,17 +9,17 @@
     <label for="name">Name </label>
     <input id="name" formControlName="name">
   </div>
-  <div class="mainUnit" >
-    <div class="unitName input">
-      <label for="unit1">Unit </label>
-      <input id="unit1" formControlName="unit1">
-    </div>
-    <div class="unitPrice input">
-      <label for="price1">Price (optional) </label>
-      <input id="price1" formControlName="price1">
-    </div>
-  </div>
- <form [formGroup]="anotherUnitsForm">
+ <form [formGroup]="unitsForm">
+   <div class="mainUnit" >
+     <div class="unitName input">
+       <label for="unit1">Unit </label>
+       <input id="unit1" formControlName="unit1">
+     </div>
+     <div class="unitPrice input">
+       <label for="price1">Price (optional) </label>
+       <input id="price1" formControlName="price1">
+     </div>
+   </div>
    <div class="additionalUnits" *ngFor="let unit of unitsArr">
      <div class="unitName input">
        <label for="unit{{unit}}">Unit-{{unit}} </label>

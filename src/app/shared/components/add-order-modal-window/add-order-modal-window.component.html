@@ -1,21 +1,31 @@
 <form class="modalWindow" [formGroup]="orderForm">
   <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close-black.png"></button>
   <div class="modalTitle">Add Order</div>
-  <div class="item">
-    <div class="input">
-      <label for="item1productName">Item - 1 product name</label>
-      <input id="item1productName" formControlName="item1productName">
-    </div>
-    <div class="input">
-      <label for="item1quantity">Item - 1 quantity</label>
-      <input id="item1quantity" formControlName="item1quantity">
-    </div>
-  </div>
-  <form *ngFor = 'let i of counterArr' [formGroup]="itemsForm">
+  <form [formGroup]="itemsForm">
     <div class="item">
       <div class="input">
-        <label for="item{{i}}productName">Item - {{i}} product name</label>
-        <input id="item{{i}}productName" formControlName="item{{i}}productName">
+        <label for="item1productCode">Item - 1 product code</label>
+        <input id="item1productCode" formControlName="item1productCode"  [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of uniqueProducts" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+      <div class="input">
+        <label for="item1quantity">Item - 1 quantity</label>
+        <input id="item1quantity" formControlName="item1quantity">
+      </div>
+    </div>
+    <div class="item" *ngFor = 'let i of counterArr'>
+      <div class="input">
+        <label for="item{{i}}productCode">Item - {{i}} product name</label>
+        <input id="item{{i}}productCode" formControlName="item{{i}}productCode" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of uniqueProducts" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
       </div>
       <div class="input">
         <label for="item{{i}}quantity">Item - {{i}} product name</label>
@@ -47,3 +57,4 @@
     Add Product
   </button>
 </div>
+<div id="message"></div>
