@@ -104,7 +104,6 @@ th.mat-header-cell{
 }
 
 .modalWindow{
-  max-width: 26vw;
   padding: 22px 24px;
   background-color: white;
   position: relative;
@@ -176,6 +175,20 @@ th.mat-header-cell{
     letter-spacing: 0.03em;
     text-align: left;
     color: #616161;
+  }
+
+  & select{
+    border: 1px solid #A1A1A1;
+    border-radius: 8px;
+    height: 48px;
+    padding-left: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.0168em;
+    text-align: left;
+    outline: none;
   }
 
   & input{

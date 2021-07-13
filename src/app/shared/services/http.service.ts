@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICustomerData } from '../../store/interfaces/customers.interfacers';
-import { IProduct } from '../../store/interfaces/catalog.interfaces';
-import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {

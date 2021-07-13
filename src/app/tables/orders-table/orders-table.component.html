@@ -152,12 +152,14 @@
             <td>ProductCode</td>
             <td>Product</td>
             <td>Unit</td>
+            <td>Price</td>
             <td>Quantity</td>
           </tr>
           <tr *ngFor="let item of (element.items)">
             <td>{{ item.productCode }}</td>
             <td>{{ item.name }}</td>
-            <td>{{ item.units[0].unit }}</td>
+            <td>{{ item.activeUnit.unit }}</td>
+            <td>{{ item.activeUnit.price }}</td>
             <td>{{ item.quantity }}</td>
           </tr>
         </table>

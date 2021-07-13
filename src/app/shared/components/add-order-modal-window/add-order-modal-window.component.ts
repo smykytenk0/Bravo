@@ -26,15 +26,20 @@ export class AddOrderModalWindowComponent implements OnInit {
   customerData: any;
   uniqueProducts: string[] = [];
   items: any = [];
+  unitsForEachItem: any = [];
+  unitPrices: number[] = [0];
+  activeUnit: any = [];
 
   addItemInForm(num) {
     this.itemsForm.addControl(`item${ num }productCode`, new FormControl());
-    this.itemsForm.addControl(`item${ num }quantity`, new FormControl())
+    this.itemsForm.addControl(`item${ num }quantity`, new FormControl());
+    this.itemsForm.addControl(`item${ num }unit`, new FormControl({ value: '', disabled: true }));
   }
 
   deleteItemFromForm(num) {
     this.itemsForm.removeControl(`item${ num }productCode`);
-    this.itemsForm.removeControl(`item${ num }quantity`)
+    this.itemsForm.removeControl(`item${ num }quantity`);
+    this.itemsForm.removeControl(`item${ num }unit`);
   }
 
   initOrderForm() {
@@ -53,7 +58,8 @@ export class AddOrderModalWindowComponent implements OnInit {
     this.uniqueProducts = this.data;
     this.itemsForm = new FormGroup({
       item1productCode: new FormControl(),
-      item1quantity: new FormControl()
+      item1quantity: new FormControl(),
+      item1unit: new FormControl({ value: '', disabled: true }),
     });
     this.store.select(roleSelector).subscribe(data => this.role = data);
     this.initOrderForm();
@@ -62,6 +68,7 @@ export class AddOrderModalWindowComponent implements OnInit {
   }
 
   incrementCounter() {
+    this.unitPrices.push(0);
     this.addItemInForm(this.counter);
     this.counterArr.push(this.counter);
     this.counter++;
@@ -69,7 +76,12 @@ export class AddOrderModalWindowComponent implements OnInit {
 
   getProductByProductCode(index: any) {
     console.log(this.itemsForm.value[`item${ index }quantity`]);
-    return this.httpService.getCatalog({ productCode: this.itemsForm.value[`item${ index }productCode`] }).pipe(map(item => Object.assign(item[0], {quantity: this.itemsForm.value[`item${ index }quantity`]})))
+    return this.httpService.getCatalog({ productCode: this.itemsForm.value[`item${ index }productCode`] }).pipe(map(item => {
+      return Object.assign(item[0], {
+        quantity: this.itemsForm.value[`item${ index }quantity`],
+        activeUnit: this.activeUnit[index - 1]
+      })
+    }))
   }
 
   addOrder() {
@@ -92,12 +104,22 @@ export class AddOrderModalWindowComponent implements OnInit {
     setTimeout(() => {
         this.httpService.addOrder(order).subscribe();
       }, 1000
-    )
+    );
   }
 
   deleteItem() {
     this.deleteItemFromForm(this.counter);
     this.counterArr.pop();
     this.counter--;
+  }
+
+  getUnits(option, index = 0) {
+    this.itemsForm.controls[`item${ index + 1 }unit`].enable();
+    this.httpService.getCatalog({ productCode: option }).subscribe(data => this.unitsForEachItem[index] = data[0].units)
+  }
+
+  changePrice(index = 0) {
+    this.activeUnit[index] = this.unitsForEachItem[index].filter(item => item.unit == this.itemsForm.value[`item${ index + 1 }unit`])[0];
+    this.unitPrices[index] = this.activeUnit[index].price;
   }
 }

@@ -144,11 +144,11 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
       let customerEmails = [];
       Object.values(data).map(item => customerEmails.push(item.email));
+      console.log(customerEmails);
       this.customerEmails = customerEmails;
       this.role == 'admin' ?
         this.refresh({ isConfirmedStatus: this.requestStatus })
         : this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({
-          customerId: data[0].id,
           isConfirmedStatus: this.requestStatus
         }))
     });

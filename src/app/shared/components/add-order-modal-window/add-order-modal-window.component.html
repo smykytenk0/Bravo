@@ -1,16 +1,28 @@
 <form class="modalWindow" [formGroup]="orderForm">
   <button class="modalCloseBtn" mat-dialog-close><img src="../../../../assets/close-black.png"></button>
   <div class="modalTitle">Add Order</div>
-  <form [formGroup]="itemsForm">
+  <form [formGroup]="itemsForm" class="small-field">
     <div class="item">
       <div class="input">
         <label for="item1productCode">Item - 1 product code</label>
         <input id="item1productCode" formControlName="item1productCode"  [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="getUnits($event.option.value)">
           <mat-option *ngFor="let option of uniqueProducts" [value]="option">
             {{option}}
           </mat-option>
         </mat-autocomplete>
+      </div>
+      <div class="input">
+        <label for="item1unit">Item - 1 unit</label>
+        <select id="item1unit" formControlName="item1unit" (change)="changePrice()">
+          <ng-container *ngFor="let unit of unitsForEachItem[0]">
+            <option>{{unit.unit}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="input">
+        <label for="item1price">Item - 1 price</label>
+        <input id="item1price" [value]="unitPrices[0]">
       </div>
       <div class="input">
         <label for="item1quantity">Item - 1 quantity</label>
@@ -21,11 +33,23 @@
       <div class="input">
         <label for="item{{i}}productCode">Item - {{i}} product name</label>
         <input id="item{{i}}productCode" formControlName="item{{i}}productCode" [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="getUnits($event.option.value, i-1)">
           <mat-option *ngFor="let option of uniqueProducts" [value]="option">
             {{option}}
           </mat-option>
         </mat-autocomplete>
+      </div>
+      <div class="input">
+        <label for="item{{i}}unit">Item - {{i}} unit</label>
+        <select id="item{{i}}unit" formControlName="item{{i}}unit" (change)="changePrice(i-1)">
+          <ng-container *ngFor="let unit of unitsForEachItem[i-1]">
+            <option (select)="changePrice(i-1)">{{unit.unit}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="input">
+        <label for="item{{i}}price">Item - 1 price</label>
+        <input id="item{{i}}price" [value]="unitPrices[i-1]">
       </div>
       <div class="input">
         <label for="item{{i}}quantity">Item - {{i}} product name</label>
