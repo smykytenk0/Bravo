@@ -120,6 +120,7 @@ export class AddOrderModalWindowComponent implements OnInit {
 
   changePrice(index = 0) {
     this.activeUnit[index] = this.unitsForEachItem[index].filter(item => item.unit == this.itemsForm.value[`item${ index + 1 }unit`])[0];
+    console.log(this.unitsForEachItem[index].filter(item => item.unit == this.itemsForm.value[`item${index + 1}unit`])[0]);
     this.unitPrices[index] = this.activeUnit[index].price;
   }
 }

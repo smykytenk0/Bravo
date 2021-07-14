@@ -5,7 +5,7 @@
 </ng-container>
 
 <div class="searchButtonContainer">
-  <app-search-field [placeholder]="placeholder"></app-search-field>
+  <app-search-field [placeholder]="placeholder" (currentSearch)="takeCurrentSearch($event)"></app-search-field>
   <button class="removeFiltersButton" (click)="removeAllFilters()">Remove all filters</button>
 </div>
 
@@ -115,7 +115,7 @@
           <img src="../../../assets/sort-size.png" class="sort-size" (click)="openStatusSelect()"/>
         </div>
         <div *ngIf="isStatusOpened" class="statusSelect">
-          <app-status-select></app-status-select>
+          <app-status-select (currentStatus)="getStatus($event)"></app-status-select>
         </div>
       </div>
     </th>
@@ -200,10 +200,3 @@
     <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="openStatusSelect()"/>
   </div>
 </ng-template>
-
-<button (click)="filterData()">Filter</button>
-
-
-
-
-

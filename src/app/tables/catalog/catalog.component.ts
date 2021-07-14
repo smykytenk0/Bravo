@@ -73,4 +73,8 @@ export class CatalogComponent implements OnDestroy, OnInit {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
   }
+
+  takeCurrentSearch(currentSearch: string) {
+    this.dataSource.filter = currentSearch.trim().toLowerCase();
+  }
 }

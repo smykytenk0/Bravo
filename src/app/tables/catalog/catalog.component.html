@@ -6,7 +6,7 @@
   </div>
 </ng-container>
 
-<app-search-field [placeholder]="placeholder"></app-search-field>
+<app-search-field [placeholder]="placeholder" (currentSearch)="takeCurrentSearch($event)"></app-search-field>
 
 <table mat-table [dataSource]="dataSource">
 

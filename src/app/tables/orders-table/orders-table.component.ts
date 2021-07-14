@@ -70,6 +70,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
         )
       ) : this.httpService.getOrders(params)).subscribe(data => {
       this.ordersData = data;
+      console.log(data);
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
     })
@@ -184,5 +185,14 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
       this.refresh();
     })
 
+  }
+
+  takeCurrentSearch(currentSearch: string) {
+    this.dataSource.filter = currentSearch.trim().toLowerCase();
+  }
+
+  getStatus(currentStatus: string) {
+    this.store.dispatch(OrdersActions.filterStatus({status: currentStatus}));
+    this.filterData();
   }
 }

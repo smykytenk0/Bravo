@@ -5,10 +5,10 @@ export function getDayStatus(value: Date) {
     return 'Today';
   }
   if (isSameDate(value, new Date(new Date().getTime() + DAY_IN_MS))) {
-    return 'Yesterday';
+    return 'Tomorrow';
   }
   if (isSameDate(value, new Date(new Date().getTime() - DAY_IN_MS))) {
-    return 'Tomorrow';
+    return 'Yesterday';
   }
   return `${DAYS_SHORT[value.getDay()]}, ${value.getDate()} ${MONTHS_SHORT[value.getMonth() - 1]} ${value.getFullYear()}`;
 }

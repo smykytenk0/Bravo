@@ -1,4 +1,4 @@
 <div class="ordersSearch" matInput>
   <div class="ordersSearchImg"></div>
-  <input class="ordersSearchInput" placeholder="{{placeholder}}">
+  <input #searchInput class="ordersSearchInput" (keyup)="emitCurrentSearch(searchInput.value)" placeholder="{{placeholder}}">
 </div>
