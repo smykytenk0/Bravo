@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -19,7 +19,8 @@ import { HttpClient } from '@angular/common/http';
 import { emailSelector, loginStatusSelector, roleSelector } from '../../store/auth/auth.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrderModalWindowComponent } from '../../shared/components/add-order-modal-window/add-order-modal-window.component';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-orders-table',
@@ -35,9 +36,10 @@ import { filter, map, tap } from 'rxjs/operators';
 })
 
 export class OrdersTableComponent implements OnInit, OnDestroy {
+  private unsubscribeAll: Subject<any> = new Subject<any>();
   title: string = 'Orders';
   placeholder: string = 'Order, Customer, Notes...';
-  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'lastEmptyColumn'];
+  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'statusActions', 'lastEmptyColumn'];
   dataSource: MatTableDataSource<OrdersData>;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
@@ -53,7 +55,6 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     end: new FormControl()
   });
   status: string;
-  requestStatus: boolean[];
   startDate: Date;
   endDate: Date;
   customer: object;
@@ -61,36 +62,6 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   customerEmails: string[];
   email: string;
   role: string;
-
-  refresh(params = {}) {
-    (this.role == 'customer' ? this.httpService.getOrders(params)
-      .pipe(
-        map(item => Object.values(item)
-          .filter(item => item.customerData.email == this.email)
-        )
-      ) : this.httpService.getOrders(params)).subscribe(data => {
-      this.ordersData = data;
-      console.log(data);
-      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
-      this.dataSource.paginator = this.paginator;
-    })
-  }
-
-  getUniqueCustomers(array: any) {
-    for (let i of array) {
-      if (this.uniqueCustomers.indexOf(i.name) == -1) {
-        this.uniqueCustomers.push(i.name);
-      }
-    }
-  }
-
-  getUniqueProductNames(array: any) {
-    for (let i of array) {
-      if (this.uniqueProductCodes.indexOf(i.productCode) == -1) {
-        this.uniqueProductCodes.push(i.productCode);
-      }
-    }
-  }
 
   constructor(private store: Store,
               private orders: OrdersService,
@@ -113,15 +84,45 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
       : this.refresh();
   }
 
-  toggleDataPicker() {
+  refresh(params = {}): void {
+    (this.role == 'customer' ? this.httpService.getOrders(params)
+      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(
+        map(item => Object.values(item)
+          .filter(item => item.customerData.email == this.email)
+        )
+      ) : this.httpService.getOrders(params)).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => {
+      this.ordersData = data;
+      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
+      this.dataSource.paginator = this.paginator;
+    })
+  }
+
+  getUniqueCustomers(array: any): void {
+    for (let i of array) {
+      if (this.uniqueCustomers.indexOf(i.name) == -1) {
+        this.uniqueCustomers.push(i.name);
+      }
+    }
+  }
+
+  getUniqueProductNames(array: any): void {
+    for (let i of array) {
+      if (this.uniqueProductCodes.indexOf(i.productCode) == -1) {
+        this.uniqueProductCodes.push(i.productCode);
+      }
+    }
+  }
+
+  toggleDataPicker(): void {
     this.dataPickerOpened = !this.dataPickerOpened;
   }
 
-  customerSelectOpen() {
+  customerSelectOpen(): void {
     this.isCustomersOpened = !this.isCustomersOpened;
   }
 
-  openStatusSelect() {
+  toggleStatusSelect(): void {
     this.isStatusOpened = !this.isStatusOpened;
   }
 
@@ -129,52 +130,35 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
-  filterData() {
-    switch (this.status) {
-      case 'Confirmed':
-        this.requestStatus = [true];
-        break;
-      case 'Both':
-        this.requestStatus = [true, false];
-        break;
-      case 'Not confirmed':
-        this.requestStatus = [false];
-        break;
-    }
+  filterData(): void{
     this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
     this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
       let customerEmails = [];
       Object.values(data).map(item => customerEmails.push(item.email));
-      console.log(customerEmails);
       this.customerEmails = customerEmails;
       this.role == 'admin' ?
-        this.refresh({ isConfirmedStatus: this.requestStatus })
-        : this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({
-          isConfirmedStatus: this.requestStatus
+        this.refresh({ status: this.status })
+        : this.httpService.getCustomers({ email: this.email }).subscribe(() => this.refresh({
+          status: this.status
         }))
     });
   }
 
-  enterDatepickerData() {
+  enterDatepickerData(): void {
     this.store.dispatch(OrdersActions.getRangeStartDate({ startDate: this.range.value.start }));
     this.store.dispatch(OrdersActions.getRangeEndDate({ endDate: this.range.value.end }));
     this.orders.ordersFilter();
   }
 
-  cancelDatepickerData() {
+  cancelDatepickerData(): void {
   }
 
-  openPrint(row) {
+  openPrint(row): void {
     this.router.navigate(['/print'], { state: row })
-  }
-
-  ngOnDestroy(): void {
-    this.store.dispatch(OrdersActions.clearAllFilters());
   }
 
   removeAllFilters() {
     this.store.dispatch(OrdersActions.clearAllFilters());
-    console.log(this.role);
     this.role == 'customer' ?
       this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
       : this.refresh();
@@ -192,7 +176,17 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   }
 
   getStatus(currentStatus: string) {
-    this.store.dispatch(OrdersActions.filterStatus({status: currentStatus}));
+    this.store.dispatch(OrdersActions.filterStatus({ status: currentStatus }));
     this.filterData();
+  }
+
+  changeStatus(event: string, element: any) {
+    this.httpService.changeOrdersStatus(element, event).subscribe()
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(OrdersActions.clearAllFilters());
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 }

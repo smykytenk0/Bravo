@@ -59,10 +59,12 @@
 </table>
 
 <div *ngIf="(catalogData).length==0" class="emptyTable">
-  <app-empty-table></app-empty-table>
+  <app-empty-table [text]="'product'"></app-empty-table>
   <div class="emptyTableButtons" *ngIf="role == 'admin'">
-    <app-add [addBtnText]="addBtnText" (click)="openAddProductModalWindow()"></app-add>
-    <app-replace-catalog></app-replace-catalog>
+    <ng-container *ngIf="role == 'admin'">
+      <app-add [addBtnText]="addBtnText" (click)="openAddProductModalWindow()"></app-add>
+      <app-replace-catalog></app-replace-catalog>
+    </ng-container>
   </div>
 </div>
 

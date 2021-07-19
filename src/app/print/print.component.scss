@@ -1,3 +1,5 @@
+@import "../../assets/styles/variables.scss";
+
 .print-content{
   margin: 50px auto 0 auto;
   width: 556px;
@@ -26,7 +28,7 @@
   line-height: 20px;
   letter-spacing: 0.0168em;
   text-align: left;
-  color:#616161;
+  color:$color-10;
 }
 
 .small-title{
@@ -59,7 +61,7 @@
 
 th{
   text-align: start!important;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid $color-3;
   height: 40px;
   &:first-child{
     width: 16px;
@@ -70,12 +72,12 @@ th{
 }
 
 th:first-child:hover, th:last-child:hover{
-  border-bottom: 1px solid #E0E0E0!important;
+  border-bottom: 1px solid $color-3!important;
 }
 
 tr td{
   height: 40px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid $color-3;
   &:first-child{
     border-bottom: none;
   }

@@ -160,120 +160,6 @@
   "orders": [
     {
       "notes": "Deliver it as fast as it possible",
-      "reqDelivery": "2021-07-14",
-      "customerData": {
-        "customerNo": "BB-788",
-        "name": "Burger Bar",
-        "deliveryAddress": "Solomianska, 10, Kyiv",
-        "contactName": "Olena",
-        "mobilePhone": "+380676767865",
-        "notify": true,
-        "email": "burgerbar@gmail.com",
-        "deliveryDays": [
-          "Mon",
-          "Wed"
-        ],
-        "role": "customer",
-        "id": 2
-      },
-      "items": [
-        {
-          "productCode": "COR740",
-          "name": "Corn",
-          "availability": "In stock",
-          "units": [
-            {
-              "unit": "pound",
-              "price": "75"
-            },
-            {
-              "unit": "kg",
-              "price": "80"
-            }
-          ],
-          "id": 4,
-          "quantity": "20",
-          "activeUnit": {
-            "unit": "kg",
-            "price": "80"
-          }
-        }
-      ],
-      "role": "customer",
-      "ordered": "2021-07-13T15:37:15.855Z",
-      "isConfirmedStatus": false,
-      "id": 1
-    },
-    {
-      "notes": "It should be fresh",
-      "reqDelivery": "2022-03-12",
-      "customerData": {
-        "customerNo": "IM 209",
-        "name": "Il Molino",
-        "deliveryAddress": "Peremogy, 45, Kyiv",
-        "contactName": "Olexander",
-        "mobilePhone": "+380667578846",
-        "notify": true,
-        "email": "inmolino@gmail.com",
-        "deliveryDays": [
-          "Mon",
-          "Wed",
-          "Fri"
-        ],
-        "role": "customer",
-        "id": 5
-      },
-      "items": [
-        {
-          "productCode": "CAB147",
-          "name": "Cabbage",
-          "availability": "In stock",
-          "units": [
-            {
-              "unit": "pound",
-              "price": "19"
-            },
-            {
-              "unit": "kg ",
-              "price": "25"
-            }
-          ],
-          "id": 5,
-          "quantity": "80",
-          "activeUnit": {
-            "unit": "pound",
-            "price": "19"
-          }
-        },
-        {
-          "productCode": "COR740",
-          "name": "Corn",
-          "availability": "In stock",
-          "units": [
-            {
-              "unit": "pound",
-              "price": "75"
-            },
-            {
-              "unit": "kg",
-              "price": "80"
-            }
-          ],
-          "id": 4,
-          "quantity": "30",
-          "activeUnit": {
-            "unit": "pound",
-            "price": "75"
-          }
-        }
-      ],
-      "role": "customer",
-      "ordered": "2021-07-14T07:34:52.095Z",
-      "isConfirmedStatus": false,
-      "id": 2
-    },
-    {
-      "notes": "Deliver it as fast as it possible",
       "reqDelivery": "2021-07-15",
       "customerData": {
         "customerNo": "SB-123",
@@ -336,8 +222,8 @@
       ],
       "role": "customer",
       "ordered": "2021-07-14T07:49:42.970Z",
-      "isConfirmedStatus": false,
-      "id": 3
+      "status": "New",
+      "id": 1
     }
   ]
 }

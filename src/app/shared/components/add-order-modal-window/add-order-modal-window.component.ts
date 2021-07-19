@@ -1,15 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { emailSelector, roleSelector } from '../../../store/auth/auth.reducer';
 import { FormControl, FormGroup } from '@angular/forms';
-import { HttpService } from '../../services/http.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { from, Observable, of } from 'rxjs';
-import { concat, map, mergeMap, switchMap, tap, toArray } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
-interface AnyObj {
-  [key: string]: any
-}
+import { HttpService } from '../../services/http.service';
+import { emailSelector, roleSelector } from '../../../store/auth/auth.reducer';
 
 @Component({
   selector: 'app-add-order-modal-window',
@@ -75,7 +72,6 @@ export class AddOrderModalWindowComponent implements OnInit {
   }
 
   getProductByProductCode(index: any) {
-    console.log(this.itemsForm.value[`item${ index }quantity`]);
     return this.httpService.getCatalog({ productCode: this.itemsForm.value[`item${ index }productCode`] }).pipe(map(item => {
       return Object.assign(item[0], {
         quantity: this.itemsForm.value[`item${ index }quantity`],
@@ -91,7 +87,6 @@ export class AddOrderModalWindowComponent implements OnInit {
         mergeMap(item => this.getProductByProductCode(item))
       )
       .subscribe(data => {
-        console.log(data);
         this.items.push(data);
       });
     const order = Object.assign(this.orderForm.value, {
@@ -99,7 +94,7 @@ export class AddOrderModalWindowComponent implements OnInit {
       items: this.items,
       role: 'customer',
       ordered: new Date(),
-      isConfirmedStatus: false
+      status: 'new'
     });
     setTimeout(() => {
         this.httpService.addOrder(order).subscribe();
@@ -120,7 +115,6 @@ export class AddOrderModalWindowComponent implements OnInit {
 
   changePrice(index = 0) {
     this.activeUnit[index] = this.unitsForEachItem[index].filter(item => item.unit == this.itemsForm.value[`item${ index + 1 }unit`])[0];
-    console.log(this.unitsForEachItem[index].filter(item => item.unit == this.itemsForm.value[`item${index + 1}unit`])[0]);
     this.unitPrices[index] = this.activeUnit[index].price;
   }
 }

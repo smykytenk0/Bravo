@@ -1,17 +1,19 @@
+@import "../../../assets/styles/variables";
+
 .verificationWrapper{
   display: flex;
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(247,247,247);
+  background-color: $color-1;
 }
 
 
 .verificationContainer{
   width: 440px;
   box-sizing: border-box;
-  background-color: white;
-  border: 1px solid #E0E0E0;
+  background-color: $color-2;
+  border: 1px solid $color-3;
   border-radius: 8px;
   margin: auto;
   padding: 70px 48px;
@@ -41,7 +43,7 @@ input{
   height: 48px;
   width: 156px;
   border-radius: 8px;
-  border: 1px solid #A1A1A1;
+  border: 1px solid $color-4;
   outline: none;
   box-sizing: border-box;
   padding-left: 20px;
@@ -53,9 +55,9 @@ input{
   letter-spacing: 20px;
 
   &:focus{
-    border: 1.5px solid #1672EC;
-    caret-color: #1672EC;
-    color: #1672EC;
+    border: 1.5px solid $color-5;
+    caret-color: $color-5;
+    color: $color-5;
   }
 }
 

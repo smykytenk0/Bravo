@@ -1,3 +1,5 @@
+@import "../../../../assets/styles/variables.scss";
+
 .confirmedStatus{
   color: #1F8B24;
   font-weight: 700;
@@ -15,8 +17,8 @@
 .notConfirmed{
   width: 93px;
   height: 40px;
-  background-color: #1672EC;
-  color: #C5DCFA;
+  background-color: $color-5;
+  color: $color-6;
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -27,3 +29,4 @@
   outline: none;
   cursor: pointer;
 }
+

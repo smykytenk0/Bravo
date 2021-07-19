@@ -1,3 +1,5 @@
+@import "../../../../assets/styles/variables.scss";
+
 a{
   text-decoration: none;
   outline: none;
@@ -48,9 +50,9 @@ a{
 
 .active-link{
   & .item{
-    background-color: rgba(197, 220, 250, 0.51);
+    background-color: $color-9;
     & .itemTitle{
-      color: #1672EC;
+      color: $color-5;
     }
   }
 }

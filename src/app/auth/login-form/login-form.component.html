@@ -4,7 +4,7 @@
     <form class="loginForm" [formGroup]="loginForm">
       <label for="email" class="email-label">Your Email</label>
       <div class="loginFormInput" id="loginFormInput">
-        <input id="email" formControlName="email" (ngModelChange)="handleChange($event)">
+        <input id="email" formControlName="email" (ngModelChange)="handleChange()">
         <div class="inputImgWrapper"></div>
       </div>
     </form>

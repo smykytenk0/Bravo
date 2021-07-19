@@ -1,3 +1,5 @@
+@import "../../../../assets/styles/variables.scss";
+
 .addButton{
   padding: 8px;
   width: 152px;
@@ -5,7 +7,7 @@
   align-items: center;
   margin: 0 auto;
   &:hover{
-    background: rgba(224, 224, 224, 0.5);
+    background: $color-11;
     cursor: pointer;
     border-radius: 8px;
   }
@@ -25,5 +27,5 @@
   line-height: 24px;
   letter-spacing: 0.05em;
   text-align: left;
-  color: #1672EC;
+  color: $color-5;
 }

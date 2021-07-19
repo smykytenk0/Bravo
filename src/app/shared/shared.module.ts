@@ -24,6 +24,7 @@ import { StatusSelectComponent } from './components/status-select/status-select.
 import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
 import { SuccessfulProductAddingComponent } from './components/successful-product-adding/successful-product-adding.component';
+import { StatusActionsComponent } from '../status-actions/status-actions.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
     SmallMenuComponent,
     StatusComponent,
     StatusSelectComponent,
-    SuccessfulProductAddingComponent
+    SuccessfulProductAddingComponent,
+    StatusActionsComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -71,8 +73,10 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
     SmallMenuComponent,
     StatusComponent,
     StatusSelectComponent,
-    SuccessfulProductAddingComponent
+    SuccessfulProductAddingComponent,
+    StatusActionsComponent,
   ]
 })
 
-export class SharedModule{}
+export class SharedModule {
+}

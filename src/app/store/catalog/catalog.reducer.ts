@@ -1,5 +1,6 @@
-import { Catalog } from '../interfaces/catalog.interfaces';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+
+import { Catalog } from '../interfaces/catalog.interfaces';
 import { CatalogActions } from './catalog.actions';
 
 

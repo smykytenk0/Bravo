@@ -1,3 +1,5 @@
+@import "../../../../assets/styles/variables.scss";
+
 .input:nth-child(8){
   & input{
     margin-top: 34px;
@@ -47,8 +49,8 @@ mat-checkbox{
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  background-color: #1672EC;
-  color: #C5DCFA;
+  background-color: $color-5;
+  color: $color-6;
   border: none;
   & img{
     margin: 0 16px 0 4px;

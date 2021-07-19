@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VerificationComponent } from './verification/verification.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { VerificationComponent } from './verification/verification.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 
 const routes: Routes = [

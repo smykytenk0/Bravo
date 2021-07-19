@@ -35,6 +35,7 @@ export class CatalogComponent implements OnDestroy, OnInit {
 
   refresh() {
     this.httpService.getCatalog()
+      .pipe(takeUntil(this.unsubscribeAll))
       .subscribe((data) => {
         this.catalogData = data;
         this.dataSource = new MatTableDataSource<IProduct>(this.catalogData);
@@ -44,10 +45,12 @@ export class CatalogComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.refresh();
-    this.store.select(roleSelector).subscribe(data => {
-      this.role = data;
-      this.role == 'admin'? this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'] : this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'lastEmptyColumn']
-    });
+    this.store.select(roleSelector)
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe(data => {
+        this.role = data;
+        this.role == 'admin' ? this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'] : this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'lastEmptyColumn']
+      });
   }
 
   openDeleteModalWindow(element) {
@@ -69,12 +72,12 @@ export class CatalogComponent implements OnDestroy, OnInit {
     })
   }
 
+  takeCurrentSearch(currentSearch: string) {
+    this.dataSource.filter = currentSearch.trim().toLowerCase();
+  }
+
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
-  }
-
-  takeCurrentSearch(currentSearch: string) {
-    this.dataSource.filter = currentSearch.trim().toLowerCase();
   }
 }

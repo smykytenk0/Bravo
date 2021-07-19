@@ -1,5 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { AuthActions } from './auth.actions';
+
 import { Auth } from '../interfaces/auth.interface';
 
 export const initialState: Auth = {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-field',
@@ -6,8 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./search-field.component.scss']
 })
 export class SearchFieldComponent {
-  @Input()placeholder;
-
+  @Input() placeholder;
   @Output() currentSearch: EventEmitter<string> = new EventEmitter();
 
   emitCurrentSearch(value: any) {

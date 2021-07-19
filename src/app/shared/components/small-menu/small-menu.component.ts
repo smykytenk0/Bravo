@@ -1,6 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { roleSelector } from '../../../store/auth/auth.reducer';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-small-menu',
@@ -9,5 +7,4 @@ import { roleSelector } from '../../../store/auth/auth.reducer';
 })
 export class SmallMenuComponent {
   @Input() role: string;
-
 }

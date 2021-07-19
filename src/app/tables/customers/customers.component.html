@@ -41,7 +41,7 @@
     </ng-container>
   </table>
   <div *ngIf="customersData.length==0" class="emptyTable">
-    <app-empty-table></app-empty-table>
+    <app-empty-table [text]="'customer'"></app-empty-table>
     <app-add [addBtnText]="addCustomer" (click)="openAddCustomerModalWindow()"></app-add>
   </div>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

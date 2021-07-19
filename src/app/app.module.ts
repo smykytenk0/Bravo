@@ -11,7 +11,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -59,8 +59,6 @@ import { AddOrderModalWindowComponent } from './shared/components/add-order-moda
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
@@ -68,8 +66,6 @@ import { AddOrderModalWindowComponent } from './shared/components/add-order-moda
     ReactiveFormsModule,
     MatNativeDateModule,
     MatSelectModule,
-
-
     MatButtonModule,
     MatDialogModule,
     NgSelectModule,
@@ -87,6 +83,7 @@ import { AddOrderModalWindowComponent } from './shared/components/add-order-moda
     SharedModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

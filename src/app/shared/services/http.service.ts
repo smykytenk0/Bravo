@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { ICustomerData } from '../../store/interfaces/customers.interfacers';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +10,7 @@ export class HttpService {
   }
 
   getCustomers(params = {}): Observable<any> {
-    return this.http.get('http://localhost:3000/customers', {params: params});
+    return this.http.get('http://localhost:3000/customers', { params: params });
   }
 
   addCustomer(customer: ICustomerData) {
@@ -21,7 +22,7 @@ export class HttpService {
   }
 
   getCatalog(params = {}) {
-    return this.http.get('http://localhost:3000/products', {params: params});
+    return this.http.get('http://localhost:3000/products', { params: params });
   }
 
   addProduct(product) {
@@ -49,15 +50,15 @@ export class HttpService {
   }
 
   getOrders(params = {}) {
-    return this.http.get(`http://localhost:3000/orders`, {params: params})
+    return this.http.get(`http://localhost:3000/orders`, { params: params })
   }
 
-  addOrder(order){
+  addOrder(order) {
     return this.http.post('http://localhost:3000/orders', order);
   }
 
-  changeOrdersStatus(element) {
-    element.isConfirmedStatus = !element.isConfirmedStatus;
+  changeOrdersStatus(element, currentStatus) {
+    element.status = currentStatus;
     return this.http.patch('http://localhost:3000/orders/' + element.id, element)
   }
 }

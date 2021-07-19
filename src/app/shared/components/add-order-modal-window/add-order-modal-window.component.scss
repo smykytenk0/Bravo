@@ -1,10 +1,12 @@
+@import "../../../../assets/styles/variables.scss";
+
 .addUnitButton{
   margin-top: 16px;
   display: flex;
   align-items: center;
   padding: 8px 12px;
   width: 103px;
-  border: 1px solid #C0C0C0;
+  border: 1px solid $color-12;
   border-radius: 8px;
   &Img{
     width:24px;
@@ -20,7 +22,7 @@
     line-height: 24px;
     letter-spacing: 0.05em;
     text-align: left;
-    color: #1672EC;
+    color: $color-5;
   }
 }
 

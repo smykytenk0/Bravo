@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
@@ -35,16 +34,17 @@ $calendar-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
-*{
+@import "assets/styles/variables";
+* {
   margin: 0;
   font-family: 'Manrope', sans-serif !important;
 }
 
-.mat-calendar-body-range-end{
+.mat-calendar-body-range-end {
   .mat-calendar-body-selected {
-    background-color: white;
-    color: #0F56B3;
-    border: 1.5px solid #5096F1;
+    background-color: $color-2;
+    color: $color-20;
+    border: 1.5px solid $color-21;
   }
 }
 
@@ -53,24 +53,25 @@ $calendar-theme: mat.define-light-theme((
 }
 
 .mat-calendar-body-selected {
-  background-color: #1672EC;
+  background-color: $color-5;
   color: white;
 
-  &:last-child{
+  &:last-child {
     background-color: white;
-    color: #0F56B3;
+    color: $color-20;
   }
 }
 
 .mat-calendar-body-in-range::before {
-  background: #C5DCFA80;
+  background: $color-14;
 }
 
-.mat-datepicker-actions .mat-button-base{
+.mat-datepicker-actions .mat-button-base {
   margin: 8px;
   height: 48px;
-  &:last-child{
-    background: #1672EC;
+
+  &:last-child {
+    background: $color-5;
     width: 111px;
 
   }
@@ -79,38 +80,38 @@ $calendar-theme: mat.define-light-theme((
 table {
   width: 100%;
   box-shadow: none;
-  border: 1px solid #E0E0E0;
+  border: 1px solid $color-3;
   border-radius: 6px;
   border-spacing: 0;
 }
 
-th.mat-header-cell{
+th.mat-header-cell {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
   letter-spacing: 0.005em;
   text-align: left;
-  color: black;
+  color: $color-22;
 }
 
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background-color: #1672EC;
+  background-color: $color-5;
 }
 
-.mat-dialog-container{
-  padding: 0!important;
+.mat-dialog-container {
+  padding: 0 !important;
   box-shadow: none !important;
 }
 
-.modalWindow{
+.modalWindow {
   padding: 22px 24px;
-  background-color: white;
+  background-color: $color-2;
   position: relative;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid $color-3;
 }
 
-.modalTitle{
+.modalTitle {
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -120,14 +121,14 @@ th.mat-header-cell{
   margin-bottom: 16px;
 }
 
-.modalWindowButtons{
+.modalWindowButtons {
   padding: 20px 24px;
-  background-color: white;
+  background-color: $color-2;
   display: flex;
   justify-content: flex-end;
 }
 
-.modalWindowButton{
+.modalWindowButton {
   outline: none;
   padding: 12px 16px;
   font-size: 16px;
@@ -140,45 +141,46 @@ th.mat-header-cell{
   cursor: pointer;
 }
 
-.cancelModalButton{
-  color: #616161;
-  border: 1px solid #C0C0C0;
+.cancelModalButton {
+  color: $color-10;
+  border: 1px solid $color-3;
   background-color: transparent;
 }
 
-.modalCloseBtn{
+.modalCloseBtn {
   cursor: pointer;
   width: 40px;
   height: 40px;
-  background-color: white;
+  background-color: $color-2;
   border: none;
   position: absolute;
   top: 12px;
   right: 12px;
   outline: none;
 
-  &:hover{
+  &:hover {
     border-radius: 18px;
-    background: rgba(224, 224, 224, 0.5);
+    background: $color-11;
   }
 }
 
-.input{
+.input {
   display: flex;
   flex-direction: column;
-  & label{
-    margin:16px 0 2px 12px;
+
+  & label {
+    margin: 16px 0 2px 12px;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0.03em;
     text-align: left;
-    color: #616161;
+    color: $color-10;
   }
 
-  & select{
-    border: 1px solid #A1A1A1;
+  & select {
+    border: 1px solid $color-4;
     border-radius: 8px;
     height: 48px;
     padding-left: 12px;
@@ -191,8 +193,8 @@ th.mat-header-cell{
     outline: none;
   }
 
-  & input{
-    border: 1px solid #A1A1A1;
+  & input {
+    border: 1px solid $color-4;
     border-radius: 8px;
     height: 48px;
     padding-left: 12px;
@@ -205,9 +207,9 @@ th.mat-header-cell{
     outline: none;
   }
 
-  & textarea{
+  & textarea {
     min-height: 120px;
-    border: 1px solid #A1A1A1;
+    border: 1px solid $color-4;
     border-radius: 8px;
     resize: none;
     outline: none;
@@ -221,7 +223,7 @@ th.mat-header-cell{
   }
 }
 
-.modalDescription{
+.modalDescription {
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -230,50 +232,52 @@ th.mat-header-cell{
   text-align: left;
 }
 
-.cancelButton{
-  color: #616161;
-  border: 1px solid #C0C0C0;
+.cancelButton {
+  color: $color-10;
+  border: 1px solid $color-12;
   background-color: transparent;
 }
 
-.confirmButton{
+.confirmButton {
   margin-left: 16px;
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  background-color: #1672EC;
-  color: #C5DCFA;
+  background-color: $color-5;
+  color: $color-6;
   border: none;
-  & img{
+
+  & img {
     margin: 0 16px 0 4px;
   }
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-table tr:not(.mat-header-row):hover{
-  background-color: rgba(224, 224, 224, 0.25);
-  & td:first-child{
+table tr:not(.mat-header-row):hover {
+  background-color: $color-23;
+
+  & td:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    border:none;
+    border: none;
   }
 
-  & td:last-child{
+  & td:last-child {
     border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px ;
-    border:none;
+    border-bottom-right-radius: 8px;
+    border: none;
   }
 }
 
-th:not(:first-child, :last-child):hover{
-  border-bottom: 2px solid #1672EC!important;
+th:not(:first-child, :last-child):hover {
+  border-bottom: 2px solid $color-5 !important;
 }
 
-.emptyTableHeading{
+.emptyTableHeading {
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -283,18 +287,18 @@ th:not(:first-child, :last-child):hover{
   padding-bottom: 8px;
 }
 
-.inboxImg{
+.inboxImg {
   margin: 0 auto 24px auto;
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background-color: rgb(226,237,252);
+  background-color: $color-24;
   background-image: url("assets/inbox.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.emptyTableDescription{
+.emptyTableDescription {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -305,18 +309,18 @@ th:not(:first-child, :last-child):hover{
   padding-bottom: 40px;
 }
 
-.emptyTable{
-  background-color: white;
-  border: 1px solid #E0E0E0;
+.emptyTable {
+  background-color: $color-2;
+  border: 1px solid $color-3;
   border-top: none;
   padding: 64px 0 49px 0;
 }
 
-tr:last-child td{
-  border-bottom: none!important;
+tr:last-child td {
+  border-bottom: none !important;
 }
 
-tr td:first-child, tr td:last-child{
+tr td:first-child, tr td:last-child {
   border: none;
 }
 
@@ -331,28 +335,28 @@ tr td:first-child, tr td:last-child{
   line-height: 20px;
   letter-spacing: 0.0168em;
   text-align: left;
-  margin: 0 12px!important;
+  margin: 0 12px !important;
 }
 
 .mat-form-field-infix {
   border: none;
-  padding: 8px 12px!important;
+  padding: 8px 12px !important;
   margin-right: 6px;
 }
 
 .mat-form-field-flex {
   width: 80px;
-  border: 1px solid silver;
+  border: 1px solid $color-25;
   border-radius: 8px;
 }
 
 .mat-form-field-wrapper {
-  padding: 0!important;
+  padding: 0 !important;
 }
 
 .mat-paginator-page-size-select {
-  margin: 0!important;
-  width: 80px!important;
+  margin: 0 !important;
+  width: 80px !important;
   padding: 0;
 }
 
@@ -366,15 +370,15 @@ tr td:first-child, tr td:last-child{
 }
 
 mat-paginator .mat-button-wrapper {
-  display: none!important;
+  display: none !important;
 }
 
 .mat-icon-button {
-  margin-right: 12px!important;
-  width: 32px!important;
-  height: 32px!important;
-  background-color: #E0E0E050!important;
-  vertical-align: top!important;
+  margin-right: 12px !important;
+  width: 32px !important;
+  height: 32px !important;
+  background-color: $color-26 !important;
+  vertical-align: top !important;
 }
 
 .mat-paginator-range-actions button:nth-child(2) .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
@@ -394,7 +398,7 @@ mat-paginator .mat-button-wrapper {
 }
 
 .mat-paginator-container {
-  padding: 0!important;
+  padding: 0 !important;
 }
 
 mat-paginator {
@@ -402,37 +406,37 @@ mat-paginator {
   box-sizing: border-box;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  border: 1px solid #E0E0E0;
+  border: 1px solid $color-3;
   border-top: none;
 }
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-  padding: 0 10px!important;
+  padding: 0 10px !important;
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }
 
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
-  padding-left: 0!important;
+  padding-left: 0 !important;
 }
 
 th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
-  padding-right: 0!important;
+  padding-right: 0 !important;
 }
 
-th:not(:first-child), th:not(:last-child){
-  padding: 0 10px!important;
+th:not(:first-child), th:not(:last-child) {
+  padding: 0 10px !important;
 }
 
-th:first-child, th:last-child, td:first-child, td:last-child{
-  width: 16px!important;
-  padding: 0!important;
+th:first-child, th:last-child, td:first-child, td:last-child {
+  width: 16px !important;
+  padding: 0 !important;
 }
 
 
-.logoForm{
+.logoForm {
   position: absolute;
-  top:40px;
+  top: 40px;
   left: 60px;
 }
 
