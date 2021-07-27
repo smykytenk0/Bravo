@@ -16,11 +16,13 @@ import {
   statusSelector
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
-import { emailSelector, loginStatusSelector, roleSelector } from '../../store/auth/auth.reducer';
+import { emailSelector, roleSelector } from '../../store/auth/auth.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrderModalWindowComponent } from '../../shared/components/add-order-modal-window/add-order-modal-window.component';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { OrderActionsEnum } from '../../shared/enums/orderActions.enum';
+import { getEnumKeys } from '../../shared/services/helper'
 
 @Component({
   selector: 'app-orders-table',
@@ -62,6 +64,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   customerEmails: string[];
   email: string;
   role: string;
+  possibleStatuses: string[];
 
   constructor(private store: Store,
               private orders: OrdersService,
@@ -82,6 +85,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.role == 'customer' ?
       this.refresh({ customerData: { email: this.email } })
       : this.refresh();
+    this.possibleStatuses = getEnumKeys(OrderActionsEnum);
   }
 
   refresh(params = {}): void {
@@ -130,7 +134,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
-  filterData(): void{
+  filterData(): void {
     this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
     this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
       let customerEmails = [];
@@ -180,8 +184,9 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.filterData();
   }
 
-  changeStatus(event: string, element: any) {
-    this.httpService.changeOrdersStatus(element, event).subscribe()
+  changeStatus(event: number, element: any) {
+    this.httpService.changeOrdersStatus(element, event).subscribe();
+    this.refresh();
   }
 
   ngOnDestroy(): void {

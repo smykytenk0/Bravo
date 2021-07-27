@@ -121,14 +121,14 @@
       </div>
     </th>
     <td mat-cell *matCellDef="let element">
-      <app-status [element]="element"></app-status>
+      {{ possibleStatuses[element.status] }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="statusActions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
-      <app-status-actions></app-status-actions>
+      <app-status-actions [role]="role" [status]="possibleStatuses[element.status]" (changedStatus)="changeStatus($event, element)"></app-status-actions>
     </td>
   </ng-container>
 

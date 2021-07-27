@@ -71,22 +71,6 @@
         }
       ],
       "id": 5
-    },
-    {
-      "productCode": "CHE300",
-      "name": "Cherry",
-      "availability": "In stock",
-      "units": [
-        {
-          "unit": "kg",
-          "price": "50"
-        },
-        {
-          "unit": "tonna",
-          "price": "40000"
-        }
-      ],
-      "id": 6
     }
   ],
   "customers": [
@@ -222,7 +206,7 @@
       ],
       "role": "customer",
       "ordered": "2021-07-14T07:49:42.970Z",
-      "status": "New",
+      "status": 5,
       "id": 1
     }
   ]

@@ -2,20 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,16 +23,15 @@ import { OrdersEffect } from './store/orders/orders.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationComponent } from './navigation/navigation.component';
 import { CustomersReducer } from './store/customers/customers.reducer';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CatalogReducer } from './store/catalog/catalog.reducer';
 import { HttpClientModule } from '@angular/common/http';
-import { MatRadioModule } from '@angular/material/radio';
 import { SharedModule } from './shared/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
 import { AddOrderModalWindowComponent } from './shared/components/add-order-modal-window/add-order-modal-window.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -59,15 +52,11 @@ import { AddOrderModalWindowComponent } from './shared/components/add-order-moda
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSortModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDialogModule,
     NgSelectModule,
     MatChipsModule,
     MatIconModule,
@@ -75,12 +64,11 @@ import { AddOrderModalWindowComponent } from './shared/components/add-order-moda
     MatMenuModule,
     MatTooltipModule,
     AppRoutingModule,
-    MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,
     HttpClientModule,
-    MatRadioModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule,
   ],
   providers: [],
   exports: [],

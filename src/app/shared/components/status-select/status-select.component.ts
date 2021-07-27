@@ -9,7 +9,7 @@ export class StatusSelectComponent implements OnInit {
   @Output() currentStatus: EventEmitter<string> = new EventEmitter();
   @Output() confirmedStatus: EventEmitter<boolean> = new EventEmitter();
   status: string;
-  statusArray: string[] = ['New', 'Confirmed', 'Canceled', 'On way', 'Delivered', 'Completed'];
+  statusArray: string[] = ['New', 'Confirmed', 'Canceled', 'On the way', 'Delivered', 'Completed'];
 
   constructor() {
   }

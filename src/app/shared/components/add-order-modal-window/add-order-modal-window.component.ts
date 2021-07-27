@@ -20,7 +20,7 @@ export class AddOrderModalWindowComponent implements OnInit {
   counterArr = [];
   counter: number = 2;
   email: string;
-  customerData: any;
+  customerData: object;
   uniqueProducts: string[] = [];
   items: any = [];
   unitsForEachItem: any = [];

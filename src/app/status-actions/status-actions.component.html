@@ -1,1 +1,21 @@
-<div>status-actions works!</div>
+<div *ngIf="role == 'admin'; else customer">
+  <div *ngIf="['Canceled', 'Delivered', 'Completed'].indexOf(status) == -1">
+    <button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">Choose action</button>
+    <mat-menu #menu="matMenu">
+      <ng-container *ngFor="let option of adminStatusOptions">
+        <button mat-menu-item (click)="onStatusActivated(option)">{{ option }}</button>
+      </ng-container>
+    </mat-menu>
+  </div>
+</div>
+
+<ng-template #customer>
+  <ng-container *ngIf="['New', 'Canceled', 'Confirmed', 'On the way', 'Completed']. indexOf(status) == -1">
+    <button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">Choose action</button>
+    <mat-menu #menu="matMenu">
+      <ng-container *ngFor="let option of customerStatusOptions">
+        <button mat-menu-item (click)="onStatusActivated(option)">{{ option }}</button>
+      </ng-container>
+    </mat-menu>
+  </ng-container>
+</ng-template>

@@ -73,4 +73,8 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
   }
+
+  handleAddressChange(address: any) {
+    console.log(address)
+  }
 }
