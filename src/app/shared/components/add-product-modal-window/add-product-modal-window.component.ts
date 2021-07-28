@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { CatalogActions } from '../../../store/catalog/catalog.actions';
-import { IProduct, IUnit } from '../../../store/interfaces/catalog.interfaces';
-import { SuccessfulProductAddingComponent } from '../successful-product-adding/successful-product-adding.component';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+
+import { IProduct } from '../../../store/interfaces/catalog.interfaces';
+import { SuccessfulProductAddingComponent } from '../successful-product-adding/successful-product-adding.component';
 import { HttpService } from '../../services/http.service';
 import { takeUntil } from 'rxjs/operators';
 
@@ -15,87 +15,79 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './add-product-modal-window.component.html',
   styleUrls: ['./add-product-modal-window.component.scss']
 })
-export class AddProductModalWindowComponent implements OnInit, OnDestroy{
-  anotherUnits: IUnit[] = [];
-  maxUnitsAmount: number = 3;
-  anotherUnitsForm: FormGroup;
+export class AddProductModalWindowComponent implements OnInit, OnDestroy {
   private unsubscribeAll: Subject<any> = new Subject<any>();
+  maxUnitsAmount: number = 3;
+  unitsArr: number[] = [];
+  unitsForm: FormGroup;
+  counter: number = 2;
+  productForm: FormGroup;
+  productModalTitle: string = this.data ? 'Edit Product' : 'Add Product';
+
   constructor(private dialog: MatDialog,
               private store: Store,
               @Inject(MAT_DIALOG_DATA) private data: IProduct,
               private http: HttpClient,
               private httpService: HttpService) {
+    this.unitsForm = new FormGroup({
+      unit1: new FormControl(),
+      price1: new FormControl()
+    });
   }
 
-  private initAnotherUnitsForm(){
-    const anotherUnitsControl = this.anotherUnits.reduce((previous, current) => {
-      const index = this.anotherUnits.indexOf(current);
-      return {
-        ...previous,
-        [`Unit-${index+1}`]: new FormControl(current.unit),
-        [`Price-${index+1}`]: new FormControl(current.price)
-      }
-    }, {});
-    this.anotherUnitsForm = new FormGroup(anotherUnitsControl);
-  };
-
-
-
-  productForm = new FormGroup({
-    productCode: new FormControl(this.data? this.data.productCode: ''),
-    name: new FormControl(this.data? this.data.name: ''),
-    mainUintName: new FormControl(this.data? this.data.mainUnit.unit: ''),
-    mainUnitPrice: new FormControl(this.data? this.data.mainUnit.price: ''),
-    price: new FormControl(this.data? this.data.mainUnit.price: ''),
-    availability: new FormControl(this.data? this.data.availability: '')
-  });
-  productModalTitle: string = this.data? 'Edit Product' : "Add Product";
-
   ngOnInit(): void {
-    this.initAnotherUnitsForm();
-    this.data? this.anotherUnits = this.data.anotherUnits : [{unit: 'kg', price: 2.03}, {unit: 'kg', price: 2.03}]
+    this.initProductForm();
+  }
+
+  addUnitInForm(num) {
+    this.unitsForm.addControl(`unit${ num }`, new FormControl());
+    this.unitsForm.addControl(`price${ num }`, new FormControl())
+  }
+
+  deleteUnitFromForm(num) {
+    this.unitsForm.removeControl(`unit${ num }`);
+    this.unitsForm.removeControl(`price${ num }`);
+  }
+
+
+  initProductForm() {
+    this.productForm = new FormGroup({
+      productCode: new FormControl(this.data ? this.data.productCode : ''),
+      name: new FormControl(this.data ? this.data.name : ''),
+      availability: new FormControl(this.data ? this.data.availability : '')
+    });
   }
 
   addNewProduct() {
-    this.store.dispatch(CatalogActions.addNewProduct({
-      product: {
-        productCode: this.productForm.value.productCode,
-        name: this.productForm.value.name,
-        mainUnit: {
-          unit: this.productForm.value.mainUintName,
-          price: this.productForm.value.mainUnitPrice
-        },
-        anotherUnits: this.anotherUnits,
-        availability: this.productForm.value.availability
-      }
-    }));
-
+    let units = [{
+      unit: this.unitsForm.value.unit1,
+      price: this.unitsForm.value.price1
+    }];
+    for (let i of this.unitsArr) {
+      const unit = {
+        unit: this.unitsForm.value[`unit${ i }`],
+        price: this.unitsForm.value[`price${ i }`]
+      };
+      units.push(unit)
+    }
+    const product = Object.assign(this.productForm.value, { units: units });
+    this.httpService.addProduct(product).pipe(takeUntil(this.unsubscribeAll)).subscribe();
     this.dialog.open(SuccessfulProductAddingComponent);
-    setTimeout(()=>{
+    setTimeout(() => {
       this.dialog.closeAll()
-    },2000);
-
-    const product = {
-      productCode: this.productForm.value.productCode,
-      name: this.productForm.value.name,
-      mainUnit: {
-        unit: this.productForm.value.mainUintName,
-        price: this.productForm.value.mainUnitPrice
-      },
-      anotherUnits: this.anotherUnits.length? this.anotherUnits: null,
-      availability: this.productForm.value.availability
-    };
-    this.httpService.addProduct(product).subscribe();
+    }, 2000);
   }
 
   addUnit() {
-    this.anotherUnits.push({unit: '', price: 0});
-    this.initAnotherUnitsForm()
+    this.addUnitInForm(this.counter);
+    this.unitsArr.push(this.counter);
+    this.counter++;
   }
 
-  deleteUnit(unit) {
-    this.anotherUnits.shift();
-    this.initAnotherUnitsForm()
+  deleteUnit() {
+    this.deleteUnitFromForm(this.counter);
+    this.unitsArr.pop();
+    this.counter--;
   }
 
   ngOnDestroy(): void {

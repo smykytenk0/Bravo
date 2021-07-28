@@ -1,9 +1,5 @@
-<div class="confirmedStatusWrapper" *ngIf="isConfirmedStatus; else notConfirmed">
-  <div class="confirmedStatus" (click)="changeStatus()">
-    Confirmed
-  </div>
+<div *ngIf="role == 'admin'; else customer">
+  <span>{{element.status}}</span>
 </div>
 
-<ng-template #notConfirmed>
-  <button class="notConfirmed" (click)="changeStatus()"> Confirm </button>
-</ng-template>
+<ng-template #customer> Hello world</ng-template>

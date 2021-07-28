@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { OrdersActions } from '../../../store/orders/orders.actions';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-status-select',
@@ -9,14 +6,19 @@ import { OrdersActions } from '../../../store/orders/orders.actions';
   styleUrls: ['./status-select.component.scss'],
 })
 export class StatusSelectComponent implements OnInit {
+  @Output() currentStatus: EventEmitter<string> = new EventEmitter();
+  @Output() confirmedStatus: EventEmitter<boolean> = new EventEmitter();
   status: string;
-  statusArray: string[] = ['Confirmed', 'Not confirmed', 'Both'];
-  constructor(private store: Store) { }
+  statusArray: string[] = ['New', 'Confirmed', 'Canceled', 'On the way', 'Delivered', 'Completed'];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   enterStatusFilter() {
-    this.store.dispatch(OrdersActions.filterStatus({status: this.status}))
+    this.currentStatus.emit(this.status);
+    this.confirmedStatus.emit(true);
   }
 }

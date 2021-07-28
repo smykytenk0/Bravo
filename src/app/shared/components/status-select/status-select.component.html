@@ -3,7 +3,7 @@
   <mat-radio-group
     aria-labelledby="statusLabel"
     class="statusLabel"
-    [(ngModel)]="status" >
+    [(ngModel)]="status">
     <mat-radio-button class="statusOption" *ngFor="let status of statusArray" [value]="status">
       {{status}}
     </mat-radio-button>

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, withLatestFrom } from 'rxjs/operators';
+
 import { IOrders } from '../interfaces/orders.interfaces';
 import { OrdersActions } from './orders.actions';
-import { map, withLatestFrom } from 'rxjs/operators';
+
 import {
   filteredCustomersSelector,
   ordersDataSelector,

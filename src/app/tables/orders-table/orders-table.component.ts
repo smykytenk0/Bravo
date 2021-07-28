@@ -16,6 +16,13 @@ import {
   statusSelector
 } from '../../store/orders/orders.reducer';
 import { HttpClient } from '@angular/common/http';
+import { emailSelector, roleSelector } from '../../store/auth/auth.reducer';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOrderModalWindowComponent } from '../../shared/components/add-order-modal-window/add-order-modal-window.component';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { OrderActionsEnum } from '../../shared/enums/orderActions.enum';
+import { getEnumKeys, getTotalOrderPrice } from '../../shared/services/helper'
 
 @Component({
   selector: 'app-orders-table',
@@ -31,15 +38,17 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class OrdersTableComponent implements OnInit, OnDestroy {
+  private unsubscribeAll: Subject<any> = new Subject<any>();
   title: string = 'Orders';
   placeholder: string = 'Order, Customer, Notes...';
-  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'lastEmptyColumn'];
+  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'totalPrice', 'status', 'statusActions', 'lastEmptyColumn'];
   dataSource: MatTableDataSource<OrdersData>;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any = [];
-  ordersData: any;
+  uniqueProductCodes: any = [];
+  ordersData: any = [];
   filteredCustomers: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OrdersData | null;
@@ -48,22 +57,56 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     end: new FormControl()
   });
   status: string;
-  requestStatus: boolean[];
   startDate: Date;
   endDate: Date;
   customer: object;
   selectedCustomersArray: string[];
-  customersId: number[];
+  customerEmails: string[];
+  email: string;
+  role: string;
+  possibleStatuses: string[];
 
-  refresh(params = {}) {
-    this.httpService.getOrders(params).subscribe(data => {
+  constructor(private store: Store,
+              private orders: OrdersService,
+              private router: Router,
+              private httpService: HttpService,
+              private http: HttpClient,
+              private dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.store.select(roleSelector).subscribe(data => this.role = data);
+    this.store.select(emailSelector).subscribe(data => this.email = data);
+    this.httpService.getCustomers({ role: 'customer' }).subscribe(data => this.getUniqueCustomers(data));
+    this.httpService.getCatalog({ availability: 'In stock' }).subscribe(data => this.getUniqueProductNames(data));
+    this.store.select(statusSelector).subscribe(data => this.status = data);
+    this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
+    this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
+    this.role == 'customer' ?
+      this.refresh({ customerData: { email: this.email } })
+      : this.refresh();
+    this.possibleStatuses = getEnumKeys(OrderActionsEnum);
+  }
+
+  getTotalPrice(order): number{
+    return getTotalOrderPrice(order)
+  };
+
+  refresh(params = {}): void {
+    (this.role == 'customer' ? this.httpService.getOrders(params)
+      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(
+        map(item => Object.values(item)
+          .filter(item => item.customerData.email == this.email)
+        )
+      ) : this.httpService.getOrders(params)).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => {
       this.ordersData = data;
       this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
       this.dataSource.paginator = this.paginator;
     })
   }
 
-  getUniqueCustomers(array: any) {
+  getUniqueCustomers(array: any): void {
     for (let i of array) {
       if (this.uniqueCustomers.indexOf(i.name) == -1) {
         this.uniqueCustomers.push(i.name);
@@ -71,30 +114,23 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(private store: Store,
-              private orders: OrdersService,
-              private router: Router,
-              private httpService: HttpService,
-              private http: HttpClient) {
+  getUniqueProductNames(array: any): void {
+    for (let i of array) {
+      if (this.uniqueProductCodes.indexOf(i.productCode) == -1) {
+        this.uniqueProductCodes.push(i.productCode);
+      }
+    }
   }
 
-  ngOnInit(): void {
-    this.refresh();
-    this.httpService.getCustomers().subscribe(data => this.getUniqueCustomers(data));
-    this.store.select(statusSelector).subscribe(data => this.status = data);
-    this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
-    this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
-  }
-
-  toggleDataPicker() {
+  toggleDataPicker(): void {
     this.dataPickerOpened = !this.dataPickerOpened;
   }
 
-  customerSelectOpen() {
+  customerSelectOpen(): void {
     this.isCustomersOpened = !this.isCustomersOpened;
   }
 
-  openStatusSelect() {
+  toggleStatusSelect(): void {
     this.isStatusOpened = !this.isStatusOpened;
   }
 
@@ -102,46 +138,64 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
-  filterData() {
-    switch (this.status) {
-      case 'Confirmed':
-        this.requestStatus = [true];
-        break;
-      case 'Both':
-        this.requestStatus = [true, false];
-        break;
-      case 'Not confirmed':
-        this.requestStatus = [false];
-        break;
-    }
+  filterData(): void {
     this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
     this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
-      let customersId = [];
-      Object.values(data).map(item => customersId.push(item.id));
-      this.customersId = customersId;
-      this.refresh({ isConfirmedStatus: this.requestStatus, customerId: customersId })
+      let customerEmails = [];
+      Object.values(data).map(item => customerEmails.push(item.email));
+      this.customerEmails = customerEmails;
+      this.role == 'admin' ?
+        this.refresh({ status: this.status })
+        : this.httpService.getCustomers({ email: this.email }).subscribe(() => this.refresh({
+          status: this.status
+        }))
     });
   }
 
-  enterDatepickerData() {
+  enterDatepickerData(): void {
     this.store.dispatch(OrdersActions.getRangeStartDate({ startDate: this.range.value.start }));
     this.store.dispatch(OrdersActions.getRangeEndDate({ endDate: this.range.value.end }));
     this.orders.ordersFilter();
   }
 
-  cancelDatepickerData() {
+  cancelDatepickerData(): void {
   }
 
-  openPrint(row) {
+  openPrint(row): void {
     this.router.navigate(['/print'], { state: row })
-  }
-
-  ngOnDestroy(): void {
-    this.store.dispatch(OrdersActions.clearAllFilters());
   }
 
   removeAllFilters() {
     this.store.dispatch(OrdersActions.clearAllFilters());
+    this.role == 'customer' ?
+      this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
+      : this.refresh();
+  }
+
+  openAddOrderModalWindow() {
+    this.dialog.open(AddOrderModalWindowComponent, { data: this.uniqueProductCodes }).afterClosed().subscribe(() => {
+      this.refresh();
+    })
+
+  }
+
+  takeCurrentSearch(currentSearch: string) {
+    this.dataSource.filter = currentSearch.trim().toLowerCase();
+  }
+
+  getStatus(currentStatus: string) {
+    this.store.dispatch(OrdersActions.filterStatus({ status: currentStatus }));
+    this.filterData();
+  }
+
+  changeStatus(event: number, element: any) {
+    this.httpService.changeOrdersStatus(element, event).subscribe();
     this.refresh();
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(OrdersActions.clearAllFilters());
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 }

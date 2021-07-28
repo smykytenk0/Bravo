@@ -1,15 +1,17 @@
+@import "../../../assets/styles/variables";
+
 .loginWrapper{
   display: flex;
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(247,247,247);
+  background-color: $color-1;
 }
 
 .loginContainer{
   width: 440px;
-  background-color: white;
-  border: 1px solid #E0E0E0;
+  background-color: $color-2;
+  border: 1px solid $color-3;
   border-radius: 8px;
   margin: auto;
   padding: 70px 48px;
@@ -34,7 +36,7 @@
   height: 24px;
   border-radius: 8px;
   outline: none;
-  border: 1px solid #A1A1A1;
+  border: 1px solid $color-4;
   padding: 12px;
   margin-bottom: 16px;
   display: flex;
@@ -48,7 +50,7 @@ input{
 }
 
 .loginFormInput:focus-within{
-  border: 2px solid #1672EC;
+  border: 2px solid $color-5;
 }
 
 .hint{
@@ -65,7 +67,7 @@ input{
   padding: 12px;
   height: 48px;
   width: 100%;
-  background-color: #1672EC;
+  background-color: $color-5;
   outline: none;
   border: none;
   border-radius: 8px;
@@ -74,7 +76,7 @@ input{
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0.05em;
-  color:#C5DCFA;
+  color: $color-6;
 }
 
 label{
@@ -87,7 +89,7 @@ label{
 }
 
 .valid{
-  border: 1.5px solid #2AB930!important;
+  border: 1.5px solid $color-7!important;
   & .inputImgWrapper{
     background: url("../../../assets/valid-check.svg") no-repeat center;
   }
@@ -95,8 +97,12 @@ label{
 
 
 .invalid{
-  border: 1.5px solid #F7716E!important;
+  border: 1.5px solid $color-8!important;
   & .inputImgWrapper{
     background: url("../../../assets/valid-danger.svg") no-repeat center;
   }
+}
+
+.invalidText{
+  color: $color-8
 }

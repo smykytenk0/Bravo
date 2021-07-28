@@ -6,8 +6,7 @@ export interface IUnit {
 export interface IProduct {
   productCode: string,
   name: string,
-  mainUnit: IUnit,
-  anotherUnits?: IUnit[],
+  units: IUnit[],
   availability: string,
 }
 

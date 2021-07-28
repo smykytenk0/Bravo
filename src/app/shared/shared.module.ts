@@ -24,6 +24,11 @@ import { StatusSelectComponent } from './components/status-select/status-select.
 import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
 import { SuccessfulProductAddingComponent } from './components/successful-product-adding/successful-product-adding.component';
+import { StatusActionsComponent } from '../status-actions/status-actions.component';
+import { _MatMenuDirectivesModule, MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +47,8 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
     SmallMenuComponent,
     StatusComponent,
     StatusSelectComponent,
-    SuccessfulProductAddingComponent
+    SuccessfulProductAddingComponent,
+    StatusActionsComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -55,6 +61,10 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
     MatRadioModule,
     FormsModule,
     RouterModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
+    MatButtonModule,
+    GooglePlaceModule,
   ],
   exports: [
     AddComponent,
@@ -71,8 +81,10 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
     SmallMenuComponent,
     StatusComponent,
     StatusSelectComponent,
-    SuccessfulProductAddingComponent
+    SuccessfulProductAddingComponent,
+    StatusActionsComponent,
   ]
 })
 
-export class SharedModule{}
+export class SharedModule {
+}

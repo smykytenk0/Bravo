@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ReplaceCatalogModalComponent } from '../replace-catalog-modal/replace-catalog-modal.component';
 
 @Component({
@@ -9,7 +10,8 @@ import { ReplaceCatalogModalComponent } from '../replace-catalog-modal/replace-c
 })
 export class ReplaceCatalogComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }

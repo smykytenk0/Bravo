@@ -1,3 +1,5 @@
+@import "../../../../assets/styles/variables.scss";
+
 .trashImgWrapper{
   cursor: pointer;
   width: 40px;
@@ -6,6 +8,6 @@
   background: url("../../../../assets/trash.png") center no-repeat;
   &:hover{
     background-image: url("../../../../assets/trash-active.png");
-    background-color: #FCD0CF;
+    background-color: $color-15;
   }
 }

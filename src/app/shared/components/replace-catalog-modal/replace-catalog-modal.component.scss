@@ -1,6 +1,8 @@
+@import "../../../../assets/styles/variables.scss";
+
 .dropZone{
   padding: 27px 62px;
-  background-color: #C5DCFA50;
+  background-color: $color-17;
   border: 1px dashed #1672EC;
   border-radius: 6px;
   margin: 24px 0;

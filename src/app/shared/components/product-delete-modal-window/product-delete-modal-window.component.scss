@@ -1,10 +1,12 @@
+@import "../../../../assets/styles/variables.scss";
+
 .productDeleteButton{
   display: flex;
   align-items: center;
   margin-left: 16px;
-  background-color: #F5413D;
+  background-color: $color-16;
   border: none;
-  color: #FCD0CF;
+  color: $color-15;
   & img{
     margin: 0 16px 0 4px;
   }

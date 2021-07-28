@@ -5,15 +5,15 @@
     <form class="verificationFormContainer" [formGroup]="verificationForm">
       <div class="verificationField">
         <label for="firstNumbers">Your login code</label>
-        <input id="firstNumbers" maxlength="3" formControlName="firstNumbers" (ngModelChange)="handleChange($event)">
+        <input id="firstNumbers" maxlength="3" formControlName="firstNumbers" (ngModelChange)="handleChange()">
       </div>
       <div class="dash">-</div>
       <div class="verificationField">
         <label for="anotherNumbers"></label>
-        <input id="anotherNumbers" maxlength="3" formControlName="anotherNumbers" (ngModelChange)="handleChange($event)">
+        <input id="anotherNumbers" maxlength="3" formControlName="anotherNumbers" (ngModelChange)="handleChange()">
       </div>
     </form>
-    <div class="verificationHelp">We've sent a 6 digit login code to <span class="helpEmail">example@email.com</span> <br/>Can't find it? Check your spam folder.</div>
+    <div class="verificationHelp">We've sent a 6 digit login code to <span class="helpEmail">{{currentEmail}}</span> <br/>Can't find it? Check your spam folder.</div>
   </div>
 </div>
 

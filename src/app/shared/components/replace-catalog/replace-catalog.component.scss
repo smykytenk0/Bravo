@@ -1,21 +1,24 @@
-.replaceCatalog{
+@import "../../../../assets/styles/variables.scss";
+
+.replaceCatalog {
   display: flex;
   align-items: center;
-  &:hover{
-    background: rgba(224, 224, 224, 0.5);
+
+  &:hover {
+    background: $color-11;
     cursor: pointer;
     border-radius: 8px;
   }
 }
 
-.replaceIcon{
+.replaceIcon {
   background: url("../../../../assets/software-upload.png") center no-repeat;
   width: 16px;
   height: 16px;
   padding: 12px;
 }
 
-.replaceText{
+.replaceText {
   font-size: 16px;
   font-style: normal;
   font-weight: 700;

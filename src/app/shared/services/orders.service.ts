@@ -1,29 +1,24 @@
-import {Injectable} from "@angular/core";
-import {select, Store} from "@ngrx/store";
-import {
-  filteredCustomersSelector, filterOrdersDataSelector,
-  ordersDataSelector,
-  rangeEndDateSelector,
-  rangeStartDateSelector
-} from "../../store/orders/orders.reducer";
-import {OrdersData} from "../../store/interfaces/orders.interfaces";
-import {OrdersActions} from "../../store/orders/orders.actions";
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { OrdersData } from '../../store/interfaces/orders.interfaces';
+import { OrdersActions } from '../../store/orders/orders.actions';
 import { HttpService } from './http.service';
 
-@Injectable({providedIn:'root'})
-export class OrdersService{
+@Injectable({ providedIn: 'root' })
+export class OrdersService {
   filteredCustomers: string[];
   filteredOrdersData: OrdersData[];
-  rangeStartDate: Date;
-  rangeEndDate: Date;
-  constructor(private store: Store, private httpService: HttpService) {}
+
+  constructor(private store: Store, private httpService: HttpService) {
+  }
 
   //getOrdersData(){
   //  this.store.pipe(select(ordersDataSelector)).subscribe( data => this.filteredOrdersData = data);
   //}
 
 
-  ordersFilter(){
+  ordersFilter() {
     this.store.dispatch(OrdersActions.applyCustomerFilter());
     //this.getOrdersData();
     //this.store.pipe(select(rangeStartDateSelector)).subscribe(data => this.rangeStartDate = data);

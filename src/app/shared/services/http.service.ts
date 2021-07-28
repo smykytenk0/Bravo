@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { ICustomerData } from '../../store/interfaces/customers.interfacers';
-import { IProduct } from '../../store/interfaces/catalog.interfaces';
-import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  getCustomers(): Observable<any> {
-    return this.http.get('http://localhost:3000/customers');
+  getCustomers(params = {}): Observable<any> {
+    return this.http.get('http://localhost:3000/customers', { params: params });
   }
 
   addCustomer(customer: ICustomerData) {
@@ -22,11 +21,11 @@ export class HttpService {
     return this.http.put('http://localhost:3000/customers/' + id, customer);
   }
 
-  getCatalog() {
-    return this.http.get('http://localhost:3000/products');
+  getCatalog(params = {}) {
+    return this.http.get('http://localhost:3000/products', { params: params });
   }
 
-  addProduct(product: IProduct) {
+  addProduct(product) {
     return this.http.post('http://localhost:3000/products', product);
   }
 
@@ -51,16 +50,15 @@ export class HttpService {
   }
 
   getOrders(params = {}) {
-    return this.http.get(`http://localhost:3000/orders`, {params: params}).pipe(tap(item => {
-      for (let i in item) {
-        this.getCustomerById(item[i]);
-        this.getProductById(item[i]);
-      }
-    }));
+    return this.http.get(`http://localhost:3000/orders`, { params: params })
   }
 
-  changeOrdersStatus(element, id) {
-    element.isConfirmedStatus = !element.isConfirmedStatus;
-    return this.http.put('http://localhost:3000/orders/' + id, element)
+  addOrder(order) {
+    return this.http.post('http://localhost:3000/orders', order);
+  }
+
+  changeOrdersStatus(element, currentStatus) {
+    element.status = currentStatus;
+    return this.http.patch('http://localhost:3000/orders/' + element.id, element)
   }
 }

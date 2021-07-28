@@ -1,13 +1,13 @@
 <div *ngIf="route.url!='/orders/print'; else print" class="pageWrapper">
 
   <div class="smallMenu">
-    <app-small-menu></app-small-menu>
+    <app-small-menu [role]="role"></app-small-menu>
   </div>
 
   <div>
     <mat-drawer-container class="example-container" autosize>
       <mat-drawer #drawer class="example-sidenav" mode="side">
-        <app-navigation [navIsOpened]="navIsOpened"></app-navigation>
+        <app-navigation [navIsOpened]="navIsOpened" [role]="role"></app-navigation>
       </mat-drawer>
 
       <div class="example-sidenav-content">

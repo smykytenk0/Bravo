@@ -1,5 +1,11 @@
+<ng-container *ngIf="role=='customer'">
+  <div class="addButton">
+    <app-add [addBtnText]="'Add Order'" (click)="openAddOrderModalWindow()"></app-add>
+  </div>
+</ng-container>
+
 <div class="searchButtonContainer">
-  <app-search-field [placeholder]="placeholder"></app-search-field>
+  <app-search-field [placeholder]="placeholder" (currentSearch)="takeCurrentSearch($event)"></app-search-field>
   <button class="removeFiltersButton" (click)="removeAllFilters()">Remove all filters</button>
 </div>
 
@@ -26,22 +32,24 @@
     <th mat-header-cell *matHeaderCellDef class="sortTh">
       <div class="sortTh">
         <div class="columnName"> Customer</div>
-        <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
-          <div class="sortSizeWrapper">
-            <img src="../../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
+        <ng-container *ngIf="role == 'admin'">
+          <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
+            <div class="sortSizeWrapper">
+              <img src="../../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
+            </div>
           </div>
-        </div>
-        <div *ngIf="isCustomersOpened" class="customerPicker">
-          <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
-        </div>
+          <div *ngIf="isCustomersOpened" class="customerPicker">
+            <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
+          </div>
+        </ng-container>
       </div>
     </th>
-    <td mat-cell *matCellDef="let element"><div *ngFor="let customer of (element?.customerData) | keyvalue"> <div *ngFor = "let field of customer.value | keyvalue"><div *ngIf="(field.key == 'name')">{{field.value}}</div></div></div></td>
+    <td mat-cell *matCellDef="let element"> {{element.customerData.name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="customerNo">
     <th class="mainTableTh" mat-header-cell *matHeaderCellDef> Customer No</th>
-    <td mat-cell *matCellDef="let element"><div *ngFor="let customer of (element?.customerData) | keyvalue"> <div *ngFor = "let field of customer.value | keyvalue"><div *ngIf="(field.key == 'customerNo')">{{field.value}}</div></div></div> </td>
+    <td mat-cell *matCellDef="let element"> {{element.customerData.customerNo}} </td>
   </ng-container>
 
   <ng-container matColumnDef="items">
@@ -99,20 +107,33 @@
     <td mat-cell *matCellDef="let element"> {{JsonDateParse(element.reqDelivery) | dateFormat }} </td>
   </ng-container>
 
+  <ng-container matColumnDef="totalPrice">
+    <th mat-header-cell *matHeaderCellDef>Total Price</th>
+    <td mat-cell *matCellDef="let element">{{getTotalPrice(element)}}</td>
+  </ng-container>
+
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>
       <div class="sortTh">
         <div class="columnName"> Status</div>
         <div class="sortSizeWrapper" *ngIf="!isStatusOpened; else statusOpen">
-          <img src="../../../assets/sort-size.png" class="sort-size" (click)="openStatusSelect()"/>
+          <img src="../../../assets/sort-size.png" class="sort-size" (click)="toggleStatusSelect()"/>
         </div>
         <div *ngIf="isStatusOpened" class="statusSelect">
-          <app-status-select></app-status-select>
+          <app-status-select (currentStatus)="getStatus($event)"
+                             (confirmedStatus)="toggleStatusSelect()"></app-status-select>
         </div>
       </div>
     </th>
     <td mat-cell *matCellDef="let element">
-      <app-status [element]="element" (click)="refresh()"></app-status>
+      {{ possibleStatuses[element.status] }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="statusActions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <app-status-actions [role]="role" [status]="possibleStatuses[element.status]" [price]="getTotalPrice(element)" (changedStatus)="changeStatus($event, element)"></app-status-actions>
     </td>
   </ng-container>
 
@@ -132,7 +153,7 @@
           </div>
           <div class="address">
             <div class="infoTitle">Delivery Address:</div>
-            <div class="info">{{ element.address.street }}, {{element.address.city}}</div>
+            <div class="info">{{ element.customerData.deliveryAddress}}</div>
           </div>
           <a class="print" target="_blank" (click)="openPrint(element)">
             <img src="../../../assets/print.png" height="20" width="20"/>
@@ -144,13 +165,15 @@
             <td>ProductCode</td>
             <td>Product</td>
             <td>Unit</td>
+            <td>Price</td>
             <td>Quantity</td>
           </tr>
-          <tr *ngFor="let item of (element.products)">
+          <tr *ngFor="let item of (element.items)">
             <td>{{ item.productCode }}</td>
             <td>{{ item.name }}</td>
-            <td>{{ item.mainUnit.unit }}</td>
-            <td>{{ item.mainUnit.price }}</td>
+            <td>{{ item.activeUnit.unit }}</td>
+            <td>{{ item.activeUnit.price }}</td>
+            <td>{{ item.quantity }}</td>
           </tr>
         </table>
       </div>
@@ -165,6 +188,13 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+
+<div *ngIf="(ordersData).length == 0" class="emptyTable">
+  <app-empty-table [text]="'order'"></app-empty-table>
+  <ng-container *ngIf="role=='customer'">
+    <app-add [addBtnText]="'Add Order'" (click)="openAddOrderModalWindow()"></app-add>
+  </ng-container>
+</div>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
@@ -182,11 +212,6 @@
 
 <ng-template #statusOpen>
   <div class="sortSizeActiveWrapper">
-    <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="openStatusSelect()"/>
+    <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="toggleStatusSelect()"/>
   </div>
 </ng-template>
-
-<button (click)="filterData()">Filter</button>
-
-
-

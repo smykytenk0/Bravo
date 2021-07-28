@@ -1,0 +1,41 @@
+@import "../../../../assets/styles/variables.scss";
+
+.addUnitButton{
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  width: 103px;
+  border: 1px solid $color-12;
+  border-radius: 8px;
+  &Img{
+    width:24px;
+    height: 24px;
+    margin-right: 8px;
+    background: url("../../../../assets/math-plus-blue.png") center no-repeat;
+  }
+
+  &Text{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    color: $color-5;
+  }
+}
+
+.small-field .item .input{
+  width: 145px;
+  margin-right: 10px;
+}
+
+.item{
+  display: flex;
+  align-items: flex-end;
+
+  &-delete-button{
+    margin-bottom: 6px;
+  }
+}

@@ -13,12 +13,14 @@
         <div class="imgWrapper"></div>
       </div>
     </a>
-    <a routerLink="/tables/customers" [routerLinkActive]="['customers-active', 'active-link']">
+    <a *ngIf="role == 'admin' else empty" routerLink="/tables/customers" [routerLinkActive]="['customers-active', 'active-link']">
       <div class="item">
         <div class="imgWrapper"></div>
       </div>
     </a>
-
+    <ng-template #empty>
+      <div></div>
+    </ng-template>
     <a routerLink="/auth/login">
       <div class="item logout">
         <div class="imgWrapper"></div>

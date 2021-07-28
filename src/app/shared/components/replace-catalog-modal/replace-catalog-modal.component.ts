@@ -1,39 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-replace-catalog-modal',
   templateUrl: './replace-catalog-modal.component.html',
   styleUrls: ['./replace-catalog-modal.component.scss']
 })
-export class ReplaceCatalogModalComponent  {
+export class ReplaceCatalogModalComponent {
 
   files: any[] = [];
 
-  /**
-   * on file drop handler
-   */
   onFileDropped($event) {
     this.prepareFilesList($event);
   }
 
-  /**
-   * handle file from browsing
-   */
   fileBrowseHandler(files) {
     this.prepareFilesList(files.files);
   }
 
-  /**
-   * Delete file from files list
-   * @param index (File index)
-   */
+
   deleteFile(index: number) {
     this.files.splice(index, 1);
   }
 
-  /**
-   * Simulate the upload process
-   */
   uploadFilesSimulator(index: number) {
     setTimeout(() => {
       if (index === this.files.length) {
@@ -51,10 +39,6 @@ export class ReplaceCatalogModalComponent  {
     }, 1000);
   }
 
-  /**
-   * Convert Files list to normal array list
-   * @param files (Files List)
-   */
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;
@@ -63,11 +47,6 @@ export class ReplaceCatalogModalComponent  {
     this.uploadFilesSimulator(0);
   }
 
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
   formatBytes(bytes, decimals) {
     if (bytes === 0) {
       return '0 Bytes';

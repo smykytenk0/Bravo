@@ -160,18 +160,6 @@ th:nth-child(2):hover{
   & td {
     padding-left: 10px;
   }
-
-  & td:first-child {
-    width: 18.75vw;
-  }
-
-  & td:nth-child(2) {
-    width: 32.25vw
-  }
-
-  & td:nth-child(3) {
-    width: 19.7%;
-  }
 }
 
 .tableDetails {
@@ -233,7 +221,6 @@ tr tr:last-child td {
   border-bottom: none;
 }
 
-
 .info {
   font-size: 16px;
   font-style: normal;
@@ -276,4 +263,10 @@ tr tr:last-child td {
 
 .reqDeliverySortTh {
   vertical-align: center;
+}
+
+.addButton app-add{
+  position: absolute;
+  right: 24px;
+  top: 24px;
 }

@@ -1,3 +1,5 @@
+@import "../../assets/styles/variables.scss";
+
 .logo{
   padding: 20px 20px 20px 0;
   margin-bottom: 28px;
@@ -31,10 +33,10 @@ a{
 
 .active-link{
   & .item{
-    background-color: rgba(197, 220, 250, 0.51);
+    background-color: $color-9;
     border-radius: 0 12px 12px 0;
     & .itemTitle{
-      color: #1672EC;
+      color: $color-5;
     }
   }
 }
@@ -45,4 +47,8 @@ a{
   bottom: 8px;
   display: flex;
   align-items: center;
+}
+
+.hidden{
+  display: none!important;
 }

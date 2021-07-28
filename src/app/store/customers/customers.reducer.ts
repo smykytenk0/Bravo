@@ -1,6 +1,7 @@
-import { ICustomers } from '../interfaces/customers.interfacers';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+
 import { CustomersActions } from './customers.actions';
+import { ICustomers } from '../interfaces/customers.interfacers';
 
 export const initialState: ICustomers = {
   customers: [

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersData } from '../store/interfaces/orders.interfaces';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-print',
@@ -10,12 +8,14 @@ import { Router } from '@angular/router';
 
 export class PrintComponent implements OnInit {
   printInfo = history.state;
-  displayedColumns: string[] = ['productCode', 'product', 'unit', 'quantity'];
 
-  constructor(private route: Router) {
+  constructor() {
   }
 
+  //TODO: fix this component
+
   ngOnInit(): void {
+    console.log(this.printInfo)
   }
 
 }
