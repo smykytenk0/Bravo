@@ -15,6 +15,7 @@ export class PrintComponent implements OnInit {
   //TODO: fix this component
 
   ngOnInit(): void {
+    console.log(this.printInfo)
   }
 
 }

@@ -1,5 +1,5 @@
 <div *ngIf="role == 'admin'; else customer">
-  <div *ngIf="['Canceled', 'Delivered', 'Completed'].indexOf(status) == -1">
+  <div *ngIf="['New', 'Canceled', 'Delivered', 'Completed'].indexOf(status) == -1">
     <button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">Choose action</button>
     <mat-menu #menu="matMenu">
       <ng-container *ngFor="let option of adminStatusOptions">
@@ -17,5 +17,11 @@
         <button mat-menu-item (click)="onStatusActivated(option)">{{ option }}</button>
       </ng-container>
     </mat-menu>
+  </ng-container>
+  <ng-container *ngIf="status == possibleStatuses[0]">
+    <button class="modalWindowButton paymentButton" type="submit" (click)="checkout(); $event.stopPropagation()">
+      <img src="../../assets/check.png" alt="white-plus">
+      Pay for the order
+    </button>
   </ng-container>
 </ng-template>

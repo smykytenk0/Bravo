@@ -64,7 +64,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatButtonModule,
-    GooglePlaceModule
+    GooglePlaceModule,
   ],
   exports: [
     AddComponent,

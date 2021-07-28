@@ -107,6 +107,11 @@
     <td mat-cell *matCellDef="let element"> {{JsonDateParse(element.reqDelivery) | dateFormat }} </td>
   </ng-container>
 
+  <ng-container matColumnDef="totalPrice">
+    <th mat-header-cell *matHeaderCellDef>Total Price</th>
+    <td mat-cell *matCellDef="let element">{{getTotalPrice(element)}}</td>
+  </ng-container>
+
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>
       <div class="sortTh">
@@ -128,7 +133,7 @@
   <ng-container matColumnDef="statusActions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
-      <app-status-actions [role]="role" [status]="possibleStatuses[element.status]" (changedStatus)="changeStatus($event, element)"></app-status-actions>
+      <app-status-actions [role]="role" [status]="possibleStatuses[element.status]" [price]="getTotalPrice(element)" (changedStatus)="changeStatus($event, element)"></app-status-actions>
     </td>
   </ng-container>
 

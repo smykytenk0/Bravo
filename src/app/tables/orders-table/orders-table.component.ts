@@ -22,7 +22,7 @@ import { AddOrderModalWindowComponent } from '../../shared/components/add-order-
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { OrderActionsEnum } from '../../shared/enums/orderActions.enum';
-import { getEnumKeys } from '../../shared/services/helper'
+import { getEnumKeys, getTotalOrderPrice } from '../../shared/services/helper'
 
 @Component({
   selector: 'app-orders-table',
@@ -41,7 +41,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   private unsubscribeAll: Subject<any> = new Subject<any>();
   title: string = 'Orders';
   placeholder: string = 'Order, Customer, Notes...';
-  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'status', 'statusActions', 'lastEmptyColumn'];
+  displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'totalPrice', 'status', 'statusActions', 'lastEmptyColumn'];
   dataSource: MatTableDataSource<OrdersData>;
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
@@ -87,6 +87,10 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
       : this.refresh();
     this.possibleStatuses = getEnumKeys(OrderActionsEnum);
   }
+
+  getTotalPrice(order): number{
+    return getTotalOrderPrice(order)
+  };
 
   refresh(params = {}): void {
     (this.role == 'customer' ? this.httpService.getOrders(params)

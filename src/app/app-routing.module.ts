@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) }
     ]
   },
-  { path: 'print', component: PrintComponent },
+  { path: 'print', component: PrintComponent, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'auth/login' },
 ];
 
