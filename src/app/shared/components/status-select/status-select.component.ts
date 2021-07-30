@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { OrderActionsEnum } from '../../enums/orderActions.enum';
 
 @Component({
   selector: 'app-status-select',
@@ -6,8 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./status-select.component.scss'],
 })
 export class StatusSelectComponent implements OnInit {
-  @Output() currentStatus: EventEmitter<string> = new EventEmitter();
-  @Output() confirmedStatus: EventEmitter<boolean> = new EventEmitter();
+  @Output() changeStatus: EventEmitter<string> = new EventEmitter();
   status: string;
   statusArray: string[] = ['New', 'Confirmed', 'Canceled', 'On the way', 'Delivered', 'Completed'];
 
@@ -18,7 +18,6 @@ export class StatusSelectComponent implements OnInit {
   }
 
   enterStatusFilter() {
-    this.currentStatus.emit(this.status);
-    this.confirmedStatus.emit(true);
+    this.changeStatus.emit(OrderActionsEnum[this.status]);
   }
 }

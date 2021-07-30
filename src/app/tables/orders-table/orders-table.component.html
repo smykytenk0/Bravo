@@ -120,8 +120,7 @@
           <img src="../../../assets/sort-size.png" class="sort-size" (click)="toggleStatusSelect()"/>
         </div>
         <div *ngIf="isStatusOpened" class="statusSelect">
-          <app-status-select (currentStatus)="getStatus($event)"
-                             (confirmedStatus)="toggleStatusSelect()"></app-status-select>
+          <app-status-select (changeStatus)="getStatus($event); toggleStatusSelect()"></app-status-select>
         </div>
       </div>
     </th>
@@ -215,3 +214,5 @@
     <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="toggleStatusSelect()"/>
   </div>
 </ng-template>
+
+<app-payment></app-payment>

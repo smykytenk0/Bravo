@@ -27,7 +27,7 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
 import { StatusActionsComponent } from '../status-actions/status-actions.component';
 import { _MatMenuDirectivesModule, MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
@@ -49,6 +49,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     StatusSelectComponent,
     SuccessfulProductAddingComponent,
     StatusActionsComponent,
+    PaymentComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -64,7 +65,6 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatButtonModule,
-    GooglePlaceModule,
   ],
   exports: [
     AddComponent,
@@ -83,6 +83,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     StatusSelectComponent,
     SuccessfulProductAddingComponent,
     StatusActionsComponent,
+    PaymentComponent,
   ]
 })
 

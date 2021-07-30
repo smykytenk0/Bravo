@@ -32,6 +32,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
 import { AddOrderModalWindowComponent } from './shared/components/add-order-modal-window/add-order-modal-window.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StripeModule } from 'stripe-angular';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     SharedModule,
     MatDialogModule,
+    StripeModule.forRoot('sk_test_51JIBk1KOQxsBYCdOWwred3COdewIOtlSsrRd2aRdKbC6hJ4qt9PVQCm17vzqekg3XZMmMCGC6rtJU7BhKQRdBNTc00uYY1RARI')
   ],
   providers: [],
   exports: [],
