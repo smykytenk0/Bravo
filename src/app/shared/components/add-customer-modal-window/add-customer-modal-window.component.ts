@@ -57,7 +57,6 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
     this.initCustomerForm();
   }
 
-
   addNewCustomer() {
     for (let day of this.shortDays) {
       if (this.deliveryDaysForm.value[day]) {
@@ -72,9 +71,5 @@ export class AddCustomerModalWindowComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
-  }
-
-  handleAddressChange(address: any) {
-    console.log(address)
   }
 }

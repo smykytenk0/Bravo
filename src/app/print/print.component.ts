@@ -12,10 +12,7 @@ export class PrintComponent implements OnInit {
   constructor() {
   }
 
-  //TODO: fix this component
-
   ngOnInit(): void {
-    console.log(this.printInfo)
   }
 
 }

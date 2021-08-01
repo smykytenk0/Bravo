@@ -13,9 +13,6 @@ export class OrdersService {
   constructor(private store: Store, private httpService: HttpService) {
   }
 
-  //getOrdersData(){
-  //  this.store.pipe(select(ordersDataSelector)).subscribe( data => this.filteredOrdersData = data);
-  //}
 
 
   ordersFilter() {

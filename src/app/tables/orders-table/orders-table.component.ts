@@ -88,7 +88,7 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.possibleStatuses = getEnumKeys(OrderActionsEnum);
   }
 
-  getTotalPrice(order): number{
+  getTotalPrice(order): number {
     return getTotalOrderPrice(order)
   };
 
@@ -99,10 +99,12 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
         map(item => Object.values(item)
           .filter(item => item.customerData.email == this.email)
         )
-      ) : this.httpService.getOrders(params)).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => {
-      this.ordersData = data;
-      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
-      this.dataSource.paginator = this.paginator;
+      )
+      : this.httpService.getOrders(params)).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => {
+        console.log(data);
+        this.ordersData = data;
+        this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
+        this.dataSource.paginator = this.paginator;
     })
   }
 
@@ -197,5 +199,11 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.store.dispatch(OrdersActions.clearAllFilters());
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
+  }
+
+  filterCustomers($event: string[]) {
+    if ($event !== []) {
+      this.refresh()
+    }
   }
 }

@@ -208,6 +208,52 @@
       "ordered": "2021-07-14T07:49:42.970Z",
       "status": 0,
       "id": 1
+    },
+    {
+      "notes": "Nothing",
+      "reqDelivery": "2022-03-15",
+      "customerData": {
+        "customerNo": "BB-788",
+        "name": "Burger Bar",
+        "deliveryAddress": "Solomianska, 10, Kyiv",
+        "contactName": "Olena",
+        "mobilePhone": "+380676767865",
+        "notify": true,
+        "email": "burgerbar@gmail.com",
+        "deliveryDays": [
+          "Mon",
+          "Wed"
+        ],
+        "role": "customer",
+        "id": 2
+      },
+      "items": [
+        {
+          "productCode": "COR740",
+          "name": "Corn",
+          "availability": "In stock",
+          "units": [
+            {
+              "unit": "pound",
+              "price": "75"
+            },
+            {
+              "unit": "kg",
+              "price": "80"
+            }
+          ],
+          "id": 4,
+          "quantity": "20",
+          "activeUnit": {
+            "unit": "kg",
+            "price": "80"
+          }
+        }
+      ],
+      "role": "customer",
+      "ordered": "2021-07-30T12:28:41.128Z",
+      "status": 0,
+      "id": 2
     }
   ]
 }

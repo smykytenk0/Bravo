@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { from } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { from, Subject } from 'rxjs';
+import { map, mergeMap, takeUntil } from 'rxjs/operators';
 
 import { HttpService } from '../../services/http.service';
 import { emailSelector, roleSelector } from '../../../store/auth/auth.reducer';
@@ -26,6 +26,7 @@ export class AddOrderModalWindowComponent implements OnInit {
   unitsForEachItem: any = [];
   unitPrices: number[] = [0];
   activeUnit: any = [];
+  private unsubscribeAll: Subject<any> = new Subject<any>();
 
   addItemInForm(num) {
     this.itemsForm.addControl(`item${ num }productCode`, new FormControl());
@@ -58,10 +59,10 @@ export class AddOrderModalWindowComponent implements OnInit {
       item1quantity: new FormControl(),
       item1unit: new FormControl({ value: '', disabled: true }),
     });
-    this.store.select(roleSelector).subscribe(data => this.role = data);
+    this.store.select(roleSelector).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.role = data);
     this.initOrderForm();
-    this.store.select(emailSelector).subscribe(data => this.email = data);
-    this.httpService.getCustomers({ email: this.email }).subscribe(data => this.customerData = data);
+    this.store.select(emailSelector).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.email = data);
+    this.httpService.getCustomers({ email: this.email }).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => this.customerData = data);
   }
 
   incrementCounter() {
@@ -94,7 +95,7 @@ export class AddOrderModalWindowComponent implements OnInit {
       items: this.items,
       role: 'customer',
       ordered: new Date(),
-      status: 'new'
+      status: 0
     });
     setTimeout(() => {
         this.httpService.addOrder(order).subscribe();

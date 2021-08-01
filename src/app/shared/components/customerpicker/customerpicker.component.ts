@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
@@ -21,7 +21,8 @@ export class CustomerpickerComponent {
   @Output() customers$: Observable<string[]>;
   @ViewChild('customerInput') customerInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  visible = true;
+  @Output() selectedCustomers: EventEmitter<string[]> = new EventEmitter();
+  customersFiltered: string[] = [];
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -36,26 +37,31 @@ export class CustomerpickerComponent {
   }
 
   add(event: MatChipInputEvent): void {
+    if (event.value !== '') {
+      this.customersFiltered.push(event.value);
+    }
     const value = (event.value || '').trim();
     if (value) {
       this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({ customer: value }));
     }
     event.chipInput!.clear();
-
     this.customerCtrl.setValue(null);
     this.orders.ordersFilter();
+    this.selectedCustomers.emit(this.customersFiltered);
   }
 
   remove(customer: string): void {
     this.store.dispatch(OrdersActions.removeCustomerFromSelect({ customer: customer }));
-    this.orders.ordersFilter()
+    this.orders.ordersFilter();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    this.customersFiltered.push(event.option.viewValue);
+    this.selectedCustomers.emit(this.customersFiltered);
     this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({ customer: event.option.viewValue }));
     this.customerInput.nativeElement.value = '';
     this.customerCtrl.setValue(null);
-    this.orders.ordersFilter()
+    this.orders.ordersFilter();
   }
 
   private _filter(value: string): string[] {

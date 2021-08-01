@@ -27,7 +27,7 @@ import { SuccessfulProductAddingComponent } from './components/successful-produc
 import { StatusActionsComponent } from '../status-actions/status-actions.component';
 import { _MatMenuDirectivesModule, MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 @NgModule({

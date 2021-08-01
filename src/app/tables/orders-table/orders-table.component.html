@@ -39,7 +39,7 @@
             </div>
           </div>
           <div *ngIf="isCustomersOpened" class="customerPicker">
-            <app-customerpicker [allCustomers]="uniqueCustomers"></app-customerpicker>
+            <app-customerpicker [allCustomers]="uniqueCustomers" (selectedCustomers)="filterCustomers($event)"></app-customerpicker>
           </div>
         </ng-container>
       </div>
@@ -214,5 +214,3 @@
     <img src="../../../assets/sort-size-active.png" alt="sort-size-active" (click)="toggleStatusSelect()"/>
   </div>
 </ng-template>
-
-<app-payment></app-payment>
