@@ -23,7 +23,7 @@ export class CatalogComponent implements OnDestroy, OnInit {
   dataSource: MatTableDataSource<IProduct>;
   catalogData: any = [];
   displayedColumns: string[];
-  role: string;
+  role: number;
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,7 +49,7 @@ export class CatalogComponent implements OnDestroy, OnInit {
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(data => {
         this.role = data;
-        this.role == 'admin' ? this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'] : this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'lastEmptyColumn']
+        this.role == 0 ? this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'deleteButton', 'lastEmptyColumn'] : this.displayedColumns = ['firstEmptyColumn', 'productCode', 'name', 'mainUnit', 'mainUnitPrice', 'availability', 'lastEmptyColumn']
       });
   }
 

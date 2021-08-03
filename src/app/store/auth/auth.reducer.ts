@@ -6,7 +6,7 @@ import { Auth } from '../interfaces/auth.interface';
 export const initialState: Auth = {
   email: '',
   isLoggedIn: false,
-  activeRole: 'customer'
+  activeRole: 1
 };
 
 export const AuthReducer = createReducer(

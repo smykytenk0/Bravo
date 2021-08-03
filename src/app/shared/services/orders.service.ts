@@ -13,8 +13,6 @@ export class OrdersService {
   constructor(private store: Store, private httpService: HttpService) {
   }
 
-
-
   ordersFilter() {
     this.store.dispatch(OrdersActions.applyCustomerFilter());
     //this.getOrdersData();

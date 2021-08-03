@@ -14,7 +14,7 @@ import { emailSelector, roleSelector } from '../../../store/auth/auth.reducer';
   styleUrls: ['./add-order-modal-window.component.scss']
 })
 export class AddOrderModalWindowComponent implements OnInit {
-  role: string;
+  role: number;
   orderForm: FormGroup;
   itemsForm: FormGroup;
   counterArr = [];

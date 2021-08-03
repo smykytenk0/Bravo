@@ -19,7 +19,6 @@ import { ReplaceCatalogModalComponent } from './components/replace-catalog-modal
 import { DndDirective } from './directives/dnd.directive';
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { SmallMenuComponent } from './components/small-menu/small-menu.component';
-import { StatusComponent } from './components/status/status.component';
 import { StatusSelectComponent } from './components/status-select/status-select.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
@@ -45,7 +44,6 @@ import { PaymentComponent } from './components/payment/payment.component';
     DndDirective,
     SearchFieldComponent,
     SmallMenuComponent,
-    StatusComponent,
     StatusSelectComponent,
     SuccessfulProductAddingComponent,
     StatusActionsComponent,
@@ -79,7 +77,6 @@ import { PaymentComponent } from './components/payment/payment.component';
     ReplaceCatalogModalComponent,
     SearchFieldComponent,
     SmallMenuComponent,
-    StatusComponent,
     StatusSelectComponent,
     SuccessfulProductAddingComponent,
     StatusActionsComponent,

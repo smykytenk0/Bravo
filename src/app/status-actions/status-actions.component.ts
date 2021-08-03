@@ -9,7 +9,7 @@ import { OrderActionsEnum } from '../shared/enums/orderActions.enum';
 })
 
 export class StatusActionsComponent implements OnInit {
-  @Input() role: string;
+  @Input() role: number;
   @Input() status: string;
   @Input() price: number;
   @Output() changedStatus: EventEmitter<number> = new EventEmitter();

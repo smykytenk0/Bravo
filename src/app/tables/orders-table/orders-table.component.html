@@ -1,4 +1,4 @@
-<ng-container *ngIf="role=='customer'">
+<ng-container *ngIf="role == 1">
   <div class="addButton">
     <app-add [addBtnText]="'Add Order'" (click)="openAddOrderModalWindow()"></app-add>
   </div>
@@ -32,7 +32,7 @@
     <th mat-header-cell *matHeaderCellDef class="sortTh">
       <div class="sortTh">
         <div class="columnName"> Customer</div>
-        <ng-container *ngIf="role == 'admin'">
+        <ng-container *ngIf="role == 0">
           <div *ngIf="!isCustomersOpened; else activeCustomerSelect">
             <div class="sortSizeWrapper">
               <img src="../../../assets/sort-size.png" (click)="customerSelectOpen()" alt="sort-size"/>
@@ -190,7 +190,7 @@
 
 <div *ngIf="(ordersData).length == 0" class="emptyTable">
   <app-empty-table [text]="'order'"></app-empty-table>
-  <ng-container *ngIf="role=='customer'">
+  <ng-container *ngIf="role == 1">
     <app-add [addBtnText]="'Add Order'" (click)="openAddOrderModalWindow()"></app-add>
   </ng-container>
 </div>

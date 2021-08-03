@@ -18,7 +18,7 @@ export class VerificationComponent implements OnInit, OnDestroy {
   private unsubscribeAll: Subject<any> = new Subject<any>();
   verificationForm: FormGroup;
   currentEmail: string;
-  currentRole: string;
+  currentRole: number;
 
   constructor(private route: Router,
               private store: Store,

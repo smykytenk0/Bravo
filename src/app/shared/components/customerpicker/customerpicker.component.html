@@ -5,7 +5,7 @@
         *ngFor="let customer of customers$ | async"
         [selectable]="selectable"
         [removable]="removable"
-        (removed)="remove(customer)">
+        (removed)="removeOption(customer)">
         {{customer}}
         <img class="closeImg" matChipRemove src="../../../../assets/close-black.png" alt="close">
       </mat-chip>
@@ -15,9 +15,9 @@
         [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        (matChipInputTokenEnd)="add($event)">
+        (matChipInputTokenEnd)="addOption($event)">
     </mat-chip-list>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedOption($event)">
       <mat-option *ngFor="let customer of filteredCustomers | async" [value]="customer">
         {{customer}}
       </mat-option>

@@ -7,7 +7,7 @@ import { OrderActionsEnum } from '../../enums/orderActions.enum';
   styleUrls: ['./status-select.component.scss'],
 })
 export class StatusSelectComponent implements OnInit {
-  @Output() changeStatus: EventEmitter<string> = new EventEmitter();
+  @Output() changeStatus: EventEmitter<number> = new EventEmitter();
   status: string;
   statusArray: string[] = ['New', 'Confirmed', 'Canceled', 'On the way', 'Delivered', 'Completed'];
 
@@ -18,6 +18,7 @@ export class StatusSelectComponent implements OnInit {
   }
 
   enterStatusFilter() {
+    console.log(OrderActionsEnum[this.status]);
     this.changeStatus.emit(OrderActionsEnum[this.status]);
   }
 }

@@ -13,7 +13,7 @@
         <div class="itemTitle">Catalog</div>
       </div>
     </a>
-    <a *ngIf="role == 'admin'; else empty" routerLink="/tables/customers" [routerLinkActive]="['customers-active', 'active-link']">
+    <a *ngIf="role == 1; else empty" routerLink="/tables/customers" [routerLinkActive]="['customers-active', 'active-link']">
       <div class="item">
         <div class="itemTitle">{{navIsOpened ? 'Customers' : ''}}</div>
       </div>

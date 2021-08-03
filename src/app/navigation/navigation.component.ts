@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NavigationComponent {
   @Input() navIsOpened: boolean = true;
-  @Input() role: string;
+  @Input() role: number;
 }

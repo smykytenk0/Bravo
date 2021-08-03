@@ -1,4 +1,4 @@
-<div *ngIf="role == 'admin'; else customer">
+<div *ngIf="role == 0; else customer">
   <div *ngIf="['New', 'Canceled', 'Delivered', 'Completed'].indexOf(status) == -1">
     <button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">Choose action</button>
     <mat-menu #menu="matMenu">

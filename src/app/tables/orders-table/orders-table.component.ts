@@ -10,7 +10,6 @@ import { OrdersActions } from '../../store/orders/orders.actions';
 import { Router } from '@angular/router';
 import { HttpService } from '../../shared/services/http.service';
 import {
-  filteredCustomersSelector,
   rangeEndDateSelector,
   rangeStartDateSelector,
   statusSelector
@@ -19,8 +18,8 @@ import { HttpClient } from '@angular/common/http';
 import { emailSelector, roleSelector } from '../../store/auth/auth.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrderModalWindowComponent } from '../../shared/components/add-order-modal-window/add-order-modal-window.component';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { filter, mergeMap, scan, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { OrderActionsEnum } from '../../shared/enums/orderActions.enum';
 import { getEnumKeys, getTotalOrderPrice } from '../../shared/services/helper'
 
@@ -38,19 +37,20 @@ import { getEnumKeys, getTotalOrderPrice } from '../../shared/services/helper'
 })
 
 export class OrdersTableComponent implements OnInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   private unsubscribeAll: Subject<any> = new Subject<any>();
   title: string = 'Orders';
   placeholder: string = 'Order, Customer, Notes...';
   displayedColumns: string[] = ['firstEmptyColumn', 'button', 'orderNo', 'customer', 'customerNo', 'items', 'notes', 'ordered', 'reqDelivery', 'totalPrice', 'status', 'statusActions', 'lastEmptyColumn'];
   dataSource: MatTableDataSource<OrdersData>;
+  dataSource$: Observable<any> = this.httpService.getOrders();
   dataPickerOpened: boolean = false;
   isCustomersOpened: boolean = false;
   isStatusOpened: boolean = false;
   uniqueCustomers: any = [];
   uniqueProductCodes: any = [];
   ordersData: any = [];
-  filteredCustomers: any;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   expandedElement: OrdersData | null;
   range = new FormGroup({
     start: new FormControl(),
@@ -59,12 +59,31 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   status: string;
   startDate: Date;
   endDate: Date;
-  customer: object;
-  selectedCustomersArray: string[];
-  customerEmails: string[];
   email: string;
-  role: string;
+  role: number;
   possibleStatuses: string[];
+  customerFilter$ = new BehaviorSubject<string[]>([]);
+  statusFilter$ = new BehaviorSubject<number>(-1);
+  roleFilter$ = new BehaviorSubject<number>(null);
+  emailFilter$ = new BehaviorSubject<string>('');
+
+  filteredData$ = combineLatest([
+    this.customerFilter$,
+    this.statusFilter$,
+    this.roleFilter$,
+    this.emailFilter$
+  ]).pipe(switchMap(([customers, status, role, email]) => {
+    return this.dataSource$.pipe(
+      mergeMap(item => item),
+      filter(order => {
+        const customerCondition = customers.length ? customers.indexOf(order['customerData'].name) != -1 : true;
+        const userCondition = role ? order['customerData'].email == email : true;
+        const statusCondition = !status;
+        return customerCondition && userCondition && statusCondition;
+      }),
+      scan((arr, item) => [...arr, item], [])
+    )
+  }))
 
   constructor(private store: Store,
               private orders: OrdersService,
@@ -75,16 +94,16 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.filteredData$.subscribe(item => console.log(item));
     this.store.select(roleSelector).subscribe(data => this.role = data);
+    this.roleFilter$.next(this.role);
     this.store.select(emailSelector).subscribe(data => this.email = data);
-    this.httpService.getCustomers({ role: 'customer' }).subscribe(data => this.getUniqueCustomers(data));
+    this.emailFilter$.next(this.email);
+    this.httpService.getCustomers({ role: 1 }).subscribe(data => this.getUniqueCustomers(data));
     this.httpService.getCatalog({ availability: 'In stock' }).subscribe(data => this.getUniqueProductNames(data));
-    this.store.select(statusSelector).subscribe(data => this.status = data);
     this.store.select(rangeStartDateSelector).subscribe(data => this.startDate = data);
     this.store.select(rangeEndDateSelector).subscribe(data => this.endDate = data);
-    this.role == 'customer' ?
-      this.refresh({ customerData: { email: this.email } })
-      : this.refresh();
+    this.refresh();
     this.possibleStatuses = getEnumKeys(OrderActionsEnum);
   }
 
@@ -92,19 +111,12 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return getTotalOrderPrice(order)
   };
 
-  refresh(params = {}): void {
-    (this.role == 'customer' ? this.httpService.getOrders(params)
-      .pipe(takeUntil(this.unsubscribeAll))
-      .pipe(
-        map(item => Object.values(item)
-          .filter(item => item.customerData.email == this.email)
-        )
-      )
-      : this.httpService.getOrders(params)).pipe(takeUntil(this.unsubscribeAll)).subscribe(data => {
-        console.log(data);
-        this.ordersData = data;
-        this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
-        this.dataSource.paginator = this.paginator;
+  refresh(): void {
+    this.filteredData$.subscribe(data => {
+      console.log(data);
+      this.ordersData = data;
+      this.dataSource = new MatTableDataSource<OrdersData>(this.ordersData);
+      this.dataSource.paginator = this.paginator;
     })
   }
 
@@ -140,20 +152,6 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
-  filterData(): void {
-    this.store.select(filteredCustomersSelector).subscribe(data => this.selectedCustomersArray = data);
-    this.httpService.convertSelectedCustomers(this.selectedCustomersArray).subscribe(data => {
-      let customerEmails = [];
-      Object.values(data).map(item => customerEmails.push(item.email));
-      this.customerEmails = customerEmails;
-      this.role == 'admin' ?
-        this.refresh({ status: this.status })
-        : this.httpService.getCustomers({ email: this.email }).subscribe(() => this.refresh({
-          status: this.status
-        }))
-    });
-  }
-
   enterDatepickerData(): void {
     this.store.dispatch(OrdersActions.getRangeStartDate({ startDate: this.range.value.start }));
     this.store.dispatch(OrdersActions.getRangeEndDate({ endDate: this.range.value.end }));
@@ -169,25 +167,23 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
 
   removeAllFilters() {
     this.store.dispatch(OrdersActions.clearAllFilters());
-    this.role == 'customer' ?
-      this.httpService.getCustomers({ email: this.email }).subscribe(data => this.refresh({ customerId: data[0].id }))
-      : this.refresh();
+    this.refresh();
   }
 
   openAddOrderModalWindow() {
     this.dialog.open(AddOrderModalWindowComponent, { data: this.uniqueProductCodes }).afterClosed().subscribe(() => {
       this.refresh();
     })
-
   }
 
   takeCurrentSearch(currentSearch: string) {
     this.dataSource.filter = currentSearch.trim().toLowerCase();
   }
 
-  getStatus(currentStatus: string) {
-    this.store.dispatch(OrdersActions.filterStatus({ status: currentStatus }));
-    this.filterData();
+  getStatus(currentStatus: number) {
+    console.log(currentStatus)
+    this.statusFilter$.next(currentStatus);
+    this.refresh()
   }
 
   changeStatus(event: number, element: any) {
@@ -195,15 +191,14 @@ export class OrdersTableComponent implements OnInit, OnDestroy {
     this.refresh();
   }
 
+  filterCustomers($event: string[]) {
+    this.customerFilter$.next($event);
+    this.refresh()
+  }
+
   ngOnDestroy(): void {
     this.store.dispatch(OrdersActions.clearAllFilters());
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
-  }
-
-  filterCustomers($event: string[]) {
-    if ($event !== []) {
-      this.refresh()
-    }
   }
 }

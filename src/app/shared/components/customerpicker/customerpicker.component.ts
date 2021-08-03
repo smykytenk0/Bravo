@@ -4,7 +4,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
 import { OrdersActions } from '../../../store/orders/orders.actions';
@@ -36,7 +36,7 @@ export class CustomerpickerComponent {
       map((customers: string | null) => customers ? this._filter(customers) : this.allCustomers.slice()));
   }
 
-  add(event: MatChipInputEvent): void {
+  public addOption(event: MatChipInputEvent): void {
     if (event.value !== '') {
       this.customersFiltered.push(event.value);
     }
@@ -50,12 +50,15 @@ export class CustomerpickerComponent {
     this.selectedCustomers.emit(this.customersFiltered);
   }
 
-  remove(customer: string): void {
+  public removeOption(customer: string): void {
+    const index = this.customersFiltered.indexOf(customer);
+    this.customersFiltered = this.customersFiltered.slice(0, index).concat(this.customersFiltered.slice(index + 1));
+    this.selectedCustomers.emit(this.customersFiltered);
     this.store.dispatch(OrdersActions.removeCustomerFromSelect({ customer: customer }));
     this.orders.ordersFilter();
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
+  public selectedOption(event: MatAutocompleteSelectedEvent): void {
     this.customersFiltered.push(event.option.viewValue);
     this.selectedCustomers.emit(this.customersFiltered);
     this.store.dispatch(OrdersActions.addCustomersSelectFilteredData({ customer: event.option.viewValue }));

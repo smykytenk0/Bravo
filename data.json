@@ -77,7 +77,7 @@
     {
       "id": 1,
       "email": "mykytenk00s@gmail.com",
-      "role": "admin"
+      "role": 0
     },
     {
       "customerNo": "BB-788",
@@ -91,7 +91,7 @@
         "Mon",
         "Wed"
       ],
-      "role": "customer",
+      "role": 1,
       "id": 2
     },
     {
@@ -106,7 +106,7 @@
         "Mon",
         "Wed"
       ],
-      "role": "customer",
+      "role": 1,
       "id": 3
     },
     {
@@ -121,7 +121,7 @@
         "Tue",
         "Sat"
       ],
-      "role": "customer",
+      "role": 1,
       "id": 4
     },
     {
@@ -137,7 +137,7 @@
         "Wed",
         "Fri"
       ],
-      "role": "customer",
+      "role": 1,
       "id": 5
     }
   ],
@@ -157,7 +157,7 @@
           "Mon",
           "Wed"
         ],
-        "role": "customer",
+        "role": 1,
         "id": 3
       },
       "items": [
@@ -204,7 +204,7 @@
           }
         }
       ],
-      "role": "customer",
+      "role": 1,
       "ordered": "2021-07-14T07:49:42.970Z",
       "status": 0,
       "id": 1
@@ -224,7 +224,7 @@
           "Mon",
           "Wed"
         ],
-        "role": "customer",
+        "role": 1,
         "id": 2
       },
       "items": [
@@ -250,7 +250,7 @@
           }
         }
       ],
-      "role": "customer",
+      "role": 1,
       "ordered": "2021-07-30T12:28:41.128Z",
       "status": 0,
       "id": 2

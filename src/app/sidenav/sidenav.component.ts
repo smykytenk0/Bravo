@@ -13,7 +13,7 @@ import { roleSelector } from '../store/auth/auth.reducer';
 export class SidenavComponent implements OnInit{
   navIsOpened: boolean = true;
   pageName: string = '';
-  role: string;
+  role: number;
 
   @ViewChild('drawer') sidenav: MatSidenav;
   constructor(public route: Router,

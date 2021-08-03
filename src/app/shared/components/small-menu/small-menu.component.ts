@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./small-menu.component.scss']
 })
 export class SmallMenuComponent {
-  @Input() role: string;
+  @Input() role: number;
 }

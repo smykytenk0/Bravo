@@ -24,7 +24,6 @@ export class CustomersComponent implements OnDestroy, OnInit{
   displayedColumns: string[] = ['firstEmptyColumn', 'customerNo', 'name', 'address', 'deliveryDays', 'lastEmptyColumn'];
   private unsubscribeAll: Subject<any> = new Subject<any>();
   role: string;
-  parameters: any;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,7 +38,7 @@ export class CustomersComponent implements OnDestroy, OnInit{
   }
 
   refresh(){
-    this.httpService.getCustomers({role: 'customer'}).pipe(takeUntil(this.unsubscribeAll)).subscribe(data=> {
+    this.httpService.getCustomers({role: 1}).pipe(takeUntil(this.unsubscribeAll)).subscribe(data=> {
       this.customersData = data;
       this.dataSource = new MatTableDataSource<ICustomerData>(this.customersData);
       this.dataSource.paginator = this.paginator;
